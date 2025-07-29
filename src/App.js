@@ -1613,13 +1613,13 @@ const FlanneryTrainingApp = () => {
       <div className="grid grid-cols-1 gap-4 max-w-full">
         <div className="bg-white p-4 rounded-lg shadow border max-w-full">
           <div className="flex items-center justify-between mb-3">
-            <h3 className="text-lg font-semibold">Progress</h3>
+            <h3 className="text-lg font-semibold text-black">Progress</h3>
             <CheckCircle className="h-5 w-5 text-flanneryGreen-500" />
           </div>
           <div className="space-y-3">
             <div>
               <div className="flex justify-between text-sm">
-                <span>Modules Completed</span>
+                <span className="text-black">Modules Completed</span>
                 <span className="font-semibold">{completedSections.size}/15</span>
               </div>
               <div className="w-full bg-gray-200 rounded-full h-2 mt-1">
@@ -1632,7 +1632,7 @@ const FlanneryTrainingApp = () => {
             
             <div>
               <div className="flex justify-between text-sm">
-                <span>Knowledge Checks</span>
+                <span className="text-black">Knowledge Checks</span>
                 <span className="font-semibold">
                   {Object.values(knowledgeProgress).filter(status => status === 'correct').length}/{knowledgeChecks.length}
                 </span>
@@ -1692,7 +1692,7 @@ const FlanneryTrainingApp = () => {
       </div>
 
       <div className="bg-white p-4 rounded-lg shadow border max-w-full">
-        <h3 className="text-lg font-semibold mb-3">Training Objectives</h3>
+        <h3 className="text-lg font-semibold mb-3 text-black">Training Objectives</h3>
         <div className="space-y-2">
           {trainingData.introduction.content.objectives.slice(0, showAllObjectives ? undefined : 6).map((objective, index) => (
             <div key={index} className="flex items-start space-x-2">
