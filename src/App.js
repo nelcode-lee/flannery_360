@@ -3237,14 +3237,6 @@ const FlanneryTrainingApp = () => {
             </div>
           </div>
           <p className="text-xs text-flannery-300">Mobile Training Platform</p>
-          <div className="flex items-center space-x-2 flex-shrink-0">
-            <button className="p-2 hover:bg-flanneryDark-800 rounded-lg" title="Bookmark">
-              <Bookmark className="h-5 w-5 text-flannery-400" />
-            </button>
-            <button className="p-2 hover:bg-flanneryDark-800 rounded-lg" title="Reset">
-              <RotateCcw className="h-5 w-5 text-flannery-400" />
-            </button>
-          </div>
         </div>
       </header>
 
