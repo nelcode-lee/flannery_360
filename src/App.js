@@ -19,7 +19,8 @@ import {
   Globe, 
   HelpCircle, 
   ExternalLink, 
-  BookOpen 
+  BookOpen,
+  Bookmark
 } from 'lucide-react';
 
 const FlanneryLogo = () => (
