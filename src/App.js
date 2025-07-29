@@ -3256,11 +3256,11 @@ const FlanneryTrainingApp = () => {
     return (
       <div className="space-y-6 pb-8">
         <div className="flex items-center justify-between">
-          <h1 className="text-2xl font-bold text-gray-900">Training Resources</h1>
+          <h1 className="text-3xl font-bold text-white bg-gradient-to-r from-blue-400 to-blue-600 bg-clip-text text-transparent">Training Resources</h1>
           <div className="flex space-x-2">
             <button 
               onClick={() => setShowQRModal(true)}
-              className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors"
+              className="px-4 py-2 bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-lg hover:from-blue-600 hover:to-blue-700 transition-all shadow-lg"
             >
               📱 QR Scanner
             </button>
@@ -3268,12 +3268,12 @@ const FlanneryTrainingApp = () => {
         </div>
 
         {/* Interactive Operator Manuals */}
-        <div className="bg-white p-6 rounded-lg shadow border">
+        <div className="bg-gradient-to-r from-blue-50 to-blue-100 p-6 rounded-lg shadow-lg border-2 border-blue-200">
           <div 
             className="flex items-center justify-between cursor-pointer"
             onClick={() => toggleSection('manuals')}
           >
-            <h3 className="text-lg font-semibold text-blue-900">📚 Interactive Operator Manuals</h3>
+            <h3 className="text-xl font-bold text-blue-800">📚 Interactive Operator Manuals</h3>
             <div className={`transform transition-transform ${expandedSections.manuals ? 'rotate-180' : ''}`}>
               ▼
             </div>
@@ -3330,12 +3330,12 @@ const FlanneryTrainingApp = () => {
         </div>
 
         {/* Interactive Safety Checklist */}
-        <div className="bg-white p-6 rounded-lg shadow border">
+        <div className="bg-gradient-to-r from-blue-50 to-blue-100 p-6 rounded-lg shadow-lg border-2 border-blue-200">
           <div 
             className="flex items-center justify-between cursor-pointer"
             onClick={() => toggleSection('checklist')}
           >
-            <h3 className="text-lg font-semibold text-green-900">✅ Interactive Safety Checklist</h3>
+            <h3 className="text-xl font-bold text-blue-800">✅ Interactive Safety Checklist</h3>
             <div className={`transform transition-transform ${expandedSections.checklist ? 'rotate-180' : ''}`}>
               ▼
             </div>
@@ -3349,31 +3349,31 @@ const FlanneryTrainingApp = () => {
               
               <div className="space-y-3">
                 {checklistItems.map((item) => (
-                  <div key={item.id} className="flex items-center space-x-3 p-3 bg-gray-50 rounded-lg">
+                  <div key={item.id} className="flex items-center space-x-3 p-3 bg-blue-50 rounded-lg border border-blue-200">
                     <input
                       type="checkbox"
                       id={item.id}
                       checked={completedChecklist[item.id] || false}
                       onChange={() => toggleChecklistItem(item.id)}
-                      className="w-4 h-4 text-green-600 rounded focus:ring-green-500"
+                      className="w-4 h-4 text-blue-600 rounded focus:ring-blue-500"
                     />
                     <label htmlFor={item.id} className="flex-1 cursor-pointer">
                       <span className={`text-sm ${completedChecklist[item.id] ? 'line-through text-gray-500' : 'text-gray-700'}`}>
                         {item.text}
                       </span>
-                      <span className="ml-2 text-xs text-gray-500">({item.category})</span>
+                      <span className="ml-2 text-xs text-blue-600">({item.category})</span>
                     </label>
                   </div>
                 ))}
               </div>
 
-              <div className="mt-4 p-3 bg-green-50 rounded-lg">
-                <p className="text-sm text-green-800">
+              <div className="mt-4 p-3 bg-blue-50 rounded-lg border border-blue-200">
+                <p className="text-sm text-blue-800">
                   <strong>Progress:</strong> {Object.values(completedChecklist).filter(Boolean).length} of {checklistItems.length} items completed
                 </p>
                 <div className="mt-2 w-full bg-gray-200 rounded-full h-2">
                   <div 
-                    className="bg-green-600 h-2 rounded-full transition-all"
+                    className="bg-gradient-to-r from-blue-500 to-blue-600 h-2 rounded-full transition-all"
                     style={{ 
                       width: `${(Object.values(completedChecklist).filter(Boolean).length / checklistItems.length) * 100}%` 
                     }}
@@ -3385,12 +3385,12 @@ const FlanneryTrainingApp = () => {
         </div>
 
         {/* Interactive Safety Quiz */}
-        <div className="bg-white p-6 rounded-lg shadow border">
+        <div className="bg-gradient-to-r from-blue-50 to-blue-100 p-6 rounded-lg shadow-lg border-2 border-blue-200">
           <div 
             className="flex items-center justify-between cursor-pointer"
             onClick={() => toggleSection('quiz')}
           >
-            <h3 className="text-lg font-semibold text-orange-900">🛡️ OperateSAFE Quiz</h3>
+            <h3 className="text-xl font-bold text-blue-800">🛡️ OperateSAFE Quiz</h3>
             <div className={`transform transition-transform ${expandedSections.quiz ? 'rotate-180' : ''}`}>
               ▼
             </div>
@@ -3428,12 +3428,12 @@ const FlanneryTrainingApp = () => {
                       </div>
                     ))}
                     
-                    <button
-                      onClick={submitSafetyQuiz}
-                      className="px-4 py-2 bg-orange-600 text-white rounded-lg hover:bg-orange-700 transition-colors"
-                    >
-                      Submit Quiz
-                    </button>
+                                         <button
+                       onClick={submitSafetyQuiz}
+                       className="px-4 py-2 bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-lg hover:from-blue-600 hover:to-blue-700 transition-all shadow-lg"
+                     >
+                       Submit Quiz
+                     </button>
                   </div>
                 </div>
               ) : (
@@ -3442,14 +3442,14 @@ const FlanneryTrainingApp = () => {
                   <p className="text-sm text-green-800">
                     You scored {getQuizScore().correct} out of {getQuizScore().total} correctly!
                   </p>
-                  <div className="mt-3">
-                    <button
-                      onClick={() => setSafetyQuiz({ currentQuestion: 0, answers: {}, completed: false })}
-                      className="px-3 py-1 bg-green-600 text-white text-sm rounded hover:bg-green-700"
-                    >
-                      Retake Quiz
-                    </button>
-                  </div>
+                                     <div className="mt-3">
+                     <button
+                       onClick={() => setSafetyQuiz({ currentQuestion: 0, answers: {}, completed: false })}
+                       className="px-3 py-1 bg-gradient-to-r from-blue-500 to-blue-600 text-white text-sm rounded hover:from-blue-600 hover:to-blue-700"
+                     >
+                       Retake Quiz
+                     </button>
+                   </div>
                 </div>
               )}
             </div>
@@ -3457,23 +3457,23 @@ const FlanneryTrainingApp = () => {
         </div>
 
         {/* QR Code Resources */}
-        <div className="bg-white p-6 rounded-lg shadow border">
-          <h3 className="text-lg font-semibold mb-3 text-green-900">📱 QR Code Resources</h3>
+        <div className="bg-gradient-to-r from-blue-50 to-blue-100 p-6 rounded-lg shadow-lg border-2 border-blue-200">
+          <h3 className="text-xl font-bold mb-3 text-blue-800">📱 QR Code Resources</h3>
           <p className="text-sm text-gray-700 mb-3">
             Scan QR codes throughout the workbook for additional content including videos and reading materials.
           </p>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div className="bg-green-50 p-4 rounded-lg hover:bg-green-100 transition-colors cursor-pointer">
-              <h4 className="font-medium text-green-800 mb-2">📹 Video Content</h4>
-              <p className="text-sm text-green-700 mb-3">Safety procedures, operating techniques, and best practices</p>
-              <button className="px-3 py-1 bg-green-600 text-white text-sm rounded hover:bg-green-700">
+            <div className="bg-blue-50 p-4 rounded-lg hover:bg-blue-100 transition-colors cursor-pointer border border-blue-200">
+              <h4 className="font-medium text-blue-800 mb-2">📹 Video Content</h4>
+              <p className="text-sm text-blue-700 mb-3">Safety procedures, operating techniques, and best practices</p>
+              <button className="px-3 py-1 bg-gradient-to-r from-blue-500 to-blue-600 text-white text-sm rounded hover:from-blue-600 hover:to-blue-700">
                 Watch Videos
               </button>
             </div>
-            <div className="bg-green-50 p-4 rounded-lg hover:bg-green-100 transition-colors cursor-pointer">
-              <h4 className="font-medium text-green-800 mb-2">📖 Reading Materials</h4>
-              <p className="text-sm text-green-700 mb-3">Additional guides, regulations, and technical documents</p>
-              <button className="px-3 py-1 bg-green-600 text-white text-sm rounded hover:bg-green-700">
+            <div className="bg-blue-50 p-4 rounded-lg hover:bg-blue-100 transition-colors cursor-pointer border border-blue-200">
+              <h4 className="font-medium text-blue-800 mb-2">📖 Reading Materials</h4>
+              <p className="text-sm text-blue-700 mb-3">Additional guides, regulations, and technical documents</p>
+              <button className="px-3 py-1 bg-gradient-to-r from-blue-500 to-blue-600 text-white text-sm rounded hover:from-blue-600 hover:to-blue-700">
                 Browse Documents
               </button>
             </div>
@@ -3481,29 +3481,29 @@ const FlanneryTrainingApp = () => {
         </div>
 
         {/* Literacy, Numeracy & ICT */}
-        <div className="bg-white p-6 rounded-lg shadow border">
-          <h3 className="text-lg font-semibold mb-3 text-purple-900">📊 Literacy, Numeracy & ICT</h3>
+        <div className="bg-gradient-to-r from-blue-50 to-blue-100 p-6 rounded-lg shadow-lg border-2 border-blue-200">
+          <h3 className="text-xl font-bold mb-3 text-blue-800">📊 Literacy, Numeracy & ICT</h3>
           <p className="text-sm text-gray-700 mb-3">
             English, Mathematics and ICT are embedded into the content. You will be required to:
           </p>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="space-y-2">
-              <div className="flex items-center space-x-2 p-2 bg-purple-50 rounded hover:bg-purple-100 transition-colors">
-                <div className="w-2 h-2 bg-purple-500 rounded-full"></div>
+              <div className="flex items-center space-x-2 p-2 bg-blue-50 rounded hover:bg-blue-100 transition-colors border border-blue-200">
+                <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
                 <span className="text-sm text-gray-700">Extract information from operator manuals</span>
               </div>
-              <div className="flex items-center space-x-2 p-2 bg-purple-50 rounded hover:bg-purple-100 transition-colors">
-                <div className="w-2 h-2 bg-purple-500 rounded-full"></div>
+              <div className="flex items-center space-x-2 p-2 bg-blue-50 rounded hover:bg-blue-100 transition-colors border border-blue-200">
+                <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
                 <span className="text-sm text-gray-700">Conduct simple calculations of bucket capacities</span>
               </div>
             </div>
             <div className="space-y-2">
-              <div className="flex items-center space-x-2 p-2 bg-purple-50 rounded hover:bg-purple-100 transition-colors">
-                <div className="w-2 h-2 bg-purple-500 rounded-full"></div>
+              <div className="flex items-center space-x-2 p-2 bg-blue-50 rounded hover:bg-blue-100 transition-colors border border-blue-200">
+                <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
                 <span className="text-sm text-gray-700">Read digital screens in the cab</span>
               </div>
-              <div className="flex items-center space-x-2 p-2 bg-purple-50 rounded hover:bg-purple-100 transition-colors">
-                <div className="w-2 h-2 bg-purple-500 rounded-full"></div>
+              <div className="flex items-center space-x-2 p-2 bg-blue-50 rounded hover:bg-blue-100 transition-colors border border-blue-200">
+                <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
                 <span className="text-sm text-gray-700">Use training simulators effectively</span>
               </div>
             </div>
@@ -3511,50 +3511,50 @@ const FlanneryTrainingApp = () => {
         </div>
 
         {/* Knowledge Stops */}
-        <div className="bg-white p-6 rounded-lg shadow border">
-          <h3 className="text-lg font-semibold mb-3 text-red-900">⚠️ Knowledge Stops</h3>
+        <div className="bg-gradient-to-r from-blue-50 to-blue-100 p-6 rounded-lg shadow-lg border-2 border-blue-200">
+          <h3 className="text-xl font-bold mb-3 text-blue-800">⚠️ Knowledge Stops</h3>
           <p className="text-sm text-gray-700 mb-3">
             Throughout the training, you will encounter Knowledge Stops - your chance to put your learning to the test.
           </p>
-          <div className="bg-red-50 p-4 rounded-lg">
-            <p className="text-sm text-red-800 mb-3">
+          <div className="bg-blue-50 p-4 rounded-lg border border-blue-200">
+            <p className="text-sm text-blue-800 mb-3">
               <strong>Assessment:</strong> These knowledge checks help reinforce learning and ensure understanding 
               of key safety and operational concepts.
             </p>
-            <button className="px-3 py-1 bg-red-600 text-white text-sm rounded hover:bg-red-700">
+            <button className="px-3 py-1 bg-gradient-to-r from-blue-500 to-blue-600 text-white text-sm rounded hover:from-blue-600 hover:to-blue-700">
               Practice Knowledge Stops
             </button>
           </div>
         </div>
 
         {/* Course Objectives */}
-        <div className="bg-white p-6 rounded-lg shadow border">
-          <h3 className="text-lg font-semibold mb-3 text-indigo-900">🎯 Course Objectives</h3>
+        <div className="bg-gradient-to-r from-blue-50 to-blue-100 p-6 rounded-lg shadow-lg border-2 border-blue-200">
+          <h3 className="text-xl font-bold mb-3 text-blue-800">🎯 Course Objectives</h3>
           <p className="text-sm text-gray-700 mb-3">
             All content delivered on this course meets the requirements set out in the National Occupational Standards for this machine type.
           </p>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="space-y-2">
-              <div className="flex items-center space-x-2 p-2 bg-indigo-50 rounded hover:bg-indigo-100 transition-colors">
-                <div className="w-2 h-2 bg-indigo-500 rounded-full"></div>
+              <div className="flex items-center space-x-2 p-2 bg-blue-50 rounded hover:bg-blue-100 transition-colors border border-blue-200">
+                <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
                 <span className="text-sm text-gray-700">Understand relevant legislation</span>
               </div>
-              <div className="flex items-center space-x-2 p-2 bg-indigo-50 rounded hover:bg-indigo-100 transition-colors">
-                <div className="w-2 h-2 bg-indigo-500 rounded-full"></div>
+              <div className="flex items-center space-x-2 p-2 bg-blue-50 rounded hover:bg-blue-100 transition-colors border border-blue-200">
+                <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
                 <span className="text-sm text-gray-700">Identify hazards and control measures</span>
               </div>
-              <div className="flex items-center space-x-2 p-2 bg-indigo-50 rounded hover:bg-indigo-100 transition-colors">
-                <div className="w-2 h-2 bg-indigo-500 rounded-full"></div>
+              <div className="flex items-center space-x-2 p-2 bg-blue-50 rounded hover:bg-blue-100 transition-colors border border-blue-200">
+                <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
                 <span className="text-sm text-gray-700">Perform pre-operational checks</span>
               </div>
             </div>
             <div className="space-y-2">
-              <div className="flex items-center space-x-2 p-2 bg-indigo-50 rounded hover:bg-indigo-100 transition-colors">
-                <div className="w-2 h-2 bg-indigo-500 rounded-full"></div>
+              <div className="flex items-center space-x-2 p-2 bg-blue-50 rounded hover:bg-blue-100 transition-colors border border-blue-200">
+                <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
                 <span className="text-sm text-gray-700">Operate safely in various conditions</span>
               </div>
-              <div className="flex items-center space-x-2 p-2 bg-indigo-50 rounded hover:bg-indigo-100 transition-colors">
-                <div className="w-2 h-2 bg-indigo-500 rounded-full"></div>
+              <div className="flex items-center space-x-2 p-2 bg-blue-50 rounded hover:bg-blue-100 transition-colors border border-blue-200">
+                <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
                 <span className="text-sm text-gray-700">Shut down machinery safely</span>
               </div>
             </div>
@@ -3562,8 +3562,8 @@ const FlanneryTrainingApp = () => {
         </div>
 
         {/* Getting Maximum Benefit */}
-        <div className="bg-gradient-to-r from-blue-500 to-purple-600 p-6 rounded-lg text-white">
-          <h3 className="text-lg font-semibold mb-3">💡 Getting Maximum Benefit</h3>
+        <div className="bg-gradient-to-r from-blue-600 to-blue-800 p-6 rounded-lg text-white shadow-lg">
+          <h3 className="text-xl font-bold mb-3">💡 Getting Maximum Benefit</h3>
           <p className="text-sm mb-4">
             To get the maximum benefit from your training:
           </p>
