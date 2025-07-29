@@ -61,7 +61,7 @@ const FlanneryTrainingApp = () => {
   const [showAllObjectives, setShowAllObjectives] = useState(false);
   const [showBurgerMenu, setShowBurgerMenu] = useState(false);
 
-  // Knowledge check answers with correct responses
+  // Knowledge check answers with correct responses from flannery.md
   const correctAnswers = {
     'intro-1': {
       type: 'multiple-choice',
@@ -76,7 +76,7 @@ const FlanneryTrainingApp = () => {
     },
     'intro-2': {
       type: 'multiple-choice',
-      question: 'List 4 main hazards commonly found on construction sites:',
+      question: 'List 4 main hazards that are commonly found on a construction site:',
       options: [
         'Moving vehicles, machinery, excavations, falling materials',
         'Moving vehicles, working at height, excavations, falling materials',
@@ -115,6 +115,28 @@ const FlanneryTrainingApp = () => {
         'Take reasonable care of themselves and others, co-operate with employer, use equipment properly',
         'Co-operate with employer, use equipment properly, report hazards',
         'Use equipment and safety devices, report incidents, follow procedures'
+      ],
+      correctAnswer: 1
+    },
+    'legislation-3': {
+      type: 'multiple-choice',
+      question: 'What are the levels of sanction that can be applied by employers and judicial bodies to plant operators who do not comply with or follow legislation and regulations?',
+      options: [
+        'Warnings and fines only',
+        'Warnings, fines, suspension, dismissal, prosecution',
+        'Suspension and dismissal only',
+        'Prosecution only'
+      ],
+      correctAnswer: 1
+    },
+    'legislation-4': {
+      type: 'multiple-choice',
+      question: 'What are the possible outcomes of prosecution for not complying with legislation and regulations?',
+      options: [
+        'Fines only',
+        'Fines, imprisonment, disqualification from driving',
+        'Imprisonment only',
+        'Disqualification from driving only'
       ],
       correctAnswer: 1
     },
@@ -208,18 +230,18 @@ const FlanneryTrainingApp = () => {
     },
     'risk-1': {
       type: 'multiple-choice',
-      question: 'What is the first step in risk assessment?',
+      question: 'What is the purpose of a risk assessment?',
       options: [
-        'Implement control measures',
-        'Identify hazards',
-        'Evaluate risks',
-        'Review the assessment'
+        'To identify hazards and evaluate risks',
+        'To implement control measures only',
+        'To review procedures only',
+        'To document incidents only'
       ],
-      correctAnswer: 1
+      correctAnswer: 0
     },
     'risk-2': {
       type: 'multiple-choice',
-      question: 'What is a hazard?',
+      question: 'What is the definition of, or how can a hazard be described?',
       options: [
         'Something that could cause harm',
         'Something that has already caused harm',
@@ -230,37 +252,49 @@ const FlanneryTrainingApp = () => {
     },
     'risk-3': {
       type: 'multiple-choice',
-      question: 'What is the hierarchy of control measures?',
+      question: 'What is a method statement?',
       options: [
-        'Eliminate, Substitute, Engineering controls, Administrative controls, PPE',
-        'PPE, Administrative controls, Engineering controls, Substitute, Eliminate',
-        'Engineering controls, Administrative controls, PPE, Substitute, Eliminate',
-        'Substitute, Eliminate, Engineering controls, PPE, Administrative controls'
+        'A document that outlines specific instructions on how to safely perform a work-related task',
+        'A risk assessment document',
+        'A safety certificate',
+        'A training record'
       ],
       correctAnswer: 0
     },
     'site-1': {
       type: 'multiple-choice',
-      question: 'What should you do during site induction?',
+      question: 'List six typical subject areas that should be covered in a site induction.',
       options: [
-        'Learn site rules, emergency procedures, safety protocols',
-        'Learn site rules, emergency procedures, and identify key personnel',
-        'Learn emergency procedures, identify key personnel, review procedures',
-        'Identify key personnel, review procedures, learn site rules'
-      ],
-      correctAnswer: 1
-    },
-    'site-2': {
-      type: 'multiple-choice',
-      question: 'What is a permit to work?',
-      options: [
-        'A document that authorizes specific work activities',
-        'A safety certificate for operators',
-        'A training record book',
-        'A maintenance log book'
+        'Access and egress, emergency procedures, PPE requirements, welfare facilities, site layout, traffic routes',
+        'Emergency procedures, PPE requirements, welfare facilities, site layout, traffic routes, accident reporting',
+        'PPE requirements, welfare facilities, site layout, traffic routes, accident reporting, safety signs',
+        'Welfare facilities, site layout, traffic routes, accident reporting, safety signs, confined spaces'
       ],
       correctAnswer: 0
     },
+    'site-2': {
+      type: 'multiple-choice',
+      question: 'Why are plant operators generally regarded as safety critical workers?',
+      options: [
+        'Because they operate heavy machinery that can cause significant harm',
+        'Because they work long hours',
+        'Because they work outdoors',
+        'Because they work with tools'
+      ],
+      correctAnswer: 0
+    },
+    'site-3': {
+      type: 'multiple-choice',
+      question: 'List 3 ways that a plant operator can contribute towards repeat business with the client or principal contractor.',
+      options: [
+        'Being punctual, working safely, being polite',
+        'Working efficiently, complying with method statements, doing a good job',
+        'Being punctual, co-operating with other workers, working safely',
+        'Working safely, efficiently, and complying with method statements'
+      ],
+      correctAnswer: 2
+    },
+    
     'preop-1': {
       type: 'multiple-choice',
       question: 'What is the purpose of pre-operational checks?',
@@ -285,58 +319,80 @@ const FlanneryTrainingApp = () => {
     },
     'travel-1': {
       type: 'multiple-choice',
-      question: 'What should you check before site travel?',
+      question: 'If both travel levers (or travel pedal for wheeled machines) are pushed forwards when the track motors (or driving wheels) are in front of the cab, in which direction will the machine move?',
       options: [
-        'Route safety, ground conditions, overhead obstructions',
-        'Route safety, ground conditions, and overhead obstructions',
-        'Ground conditions, overhead obstructions, traffic',
-        'Overhead obstructions, traffic, route safety'
+        'Forward',
+        'Backward',
+        'Left',
+        'Right'
       ],
       correctAnswer: 1
     },
     'travel-2': {
       type: 'multiple-choice',
-      question: 'What is the maximum travel speed on site?',
+      question: 'If the machine is being travelled or working on the public highway, the Road Traffic Act applies. What type of licence and which class should the operator hold?',
       options: [
-        '10 mph',
-        '5 mph',
-        '15 mph',
-        '20 mph'
+        'Category C1 licence',
+        'Category C licence',
+        'Category B licence',
+        'Category A licence'
+      ],
+      correctAnswer: 1
+    },
+    'travel-3': {
+      type: 'multiple-choice',
+      question: 'What is the minimum age allowed for operating on public highways?',
+      options: [
+        '16 years',
+        '18 years',
+        '21 years',
+        '25 years'
+      ],
+      correctAnswer: 1
+    },
+    'pedestrian-1': {
+      type: 'multiple-choice',
+      question: 'If setting up to work in a pedestrianised area, state 3 factors that need to be taken into account?',
+      options: [
+        'Physical segregation, machine movements, noise',
+        'Machine movements, noise, fumes',
+        'Noise, fumes, physical segregation',
+        'Fumes, physical segregation, machine movements'
       ],
       correctAnswer: 1
     },
     'confined-1': {
       type: 'multiple-choice',
-      question: 'What is the primary purpose of Human Detection Systems in confined areas?',
+      question: 'What information does the dig-envelope or working range chart give?',
       options: [
-        'To increase machine speed',
-        'To warn operators and pedestrians of potential collision risks',
-        'To reduce fuel consumption',
-        'To improve machine performance'
+        'Machine specifications and dimensions',
+        'Safe working range and lifting capacities',
+        'Fuel consumption rates',
+        'Maintenance schedules'
       ],
       correctAnswer: 1
     },
     'confined-2': {
       type: 'multiple-choice',
-      question: 'What is the main danger of counterweights in confined spaces?',
+      question: 'When working in a confined area or space, what danger can be present with regards to the counterweight of the machine?',
       options: [
-        'They increase fuel consumption',
-        'They can extend beyond machine footprint and strike personnel or structures',
-        'They make the machine slower',
-        'They reduce machine stability'
+        'It can extend beyond machine footprint and strike personnel or structures',
+        'It increases fuel consumption',
+        'It makes the machine slower',
+        'It reduces machine stability'
       ],
-      correctAnswer: 1
+      correctAnswer: 0
     },
     'confined-3': {
       type: 'multiple-choice',
-      question: 'What should you do when operating in a confined area with limited visibility?',
+      question: 'What is the purpose of the counterweight of the machine?',
       options: [
-        'Work faster to complete the task quickly',
-        'Use all available visibility aids and consider using a spotter or marshaller',
-        'Ignore visibility issues and continue working',
-        'Stop working until conditions improve naturally'
+        'To provide stability and balance during operation',
+        'To increase machine weight',
+        'To improve fuel efficiency',
+        'To reduce noise levels'
       ],
-      correctAnswer: 1
+      correctAnswer: 0
     },
     'quickhitch-1': {
       type: 'multiple-choice',
@@ -348,6 +404,39 @@ const FlanneryTrainingApp = () => {
         'A system for quick maintenance'
       ],
       correctAnswer: 2
+    },
+    'excavation-1': {
+      type: 'multiple-choice',
+      question: 'Give two reasons why, wherever possible, operators should excavate the ground in layers:',
+      options: [
+        'To reduce cycle time and make the process easier',
+        'To improve fuel efficiency and reduce wear',
+        'To ensure proper compaction and reduce cycle time',
+        'To reduce cycle time and make the process easier, and to achieve full bucket loads'
+      ],
+      correctAnswer: 3
+    },
+    'excavation-2': {
+      type: 'multiple-choice',
+      question: 'Describe two actions to be taken for an open trench at the end of the working day:',
+      options: [
+        'Cover the trench and mark the area',
+        'Mark the area and install barriers',
+        'Cover the trench, mark the area, and install barriers',
+        'Install barriers and add warning signs'
+      ],
+      correctAnswer: 2
+    },
+    'environmental-1': {
+      type: 'multiple-choice',
+      question: 'Name three ways in which an operator can minimise their impact on the environment whilst using the machine:',
+      options: [
+        'Lower engine speeds, ensure no fluid spillage, keep machine well maintained',
+        'Use efficient routes, reduce noise, minimize fuel consumption',
+        'Keep machine well maintained, plan work tasks, reduce emissions',
+        'Lower engine speeds, ensure no fluid spillage, and ensure prior planning of work tasks'
+      ],
+      correctAnswer: 3
     },
     'quickhitch-2': {
       type: 'multiple-choice',
