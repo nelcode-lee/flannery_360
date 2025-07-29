@@ -1696,7 +1696,7 @@ const FlanneryTrainingApp = () => {
 
   const DashboardContent = () => (
     <div className="space-y-4 md:space-y-6 lg:space-y-8 max-w-full pt-6">
-      <div className="bg-gradient-to-r from-flannery-500 to-flannery-600 text-flanneryDark-950 p-6 md:p-8 lg:p-10 rounded-lg max-w-full">
+      <div className="bg-gradient-to-r from-flannery-500 to-flannery-600 text-white p-6 md:p-8 lg:p-10 rounded-lg max-w-full">
         <div className="text-center mb-4 md:mb-6">
           <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-2">Skills Bootcamp</h1>
           <p className="text-lg md:text-xl lg:text-2xl">360 Excavator Training</p>
