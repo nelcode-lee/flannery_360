@@ -73,6 +73,21 @@
     overflow: hidden !important;
   }
   
+  /* Desktop 3D Viewer Enhancements */
+  @media (min-width: 768px) {
+    .sketchfab-embed-wrapper {
+      height: 600px !important;
+      min-height: 600px !important;
+    }
+  }
+  
+  @media (min-width: 1024px) {
+    .sketchfab-embed-wrapper {
+      height: 700px !important;
+      min-height: 700px !important;
+    }
+  }
+  
   @media (max-width: 768px) {
     .sketchfab-embed-wrapper {
       height: 350px !important;

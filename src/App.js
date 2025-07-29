@@ -1606,47 +1606,47 @@ const FlanneryTrainingApp = () => {
   }, []);
 
   const DashboardContent = () => (
-    <div className="space-y-4 max-w-full pt-6">
-      <div className="bg-gradient-to-r from-flannery-500 to-flannery-600 text-flanneryDark-950 p-6 rounded-lg max-w-full">
-        <div className="text-center mb-4">
-          <h1 className="text-2xl font-bold mb-2">Skills Bootcamp</h1>
-          <p className="text-lg">360 Excavator Training</p>
+    <div className="space-y-4 md:space-y-6 lg:space-y-8 max-w-full pt-6">
+      <div className="bg-gradient-to-r from-flannery-500 to-flannery-600 text-flanneryDark-950 p-6 md:p-8 lg:p-10 rounded-lg max-w-full">
+        <div className="text-center mb-4 md:mb-6">
+          <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-2">Skills Bootcamp</h1>
+          <p className="text-lg md:text-xl lg:text-2xl">360 Excavator Training</p>
         </div>
-        <div className="mt-4 text-center">
-          <p className="text-sm opacity-90">📸 Images and diagrams will be added to enhance learning</p>
+        <div className="mt-4 md:mt-6 text-center">
+          <p className="text-sm md:text-base opacity-90">📸 Images and diagrams will be added to enhance learning</p>
         </div>
       </div>
 
-      <div className="grid grid-cols-1 gap-4 max-w-full">
-        <div className="bg-white p-4 rounded-lg shadow border max-w-full">
-          <div className="flex items-center justify-between mb-3">
-            <h3 className="text-lg font-semibold text-black">Progress</h3>
-            <CheckCircle className="h-5 w-5 text-flanneryGreen-500" />
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 lg:gap-8 max-w-full">
+        <div className="bg-white p-4 md:p-6 lg:p-8 rounded-lg shadow border max-w-full">
+          <div className="flex items-center justify-between mb-3 md:mb-4">
+            <h3 className="text-lg md:text-xl lg:text-2xl font-semibold text-black">Progress</h3>
+            <CheckCircle className="h-5 w-5 md:h-6 md:w-6 text-flanneryGreen-500" />
           </div>
-          <div className="space-y-3">
+          <div className="space-y-3 md:space-y-4">
             <div>
-              <div className="flex justify-between text-sm">
+              <div className="flex justify-between text-sm md:text-base">
                 <span className="text-black">Modules Completed</span>
                 <span className="font-semibold">{completedSections.size}/15</span>
               </div>
-              <div className="w-full bg-gray-200 rounded-full h-2 mt-1">
+              <div className="w-full bg-gray-200 rounded-full h-2 md:h-3 mt-1 md:mt-2">
                 <div 
-                  className="bg-flannery-500 h-2 rounded-full transition-all"
+                  className="bg-flannery-500 h-2 md:h-3 rounded-full transition-all"
                   style={{ width: `${(completedSections.size / 15) * 100}%` }}
                 ></div>
               </div>
             </div>
             
             <div>
-              <div className="flex justify-between text-sm">
+              <div className="flex justify-between text-sm md:text-base">
                 <span className="text-black">Knowledge Checks</span>
                 <span className="font-semibold">
                   {Object.values(knowledgeProgress).filter(status => status === 'correct').length}/{knowledgeChecks.length}
                 </span>
               </div>
-              <div className="w-full bg-gray-200 rounded-full h-3">
+              <div className="w-full bg-gray-200 rounded-full h-3 md:h-4">
                 <div 
-                  className="bg-flanneryGreen-500 h-3 rounded-full transition-all"
+                  className="bg-flanneryGreen-500 h-3 md:h-4 rounded-full transition-all"
                   style={{ 
                     width: `${knowledgeChecks.length > 0 ? (Object.values(knowledgeProgress).filter(status => status === 'correct').length / knowledgeChecks.length) * 100 : 0}%` 
                   }}
@@ -1656,50 +1656,50 @@ const FlanneryTrainingApp = () => {
           </div>
         </div>
 
-        <div className="bg-white p-4 rounded-lg shadow border max-w-full">
-          <div className="flex items-center justify-between mb-3">
-            <h3 className="text-lg font-semibold text-black">Safety Focus</h3>
-            <AlertTriangle className="h-5 w-5 text-flannery-500" />
+        <div className="bg-white p-4 md:p-6 lg:p-8 rounded-lg shadow border max-w-full">
+          <div className="flex items-center justify-between mb-3 md:mb-4">
+            <h3 className="text-lg md:text-xl lg:text-2xl font-semibold text-black">Safety Focus</h3>
+            <AlertTriangle className="h-5 w-5 md:h-6 md:w-6 text-flannery-500" />
           </div>
-          <p className="text-gray-600 text-sm">Always remember to OperateSAFE - your safety and that of others is paramount.</p>
+          <p className="text-gray-600 text-sm md:text-base lg:text-lg">Always remember to OperateSAFE - your safety and that of others is paramount.</p>
         </div>
 
-        <div className="bg-white p-4 rounded-lg shadow border max-w-full">
-          <h3 className="text-lg font-semibold mb-3 text-black">Quick Actions</h3>
-          <div className="space-y-2">
+        <div className="bg-white p-4 md:p-6 lg:p-8 rounded-lg shadow border max-w-full">
+          <h3 className="text-lg md:text-xl lg:text-2xl font-semibold mb-3 md:mb-4 text-black">Quick Actions</h3>
+          <div className="space-y-2 md:space-y-3">
             <button 
               onClick={() => setActiveSection('training')}
-              className="w-full text-left text-black hover:text-gray-700 text-sm py-2 flex items-center justify-between"
+              className="w-full text-left text-black hover:text-gray-700 text-sm md:text-base lg:text-lg py-2 md:py-3 flex items-center justify-between hover:bg-gray-50 rounded-lg px-2 transition-colors"
             >
               <span>Continue Training</span>
-              <span className="text-xs text-gray-500">
+              <span className="text-xs md:text-sm text-gray-500">
                 {completedSections.size}/15 modules
               </span>
             </button>
             <button 
               onClick={() => setShowFinalTest(true)}
-              className="w-full text-left text-black hover:text-gray-700 text-sm py-2 flex items-center justify-between"
+              className="w-full text-left text-black hover:text-gray-700 text-sm md:text-base lg:text-lg py-2 md:py-3 flex items-center justify-between hover:bg-gray-50 rounded-lg px-2 transition-colors"
             >
               <span>Take Final Test</span>
-              <span className="text-xs text-gray-500">
+              <span className="text-xs md:text-sm text-gray-500">
                 {finalTestScore ? `${finalTestScore.score}/15` : 'Not attempted'}
               </span>
             </button>
             <button 
               onClick={() => setActiveSection('objectives')}
-              className="w-full text-left text-black hover:text-gray-700 text-sm py-2 flex items-center justify-between"
+              className="w-full text-left text-black hover:text-gray-700 text-sm md:text-base lg:text-lg py-2 md:py-3 flex items-center justify-between hover:bg-gray-50 rounded-lg px-2 transition-colors"
             >
               <span>View Training Objectives</span>
-              <span className="text-xs text-gray-500">
+              <span className="text-xs md:text-sm text-gray-500">
                 {trainingData.introduction.content.objectives.length} objectives
               </span>
             </button>
             <button 
               onClick={() => setActiveSection('progress')}
-              className="w-full text-left text-black hover:text-gray-700 text-sm py-2 flex items-center justify-between"
+              className="w-full text-left text-black hover:text-gray-700 text-sm md:text-base lg:text-lg py-2 md:py-3 flex items-center justify-between hover:bg-gray-50 rounded-lg px-2 transition-colors"
             >
               <span>Learning Resources</span>
-              <span className="text-xs text-gray-500">
+              <span className="text-xs md:text-sm text-gray-500">
                 Help & support
               </span>
             </button>
@@ -1712,14 +1712,14 @@ const FlanneryTrainingApp = () => {
   );
 
   const TrainingContent = () => (
-    <div className="space-y-4 max-w-full">
-      <div className="flex items-center justify-between mb-4 max-w-full">
-        <h1 className="text-xl font-bold text-black">Training Modules</h1>
+    <div className="space-y-4 md:space-y-6 lg:space-y-8 max-w-full">
+      <div className="flex items-center justify-between mb-4 md:mb-6 max-w-full">
+        <h1 className="text-xl md:text-2xl lg:text-3xl font-bold text-black">Training Modules</h1>
         <button 
           onClick={() => setShowSearch(!showSearch)}
-          className="p-2 hover:bg-flanneryDark-800 rounded-lg"
+          className="p-2 md:p-3 hover:bg-flanneryDark-800 rounded-lg"
         >
-          <Search className="h-5 w-5 text-flannery-400" />
+          <Search className="h-5 w-5 md:h-6 md:w-6 text-flannery-400" />
         </button>
       </div>
 
@@ -1742,7 +1742,7 @@ const FlanneryTrainingApp = () => {
         <FinalTest />
       ) : (
         <>
-          <div className="space-y-3 max-w-full">
+          <div className="space-y-3 md:space-y-4 max-w-full">
             {Object.entries(trainingData).filter(([key]) => key !== 'dashboard').map(([key, section]) => {
               const Icon = section.icon;
               const isCompleted = completedSections.has(key);
@@ -1751,20 +1751,20 @@ const FlanneryTrainingApp = () => {
                 <div key={key} className="bg-white rounded-lg shadow border overflow-hidden max-w-full">
                   <button
                     onClick={() => setActiveSection(key)}
-                    className="w-full p-4 text-left flex items-center justify-between hover:bg-gray-50"
+                    className="w-full p-4 md:p-6 lg:p-8 text-left flex items-center justify-between hover:bg-gray-50 transition-colors"
                   >
-                    <div className="flex items-center space-x-3">
-                      <div className="w-10 h-10 bg-flannery-100 rounded-lg flex items-center justify-center">
-                        <Icon className="h-5 w-5 text-flannery-600" />
+                    <div className="flex items-center space-x-3 md:space-x-4">
+                      <div className="w-10 h-10 md:w-12 md:h-12 bg-flannery-100 rounded-lg flex items-center justify-center">
+                        <Icon className="h-5 w-5 md:h-6 md:w-6 text-flannery-600" />
                       </div>
                       <div>
-                        <h3 className="font-semibold text-black">{section.title}</h3>
-                        <p className="text-sm text-gray-700">Training module</p>
+                        <h3 className="font-semibold text-black text-base md:text-lg lg:text-xl">{section.title}</h3>
+                        <p className="text-sm md:text-base text-gray-700">Training module</p>
                       </div>
                     </div>
-                    <div className="flex items-center space-x-2">
-                      {isCompleted && <CheckCircle className="h-4 w-4 text-flanneryGreen-500" />}
-                      <ChevronRight className="h-4 w-4 text-gray-400" />
+                    <div className="flex items-center space-x-2 md:space-x-3">
+                      {isCompleted && <CheckCircle className="h-4 w-4 md:h-5 md:w-5 text-flanneryGreen-500" />}
+                      <ChevronRight className="h-4 w-4 md:h-5 md:w-5 text-gray-400" />
                     </div>
                   </button>
                 </div>
@@ -3563,7 +3563,7 @@ const FlanneryTrainingApp = () => {
         </div>
 
         {/* 3D Interactive Viewer */}
-        <div className="relative overflow-hidden mt-8" style={{ height: '500px' }}>
+        <div className="relative overflow-hidden mt-8 md:mt-12" style={{ height: '500px', minHeight: '500px' }}>
           {/* Your Sketchfab Embed */}
           <div className="sketchfab-embed-wrapper w-full h-full relative">
             <iframe 
@@ -3640,7 +3640,7 @@ const FlanneryTrainingApp = () => {
   return (
     <div className="flex flex-col h-screen bg-black max-w-full overflow-x-hidden">
       {/* Header */}
-      <header className="bg-black shadow-sm border-b border-flannery-500 p-6 max-w-full relative z-40">
+      <header className="bg-black shadow-sm border-b border-flannery-500 p-4 md:p-6 max-w-full relative z-40">
         <div className="flex items-center justify-between max-w-full">
           <div className="flex items-center space-x-3">
             <div className="flex flex-col">
@@ -3661,8 +3661,10 @@ const FlanneryTrainingApp = () => {
 
       {/* Main Content */}
       <main className="flex-1 overflow-y-auto overflow-x-hidden pb-8 max-w-full bg-black">
-        <div className="px-4 max-w-full">
-          {renderContent()}
+        <div className="px-4 md:px-8 lg:px-12 max-w-full">
+          <div className="max-w-7xl mx-auto">
+            {renderContent()}
+          </div>
         </div>
       </main>
 
