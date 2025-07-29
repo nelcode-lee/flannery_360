@@ -1603,7 +1603,7 @@ const FlanneryTrainingApp = () => {
 
   const DashboardContent = () => (
     <div className="space-y-4 max-w-full pt-6">
-      <div className="bg-black text-white p-6 rounded-lg max-w-full border border-flannery-500">
+      <div className="bg-gradient-to-r from-flannery-500 to-flannery-600 text-flanneryDark-950 p-6 rounded-lg max-w-full">
         <div className="text-center mb-4">
           <h1 className="text-2xl font-bold mb-2">Skills Bootcamp</h1>
           <p className="text-lg">360 Excavator Training</p>
@@ -1776,24 +1776,24 @@ const FlanneryTrainingApp = () => {
           </div>
 
           {/* Final Test Section */}
-          <div className="mt-6 bg-black rounded-lg shadow border overflow-hidden max-w-full border-flannery-500">
-            <div className="p-4 text-white">
+          <div className="mt-6 bg-gradient-to-r from-flannery-500 to-flannery-600 rounded-lg shadow border overflow-hidden max-w-full">
+            <div className="p-4 text-flanneryDark-950">
               <div className="flex items-center space-x-3 mb-3">
-                <div className="w-10 h-10 bg-flannery-500 rounded-lg flex items-center justify-center">
-                  <Award className="h-5 w-5 text-black" />
+                <div className="w-10 h-10 bg-white bg-opacity-20 rounded-lg flex items-center justify-center">
+                  <Award className="h-5 w-5 text-flanneryDark-950" />
                 </div>
                 <div>
-                  <h3 className="font-semibold text-white">Final Assessment</h3>
-                  <p className="text-sm text-gray-300">Comprehensive test covering all modules</p>
+                  <h3 className="font-semibold text-flanneryDark-950">Final Assessment</h3>
+                  <p className="text-sm text-flanneryDark-800">Comprehensive test covering all modules</p>
                 </div>
               </div>
               
               <div className="mb-4">
-                <p className="text-sm text-gray-300 mb-2">
+                <p className="text-sm text-flanneryDark-800 mb-2">
                   Test your knowledge across all 15 training modules with our comprehensive final assessment.
                 </p>
-                <div className="bg-gray-800 p-3 rounded-lg">
-                  <p className="text-sm text-white">
+                <div className="bg-white bg-opacity-20 p-3 rounded-lg">
+                  <p className="text-sm text-flanneryDark-950">
                     <strong>Requirements:</strong> 80% pass mark (12 out of 15 questions)
                   </p>
                 </div>
@@ -1801,7 +1801,7 @@ const FlanneryTrainingApp = () => {
 
               <button
                 onClick={() => setShowFinalTest(true)}
-                className="w-full bg-flannery-500 text-black px-4 py-3 rounded-lg hover:bg-flannery-600 text-sm font-medium transition-colors"
+                className="w-full bg-white text-black px-4 py-3 rounded-lg hover:bg-gray-50 text-sm font-medium transition-colors"
               >
                 Start Final Test
               </button>
@@ -3244,7 +3244,7 @@ const FlanneryTrainingApp = () => {
         </div>
       </div>
 
-      <div className="bg-black p-6 rounded-lg text-white border border-flannery-500">
+      <div className="bg-gradient-to-r from-flannery-500 to-flannery-600 p-6 rounded-lg text-flanneryDark-950">
         <h3 className="text-lg font-semibold mb-3">Training Overview</h3>
         <div className="space-y-2 text-sm">
           <p><strong>Total Objectives:</strong> {trainingData.introduction.content.objectives.length}</p>
