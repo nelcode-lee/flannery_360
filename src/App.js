@@ -3297,112 +3297,113 @@ const FlanneryTrainingApp = () => {
     const [iframeLoaded, setIframeLoaded] = useState(false);
     const [viewer, setViewer] = useState(null);
 
-    // Component positions - optimized for 3D model integration
+    // Interactive 3D model parts - based on actual excavator components
     const components = {
       boom: {
         name: "Boom",
-        position: { x: 50, y: 30 },
         description: "The large, primary arm segment extending upwards and forwards from the main body. Supports the dipper arm and bucket assembly.",
         color: "#4F46E5",
-        icon: "🦾"
+        icon: "🦾",
+        // These would be the actual mesh names from the 3D model
+        meshNames: ["boom", "Boom", "BOOM", "arm_main"]
       },
       dipperArm: {
         name: "Dipper Arm", 
-        position: { x: 40, y: 40 },
         description: "Secondary arm segment extending forward from the boom, connected to the bucket via the quick hitch.",
         color: "#7C3AED",
-        icon: "🔧"
+        icon: "🔧",
+        meshNames: ["dipper", "Dipper", "DIPPER", "arm_secondary"]
       },
       bucket: {
         name: "Bucket",
-        position: { x: 30, y: 55 },
         description: "Large scoop-shaped attachment at the front of the arm assembly for digging and material handling.",
         color: "#EA580C",
-        icon: "🪣"
+        icon: "🪣",
+        meshNames: ["bucket", "Bucket", "BUCKET", "attachment"]
       },
       boomCylinder: {
         name: "Boom Cylinder",
-        position: { x: 55, y: 35 },
         description: "Large hydraulic cylinder positioned underneath the boom, responsible for raising and lowering the boom.",
         color: "#DC2626",
-        icon: "💪"
+        icon: "💪",
+        meshNames: ["cylinder_boom", "Cylinder", "BOOM_CYLINDER"]
       },
       dipperArmCylinder: {
         name: "Dipper Arm Cylinder",
-        position: { x: 45, y: 35 },
         description: "Long horizontal hydraulic cylinder extending from the main boom towards the front, controlling dipper arm movement.",
         color: "#059669",
-        icon: "🔗"
+        icon: "🔗",
+        meshNames: ["cylinder_dipper", "DipperCylinder", "ARM_CYLINDER"]
       },
       quickHitch: {
         name: "Quick Hitch",
-        position: { x: 35, y: 50 },
         description: "Robust coupling mechanism connecting the dipper arm to the bucket for quick attachment changes.",
         color: "#CA8A04",
-        icon: "🔗"
+        icon: "🔗",
+        meshNames: ["hitch", "Hitch", "QUICK_HITCH", "coupling"]
       },
       ram: {
         name: "Ram",
-        position: { x: 32, y: 48 },
         description: "Hydraulic cylinder positioned vertically, connecting the dipper arm to the link for bucket articulation.",
         color: "#0891B2",
-        icon: "⚡"
+        icon: "⚡",
+        meshNames: ["ram", "Ram", "RAM", "hydraulic_ram"]
       },
       link: {
         name: "Link",
-        position: { x: 30, y: 52 },
         description: "Short connecting piece in the linkage system that articulates the bucket between the ram and bucket.",
         color: "#7C2D12",
-        icon: "🔗"
+        icon: "🔗",
+        meshNames: ["link", "Link", "LINK", "connecting_link"]
       },
       cab: {
         name: "Cab",
-        position: { x: 70, y: 45 },
         description: "Operator's compartment with windows and controls, located on the left side of the main body.",
         color: "#16A34A",
-        icon: "🏠"
+        icon: "🏠",
+        meshNames: ["cab", "Cab", "CAB", "operator_compartment"]
       },
       counterweight: {
         name: "Counterweight",
-        position: { x: 85, y: 40 },
         description: "Large rectangular section at the back of the main body providing stability and balance during operation.",
         color: "#0891B2",
-        icon: "⚖️"
+        icon: "⚖️",
+        meshNames: ["counterweight", "Counterweight", "COUNTERWEIGHT", "balance"]
       },
       track: {
         name: "Track",
-        position: { x: 65, y: 75 },
         description: "Continuous belt system providing mobility, running along the entire length of the undercarriage.",
         color: "#4338CA",
-        icon: "🛤️"
+        icon: "🛤️",
+        meshNames: ["track", "Track", "TRACK", "belt_system"]
       },
       driveSprocket: {
         name: "Drive Sprocket",
-        position: { x: 80, y: 80 },
         description: "Large toothed wheel at the rear end of the track system responsible for driving the track.",
         color: "#1F2937",
-        icon: "⚙️"
+        icon: "⚙️",
+        meshNames: ["sprocket", "Sprocket", "DRIVE_SPROCKET", "drive_wheel"]
       },
       idlerWheel: {
         name: "Idler Wheel",
-        position: { x: 50, y: 80 },
         description: "Large circular wheel at the front end of the track system, providing track tension and support.",
         color: "#6B7280",
-        icon: "⭕"
+        icon: "⭕",
+        meshNames: ["idler", "Idler", "IDLER_WHEEL", "tension_wheel"]
       },
       trackRoller: {
         name: "Track Roller",
-        position: { x: 60, y: 85 },
         description: "Smaller circular rollers along the bottom of the track system supporting the track.",
         color: "#9CA3AF",
-        icon: "🔘"
+        icon: "🔘",
+        meshNames: ["roller", "Roller", "TRACK_ROLLER", "support_roller"]
       },
       carrierRoller: {
         name: "Carrier Roller",
-        position: { x: 60, y: 70 },
         description: "Smaller rollers along the top of the track system supporting the upper part of the track.",
         color: "#D1D5DB",
-        icon: "🔘"
+        icon: "🔘",
+        meshNames: ["carrier", "Carrier", "CARRIER_ROLLER", "upper_roller"]
       }
     };
 
@@ -3427,18 +3428,8 @@ const FlanneryTrainingApp = () => {
               console.log('Sketchfab viewer ready');
               setViewer(client);
               
-              // Add labels to 3D scene
-              if (showAllLabels) {
-                Object.entries(components).forEach(([key, component]) => {
-                  // Create a 3D text annotation
-                  client.api.createAnnotation({
-                    position: [component.position.x / 100, component.position.y / 100, 0],
-                    point: [component.position.x / 100, component.position.y / 100, 0],
-                    title: component.name,
-                    description: component.description
-                  });
-                });
-              }
+              // Set up click handlers for 3D model parts
+              setupModelClickHandlers(client);
             });
           } else {
             // Retry after a short delay
@@ -3448,25 +3439,105 @@ const FlanneryTrainingApp = () => {
 
         initSketchfab();
       }
-    }, [iframeLoaded, showAllLabels]);
+    }, [iframeLoaded]);
+
+    // Function to set up click handlers on 3D model parts
+    const setupModelClickHandlers = (client) => {
+      // Add click event listener to the 3D model
+      client.api.addEventListener('click', (event) => {
+        console.log('Click event:', event);
+        
+        // Get the clicked object/mesh
+        if (event.object && event.object.name) {
+          const clickedMeshName = event.object.name.toLowerCase();
+          console.log('Clicked mesh:', clickedMeshName);
+          
+          // Find which component was clicked
+          let clickedComponent = null;
+          for (const [key, component] of Object.entries(components)) {
+            if (component.meshNames.some(name => 
+              clickedMeshName.includes(name.toLowerCase())
+            )) {
+              clickedComponent = component;
+              break;
+            }
+          }
+          
+          if (clickedComponent) {
+            console.log('Component clicked:', clickedComponent.name);
+            setSelectedComponent(clickedComponent);
+            
+            // Highlight the clicked part
+            client.api.setMaterial({
+              name: event.object.name,
+              parameters: {
+                emissive: clickedComponent.color,
+                emissiveIntensity: 0.3
+              }
+            });
+            
+            // Reset highlight after 2 seconds
+            setTimeout(() => {
+              client.api.setMaterial({
+                name: event.object.name,
+                parameters: {
+                  emissive: [0, 0, 0],
+                  emissiveIntensity: 0
+                }
+              });
+            }, 2000);
+          }
+        }
+      });
+      
+      // Add hover effects
+      client.api.addEventListener('mouseover', (event) => {
+        if (event.object && event.object.name) {
+          const meshName = event.object.name.toLowerCase();
+          
+          // Check if this mesh corresponds to a component
+          for (const [key, component] of Object.entries(components)) {
+            if (component.meshNames.some(name => 
+              meshName.includes(name.toLowerCase())
+            )) {
+              // Show tooltip or cursor change
+              document.body.style.cursor = 'pointer';
+              break;
+            }
+          }
+        }
+      });
+      
+      client.api.addEventListener('mouseout', (event) => {
+        document.body.style.cursor = 'default';
+      });
+    };
 
     return (
       <div className="w-full max-w-4xl mx-auto bg-white rounded-lg shadow-lg overflow-hidden">
         {/* Header */}
         <div className="bg-gradient-to-r from-flannery-500 to-flannery-600 text-flanneryDark-950 px-4 py-3 flex items-center justify-between">
-          <h2 className="text-xl font-bold">360° Excavator Components</h2>
+          <h2 className="text-xl font-bold">Interactive 360° Excavator</h2>
           <div className="flex gap-2">
             <button
               onClick={() => setShowAllLabels(!showAllLabels)}
               className="p-2 bg-white bg-opacity-20 rounded-lg hover:bg-opacity-30 transition-colors"
+              title="Toggle component highlighting"
             >
               {showAllLabels ? <EyeOff size={18} /> : <Eye size={18} />}
             </button>
           </div>
         </div>
 
-        {/* 3D Viewer with Labels */}
+        {/* 3D Interactive Viewer */}
         <div className="relative overflow-hidden" style={{ height: '500px' }}>
+          {/* Instructions */}
+          {iframeLoaded && (
+            <div className="absolute top-4 left-4 z-10 bg-black bg-opacity-75 text-white px-3 py-2 rounded-lg text-sm">
+              <p>💡 <strong>Click on any part</strong> of the excavator to learn about it!</p>
+            </div>
+          )}
+          
           {/* Your Sketchfab Embed */}
           <div className="sketchfab-embed-wrapper w-full h-full relative">
             <iframe 
@@ -3484,38 +3555,6 @@ const FlanneryTrainingApp = () => {
               id="sketchfab-iframe"
             />
           </div>
-
-          {/* Label Overlay - Integrated with 3D model */}
-          {iframeLoaded && showAllLabels && (
-            <div className="absolute inset-0 pointer-events-none" style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, pointerEvents: 'none' }}>
-              {Object.entries(components).map(([key, component]) => (
-                <button
-                  key={key}
-                  className="absolute pointer-events-auto group"
-                  style={{
-                    position: 'absolute',
-                    left: `${component.position.x}%`,
-                    top: `${component.position.y}%`,
-                    transform: 'translate(-50%, -50%)',
-                    zIndex: 10,
-                    pointerEvents: 'auto'
-                  }}
-                  onClick={() => setSelectedComponent(component)}
-                >
-                  <div
-                    className="w-8 h-8 rounded-full border-3 border-white shadow-lg flex items-center justify-center text-white font-bold text-sm transition-all duration-200 hover:scale-110 animate-pulse cursor-pointer"
-                    style={{ backgroundColor: component.color }}
-                  >
-                    {component.icon}
-                  </div>
-                  
-                  <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-2 py-1 bg-gray-900 text-white text-xs rounded whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none z-20">
-                    {component.name}
-                  </div>
-                </button>
-              ))}
-            </div>
-          )}
 
           {/* Loading indicator */}
           {!iframeLoaded && (
