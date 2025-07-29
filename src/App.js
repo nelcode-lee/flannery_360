@@ -3295,6 +3295,7 @@ const FlanneryTrainingApp = () => {
     const [selectedComponent, setSelectedComponent] = useState(null);
     const [showAllLabels, setShowAllLabels] = useState(true);
     const [iframeLoaded, setIframeLoaded] = useState(false);
+    const [viewer, setViewer] = useState(null);
 
     // Component positions - optimized for 3D model integration
     const components = {
@@ -3405,6 +3406,50 @@ const FlanneryTrainingApp = () => {
       }
     };
 
+    // Initialize Sketchfab API when iframe loads
+    useEffect(() => {
+      if (iframeLoaded) {
+        // Wait for Sketchfab API to be available
+        const initSketchfab = () => {
+          if (window.Sketchfab) {
+            const client = new window.Sketchfab('1.12.1');
+            const iframe = document.getElementById('sketchfab-iframe');
+            
+            client.init(iframe, {
+              autostart: 1,
+              ui_controls: 1,
+              ui_infos: 0,
+              ui_watermark: 0,
+              api_version: '1.12.1'
+            });
+
+            client.addEventListener('viewerready', () => {
+              console.log('Sketchfab viewer ready');
+              setViewer(client);
+              
+              // Add labels to 3D scene
+              if (showAllLabels) {
+                Object.entries(components).forEach(([key, component]) => {
+                  // Create a 3D text annotation
+                  client.api.createAnnotation({
+                    position: [component.position.x / 100, component.position.y / 100, 0],
+                    point: [component.position.x / 100, component.position.y / 100, 0],
+                    title: component.name,
+                    description: component.description
+                  });
+                });
+              }
+            });
+          } else {
+            // Retry after a short delay
+            setTimeout(initSketchfab, 100);
+          }
+        };
+
+        initSketchfab();
+      }
+    }, [iframeLoaded, showAllLabels]);
+
     return (
       <div className="w-full max-w-4xl mx-auto bg-white rounded-lg shadow-lg overflow-hidden">
         {/* Header */}
@@ -3433,9 +3478,10 @@ const FlanneryTrainingApp = () => {
               execution-while-out-of-viewport="true"
               execution-while-not-rendered="true" 
               web-share="true"
-              src="https://sketchfab.com/models/5d7bf58696c0465a9d116f0ea77ed578/embed?autostart=1&ui_controls=1&ui_infos=0&ui_watermark=0"
+              src="https://sketchfab.com/models/5d7bf58696c0465a9d116f0ea77ed578/embed?autostart=1&ui_controls=1&ui_infos=0&ui_watermark=0&api_version=1.12.1"
               className="w-full h-full"
               onLoad={() => setIframeLoaded(true)}
+              id="sketchfab-iframe"
             />
           </div>
 
