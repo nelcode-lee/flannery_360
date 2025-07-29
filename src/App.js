@@ -3169,145 +3169,459 @@ const FlanneryTrainingApp = () => {
   }, [activeSection]); // Add activeSection as dependency
 
   const ResourcesContent = () => {
+    const [expandedSections, setExpandedSections] = useState({});
+    const [completedChecklist, setCompletedChecklist] = useState({});
+    const [selectedManual, setSelectedManual] = useState(null);
+    const [showQRModal, setShowQRModal] = useState(false);
+    const [safetyQuiz, setSafetyQuiz] = useState({
+      currentQuestion: 0,
+      answers: {},
+      completed: false
+    });
+
+    const toggleSection = (sectionId) => {
+      setExpandedSections(prev => ({
+        ...prev,
+        [sectionId]: !prev[sectionId]
+      }));
+    };
+
+    const toggleChecklistItem = (itemId) => {
+      setCompletedChecklist(prev => ({
+        ...prev,
+        [itemId]: !prev[itemId]
+      }));
+    };
+
+    const safetyQuestions = [
+      {
+        question: "What should you do if you encounter an unsafe condition?",
+        options: ["Continue working", "Stop immediately and report it", "Ignore it", "Fix it yourself"],
+        correct: 1
+      },
+      {
+        question: "What is the first step in the OperateSAFE process?",
+        options: ["Start working", "Assess the situation", "Call for help", "Use PPE"],
+        correct: 1
+      },
+      {
+        question: "When should you seek assistance?",
+        options: ["Never", "Only when injured", "When unsure about safety procedures", "Only at the end of the day"],
+        correct: 2
+      }
+    ];
+
+    const handleSafetyQuizAnswer = (questionIndex, answerIndex) => {
+      setSafetyQuiz(prev => ({
+        ...prev,
+        answers: {
+          ...prev.answers,
+          [questionIndex]: answerIndex
+        }
+      }));
+    };
+
+    const submitSafetyQuiz = () => {
+      setSafetyQuiz(prev => ({
+        ...prev,
+        completed: true
+      }));
+    };
+
+    const getQuizScore = () => {
+      let correct = 0;
+      Object.keys(safetyQuiz.answers).forEach(questionIndex => {
+        if (safetyQuiz.answers[questionIndex] === safetyQuestions[parseInt(questionIndex)].correct) {
+          correct++;
+        }
+      });
+      return { correct, total: safetyQuestions.length };
+    };
+
+    const operatorManuals = [
+      { id: 'komatsu-pc200', name: 'Komatsu PC200', type: 'Excavator', year: '2023' },
+      { id: 'cat-320', name: 'CAT 320', type: 'Excavator', year: '2022' },
+      { id: 'hitachi-zx200', name: 'Hitachi ZX200', type: 'Excavator', year: '2023' },
+      { id: 'volvo-ec200', name: 'Volvo EC200', type: 'Excavator', year: '2022' }
+    ];
+
+    const checklistItems = [
+      { id: 'manual-review', text: 'Review operator manual for your specific machine', category: 'Pre-Operation' },
+      { id: 'safety-check', text: 'Complete pre-operational safety checks', category: 'Pre-Operation' },
+      { id: 'ppe-verify', text: 'Verify all PPE is properly fitted and in good condition', category: 'Safety' },
+      { id: 'site-assessment', text: 'Conduct site-specific risk assessment', category: 'Safety' },
+      { id: 'communication', text: 'Establish communication protocols with team', category: 'Communication' },
+      { id: 'emergency-plan', text: 'Review emergency procedures and contact information', category: 'Emergency' }
+    ];
+
     return (
-      <div className="space-y-4 pb-8">
-        <h1 className="text-xl font-bold text-gray-900 mb-4">Training Resources</h1>
-        
-        <div className="bg-white p-4 rounded-lg shadow border">
-          <h3 className="text-lg font-semibold mb-3 text-blue-900">📚 Operator Manuals</h3>
-          <p className="text-sm text-gray-700 mb-3">
-            Always refer to the specific machine's operator manual for detailed procedures and specifications.
-          </p>
-          <div className="bg-blue-50 p-3 rounded-lg">
-            <p className="text-sm text-blue-800">
-              <strong>Important:</strong> Each excavator model may have specific requirements and procedures. 
-              Always consult the manufacturer's manual for your specific machine.
-            </p>
+      <div className="space-y-6 pb-8">
+        <div className="flex items-center justify-between">
+          <h1 className="text-2xl font-bold text-gray-900">Training Resources</h1>
+          <div className="flex space-x-2">
+            <button 
+              onClick={() => setShowQRModal(true)}
+              className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors"
+            >
+              📱 QR Scanner
+            </button>
           </div>
         </div>
 
-        <div className="bg-white p-4 rounded-lg shadow border">
+        {/* Interactive Operator Manuals */}
+        <div className="bg-white p-6 rounded-lg shadow border">
+          <div 
+            className="flex items-center justify-between cursor-pointer"
+            onClick={() => toggleSection('manuals')}
+          >
+            <h3 className="text-lg font-semibold text-blue-900">📚 Interactive Operator Manuals</h3>
+            <div className={`transform transition-transform ${expandedSections.manuals ? 'rotate-180' : ''}`}>
+              ▼
+            </div>
+          </div>
+          
+          {expandedSections.manuals && (
+            <div className="mt-4 space-y-4">
+              <p className="text-sm text-gray-700">
+                Select your machine to access the relevant operator manual and specifications.
+              </p>
+              
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {operatorManuals.map((manual) => (
+                  <div 
+                    key={manual.id}
+                    className={`p-4 border-2 rounded-lg cursor-pointer transition-all ${
+                      selectedManual === manual.id 
+                        ? 'border-blue-500 bg-blue-50' 
+                        : 'border-gray-200 hover:border-blue-300'
+                    }`}
+                    onClick={() => setSelectedManual(manual.id)}
+                  >
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <h4 className="font-medium text-gray-900">{manual.name}</h4>
+                        <p className="text-sm text-gray-600">{manual.type} • {manual.year}</p>
+                      </div>
+                      <div className="text-blue-600">
+                        {selectedManual === manual.id ? '✓' : '→'}
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              {selectedManual && (
+                <div className="mt-4 p-4 bg-blue-50 rounded-lg">
+                  <h4 className="font-medium text-blue-900 mb-2">Selected Manual</h4>
+                  <p className="text-sm text-blue-800">
+                    Manual loaded: {operatorManuals.find(m => m.id === selectedManual)?.name}
+                  </p>
+                  <div className="mt-3 space-y-2">
+                    <button className="px-3 py-1 bg-blue-600 text-white text-sm rounded hover:bg-blue-700">
+                      📖 View Full Manual
+                    </button>
+                    <button className="px-3 py-1 bg-green-600 text-white text-sm rounded hover:bg-green-700 ml-2">
+                      📋 Quick Reference
+                    </button>
+                  </div>
+                </div>
+              )}
+            </div>
+          )}
+        </div>
+
+        {/* Interactive Safety Checklist */}
+        <div className="bg-white p-6 rounded-lg shadow border">
+          <div 
+            className="flex items-center justify-between cursor-pointer"
+            onClick={() => toggleSection('checklist')}
+          >
+            <h3 className="text-lg font-semibold text-green-900">✅ Interactive Safety Checklist</h3>
+            <div className={`transform transition-transform ${expandedSections.checklist ? 'rotate-180' : ''}`}>
+              ▼
+            </div>
+          </div>
+          
+          {expandedSections.checklist && (
+            <div className="mt-4 space-y-4">
+              <p className="text-sm text-gray-700">
+                Complete this interactive checklist to ensure you're ready for safe operation.
+              </p>
+              
+              <div className="space-y-3">
+                {checklistItems.map((item) => (
+                  <div key={item.id} className="flex items-center space-x-3 p-3 bg-gray-50 rounded-lg">
+                    <input
+                      type="checkbox"
+                      id={item.id}
+                      checked={completedChecklist[item.id] || false}
+                      onChange={() => toggleChecklistItem(item.id)}
+                      className="w-4 h-4 text-green-600 rounded focus:ring-green-500"
+                    />
+                    <label htmlFor={item.id} className="flex-1 cursor-pointer">
+                      <span className={`text-sm ${completedChecklist[item.id] ? 'line-through text-gray-500' : 'text-gray-700'}`}>
+                        {item.text}
+                      </span>
+                      <span className="ml-2 text-xs text-gray-500">({item.category})</span>
+                    </label>
+                  </div>
+                ))}
+              </div>
+
+              <div className="mt-4 p-3 bg-green-50 rounded-lg">
+                <p className="text-sm text-green-800">
+                  <strong>Progress:</strong> {Object.values(completedChecklist).filter(Boolean).length} of {checklistItems.length} items completed
+                </p>
+                <div className="mt-2 w-full bg-gray-200 rounded-full h-2">
+                  <div 
+                    className="bg-green-600 h-2 rounded-full transition-all"
+                    style={{ 
+                      width: `${(Object.values(completedChecklist).filter(Boolean).length / checklistItems.length) * 100}%` 
+                    }}
+                  ></div>
+                </div>
+              </div>
+            </div>
+          )}
+        </div>
+
+        {/* Interactive Safety Quiz */}
+        <div className="bg-white p-6 rounded-lg shadow border">
+          <div 
+            className="flex items-center justify-between cursor-pointer"
+            onClick={() => toggleSection('quiz')}
+          >
+            <h3 className="text-lg font-semibold text-orange-900">🛡️ OperateSAFE Quiz</h3>
+            <div className={`transform transition-transform ${expandedSections.quiz ? 'rotate-180' : ''}`}>
+              ▼
+            </div>
+          </div>
+          
+          {expandedSections.quiz && (
+            <div className="mt-4 space-y-4">
+              {!safetyQuiz.completed ? (
+                <div>
+                  <p className="text-sm text-gray-700 mb-4">
+                    Test your knowledge of the OperateSAFE campaign with this interactive quiz.
+                  </p>
+                  
+                  <div className="space-y-4">
+                    {safetyQuestions.map((question, index) => (
+                      <div key={index} className="p-4 bg-orange-50 rounded-lg">
+                        <h4 className="font-medium text-orange-900 mb-3">
+                          Question {index + 1}: {question.question}
+                        </h4>
+                        <div className="space-y-2">
+                          {question.options.map((option, optionIndex) => (
+                            <label key={optionIndex} className="flex items-center space-x-2 cursor-pointer">
+                              <input
+                                type="radio"
+                                name={`question-${index}`}
+                                value={optionIndex}
+                                checked={safetyQuiz.answers[index] === optionIndex}
+                                onChange={() => handleSafetyQuizAnswer(index, optionIndex)}
+                                className="text-orange-600 focus:ring-orange-500"
+                              />
+                              <span className="text-sm text-gray-700">{option}</span>
+                            </label>
+                          ))}
+                        </div>
+                      </div>
+                    ))}
+                    
+                    <button
+                      onClick={submitSafetyQuiz}
+                      className="px-4 py-2 bg-orange-600 text-white rounded-lg hover:bg-orange-700 transition-colors"
+                    >
+                      Submit Quiz
+                    </button>
+                  </div>
+                </div>
+              ) : (
+                <div className="p-4 bg-green-50 rounded-lg">
+                  <h4 className="font-medium text-green-900 mb-2">Quiz Results</h4>
+                  <p className="text-sm text-green-800">
+                    You scored {getQuizScore().correct} out of {getQuizScore().total} correctly!
+                  </p>
+                  <div className="mt-3">
+                    <button
+                      onClick={() => setSafetyQuiz({ currentQuestion: 0, answers: {}, completed: false })}
+                      className="px-3 py-1 bg-green-600 text-white text-sm rounded hover:bg-green-700"
+                    >
+                      Retake Quiz
+                    </button>
+                  </div>
+                </div>
+              )}
+            </div>
+          )}
+        </div>
+
+        {/* QR Code Resources */}
+        <div className="bg-white p-6 rounded-lg shadow border">
           <h3 className="text-lg font-semibold mb-3 text-green-900">📱 QR Code Resources</h3>
           <p className="text-sm text-gray-700 mb-3">
             Scan QR codes throughout the workbook for additional content including videos and reading materials.
           </p>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-            <div className="bg-green-50 p-3 rounded-lg">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="bg-green-50 p-4 rounded-lg hover:bg-green-100 transition-colors cursor-pointer">
               <h4 className="font-medium text-green-800 mb-2">📹 Video Content</h4>
-              <p className="text-sm text-green-700">Safety procedures, operating techniques, and best practices</p>
+              <p className="text-sm text-green-700 mb-3">Safety procedures, operating techniques, and best practices</p>
+              <button className="px-3 py-1 bg-green-600 text-white text-sm rounded hover:bg-green-700">
+                Watch Videos
+              </button>
             </div>
-            <div className="bg-green-50 p-3 rounded-lg">
+            <div className="bg-green-50 p-4 rounded-lg hover:bg-green-100 transition-colors cursor-pointer">
               <h4 className="font-medium text-green-800 mb-2">📖 Reading Materials</h4>
-              <p className="text-sm text-green-700">Additional guides, regulations, and technical documents</p>
+              <p className="text-sm text-green-700 mb-3">Additional guides, regulations, and technical documents</p>
+              <button className="px-3 py-1 bg-green-600 text-white text-sm rounded hover:bg-green-700">
+                Browse Documents
+              </button>
             </div>
           </div>
         </div>
 
-        <div className="bg-white p-4 rounded-lg shadow border">
-          <h3 className="text-lg font-semibold mb-3 text-orange-900">🛡️ OperateSAFE Campaign</h3>
-          <p className="text-sm text-gray-700 mb-3">
-            Company-wide Health & Safety campaign championed by Flannery Plant Hire. 
-            Familiarize yourself with internal and external health and safety campaigns when starting at new jobs.
-          </p>
-          <div className="bg-orange-50 p-3 rounded-lg">
-            <p className="text-sm text-orange-800">
-              <strong>Safety First:</strong> Always put safety first and STOP any activity that could lead to harm 
-              to yourself or others. Always seek assistance and OperateSAFE.
-            </p>
-          </div>
-        </div>
-
-        <div className="bg-white p-4 rounded-lg shadow border">
+        {/* Literacy, Numeracy & ICT */}
+        <div className="bg-white p-6 rounded-lg shadow border">
           <h3 className="text-lg font-semibold mb-3 text-purple-900">📊 Literacy, Numeracy & ICT</h3>
           <p className="text-sm text-gray-700 mb-3">
             English, Mathematics and ICT are embedded into the content. You will be required to:
           </p>
-          <div className="space-y-2">
-            <div className="flex items-center space-x-2">
-              <div className="w-2 h-2 bg-purple-500 rounded-full"></div>
-              <span className="text-sm text-gray-700">Extract information from operator manuals</span>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="space-y-2">
+              <div className="flex items-center space-x-2 p-2 bg-purple-50 rounded hover:bg-purple-100 transition-colors">
+                <div className="w-2 h-2 bg-purple-500 rounded-full"></div>
+                <span className="text-sm text-gray-700">Extract information from operator manuals</span>
+              </div>
+              <div className="flex items-center space-x-2 p-2 bg-purple-50 rounded hover:bg-purple-100 transition-colors">
+                <div className="w-2 h-2 bg-purple-500 rounded-full"></div>
+                <span className="text-sm text-gray-700">Conduct simple calculations of bucket capacities</span>
+              </div>
             </div>
-            <div className="flex items-center space-x-2">
-              <div className="w-2 h-2 bg-purple-500 rounded-full"></div>
-              <span className="text-sm text-gray-700">Conduct simple calculations of bucket capacities</span>
-            </div>
-            <div className="flex items-center space-x-2">
-              <div className="w-2 h-2 bg-purple-500 rounded-full"></div>
-              <span className="text-sm text-gray-700">Read digital screens in the cab</span>
-            </div>
-            <div className="flex items-center space-x-2">
-              <div className="w-2 h-2 bg-purple-500 rounded-full"></div>
-              <span className="text-sm text-gray-700">Use training simulators effectively</span>
+            <div className="space-y-2">
+              <div className="flex items-center space-x-2 p-2 bg-purple-50 rounded hover:bg-purple-100 transition-colors">
+                <div className="w-2 h-2 bg-purple-500 rounded-full"></div>
+                <span className="text-sm text-gray-700">Read digital screens in the cab</span>
+              </div>
+              <div className="flex items-center space-x-2 p-2 bg-purple-50 rounded hover:bg-purple-100 transition-colors">
+                <div className="w-2 h-2 bg-purple-500 rounded-full"></div>
+                <span className="text-sm text-gray-700">Use training simulators effectively</span>
+              </div>
             </div>
           </div>
         </div>
 
-        <div className="bg-white p-4 rounded-lg shadow border">
+        {/* Knowledge Stops */}
+        <div className="bg-white p-6 rounded-lg shadow border">
           <h3 className="text-lg font-semibold mb-3 text-red-900">⚠️ Knowledge Stops</h3>
           <p className="text-sm text-gray-700 mb-3">
             Throughout the training, you will encounter Knowledge Stops - your chance to put your learning to the test.
           </p>
-          <div className="bg-red-50 p-3 rounded-lg">
-            <p className="text-sm text-red-800">
+          <div className="bg-red-50 p-4 rounded-lg">
+            <p className="text-sm text-red-800 mb-3">
               <strong>Assessment:</strong> These knowledge checks help reinforce learning and ensure understanding 
               of key safety and operational concepts.
             </p>
+            <button className="px-3 py-1 bg-red-600 text-white text-sm rounded hover:bg-red-700">
+              Practice Knowledge Stops
+            </button>
           </div>
         </div>
 
-        <div className="bg-white p-4 rounded-lg shadow border">
+        {/* Course Objectives */}
+        <div className="bg-white p-6 rounded-lg shadow border">
           <h3 className="text-lg font-semibold mb-3 text-indigo-900">🎯 Course Objectives</h3>
           <p className="text-sm text-gray-700 mb-3">
             All content delivered on this course meets the requirements set out in the National Occupational Standards for this machine type.
           </p>
-          <div className="space-y-2">
-            <div className="flex items-center space-x-2">
-              <div className="w-2 h-2 bg-indigo-500 rounded-full"></div>
-              <span className="text-sm text-gray-700">Understand relevant legislation</span>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="space-y-2">
+              <div className="flex items-center space-x-2 p-2 bg-indigo-50 rounded hover:bg-indigo-100 transition-colors">
+                <div className="w-2 h-2 bg-indigo-500 rounded-full"></div>
+                <span className="text-sm text-gray-700">Understand relevant legislation</span>
+              </div>
+              <div className="flex items-center space-x-2 p-2 bg-indigo-50 rounded hover:bg-indigo-100 transition-colors">
+                <div className="w-2 h-2 bg-indigo-500 rounded-full"></div>
+                <span className="text-sm text-gray-700">Identify hazards and control measures</span>
+              </div>
+              <div className="flex items-center space-x-2 p-2 bg-indigo-50 rounded hover:bg-indigo-100 transition-colors">
+                <div className="w-2 h-2 bg-indigo-500 rounded-full"></div>
+                <span className="text-sm text-gray-700">Perform pre-operational checks</span>
+              </div>
             </div>
-            <div className="flex items-center space-x-2">
-              <div className="w-2 h-2 bg-indigo-500 rounded-full"></div>
-              <span className="text-sm text-gray-700">Identify hazards and control measures</span>
-            </div>
-            <div className="flex items-center space-x-2">
-              <div className="w-2 h-2 bg-indigo-500 rounded-full"></div>
-              <span className="text-sm text-gray-700">Perform pre-operational checks</span>
-            </div>
-            <div className="flex items-center space-x-2">
-              <div className="w-2 h-2 bg-indigo-500 rounded-full"></div>
-              <span className="text-sm text-gray-700">Operate safely in various conditions</span>
-            </div>
-            <div className="flex items-center space-x-2">
-              <div className="w-2 h-2 bg-indigo-500 rounded-full"></div>
-              <span className="text-sm text-gray-700">Shut down machinery safely</span>
+            <div className="space-y-2">
+              <div className="flex items-center space-x-2 p-2 bg-indigo-50 rounded hover:bg-indigo-100 transition-colors">
+                <div className="w-2 h-2 bg-indigo-500 rounded-full"></div>
+                <span className="text-sm text-gray-700">Operate safely in various conditions</span>
+              </div>
+              <div className="flex items-center space-x-2 p-2 bg-indigo-50 rounded hover:bg-indigo-100 transition-colors">
+                <div className="w-2 h-2 bg-indigo-500 rounded-full"></div>
+                <span className="text-sm text-gray-700">Shut down machinery safely</span>
+              </div>
             </div>
           </div>
         </div>
 
-        <div className="bg-gradient-to-r from-blue-500 to-purple-600 p-4 rounded-lg text-white mb-8">
-          <h3 className="text-lg font-semibold mb-2">💡 Getting Maximum Benefit</h3>
-          <p className="text-sm mb-3">
+        {/* Getting Maximum Benefit */}
+        <div className="bg-gradient-to-r from-blue-500 to-purple-600 p-6 rounded-lg text-white">
+          <h3 className="text-lg font-semibold mb-3">💡 Getting Maximum Benefit</h3>
+          <p className="text-sm mb-4">
             To get the maximum benefit from your training:
           </p>
-          <div className="space-y-2 text-sm">
-            <div className="flex items-center space-x-2">
-              <div className="w-2 h-2 bg-white rounded-full"></div>
-              <span>Complete all knowledge stops thoroughly</span>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="space-y-2">
+              <div className="flex items-center space-x-2">
+                <div className="w-2 h-2 bg-white rounded-full"></div>
+                <span className="text-sm">Complete all knowledge stops thoroughly</span>
+              </div>
+              <div className="flex items-center space-x-2">
+                <div className="w-2 h-2 bg-white rounded-full"></div>
+                <span className="text-sm">Review operator manuals regularly</span>
+              </div>
             </div>
-            <div className="flex items-center space-x-2">
-              <div className="w-2 h-2 bg-white rounded-full"></div>
-              <span>Review operator manuals regularly</span>
-            </div>
-            <div className="flex items-center space-x-2">
-              <div className="w-2 h-2 bg-white rounded-full"></div>
-              <span>Practice safety procedures consistently</span>
-            </div>
-            <div className="flex items-center space-x-2">
-              <div className="w-2 h-2 bg-white rounded-full"></div>
-              <span>Seek clarification when needed</span>
+            <div className="space-y-2">
+              <div className="flex items-center space-x-2">
+                <div className="w-2 h-2 bg-white rounded-full"></div>
+                <span className="text-sm">Practice safety procedures consistently</span>
+              </div>
+              <div className="flex items-center space-x-2">
+                <div className="w-2 h-2 bg-white rounded-full"></div>
+                <span className="text-sm">Seek clarification when needed</span>
+              </div>
             </div>
           </div>
         </div>
+
+        {/* QR Modal */}
+        {showQRModal && (
+          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+            <div className="bg-white p-6 rounded-lg max-w-md w-full mx-4">
+              <div className="flex items-center justify-between mb-4">
+                <h3 className="text-lg font-semibold">📱 QR Code Scanner</h3>
+                <button 
+                  onClick={() => setShowQRModal(false)}
+                  className="text-gray-500 hover:text-gray-700"
+                >
+                  ✕
+                </button>
+              </div>
+              <div className="text-center">
+                <div className="w-48 h-48 bg-gray-200 rounded-lg mx-auto mb-4 flex items-center justify-center">
+                  <span className="text-gray-500">QR Scanner Placeholder</span>
+                </div>
+                <p className="text-sm text-gray-600 mb-4">
+                  Point your camera at a QR code to access additional training resources.
+                </p>
+                <button 
+                  onClick={() => setShowQRModal(false)}
+                  className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
+                >
+                  Close Scanner
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     );
   };
@@ -3842,6 +4156,6 @@ const FlanneryTrainingApp = () => {
       )}
     </div>
   );
-};
-
-export default FlanneryTrainingApp;
+  };
+  
+  export default FlanneryTrainingApp;
