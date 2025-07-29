@@ -1600,7 +1600,7 @@ const FlanneryTrainingApp = () => {
 
   const DashboardContent = () => (
     <div className="space-y-4 max-w-full">
-              <div className="bg-gradient-to-r from-orange-500 to-orange-600 text-white p-6 rounded-lg max-w-full">
+              <div className="bg-gradient-to-r from-flannery-500 to-flannery-600 text-flanneryDark-950 p-6 rounded-lg max-w-full">
           <div className="flex items-center justify-center mb-4">
             <FlanneryLogo />
           </div>
@@ -1615,7 +1615,7 @@ const FlanneryTrainingApp = () => {
         <div className="bg-white p-4 rounded-lg shadow border max-w-full">
           <div className="flex items-center justify-between mb-3">
             <h3 className="text-lg font-semibold">Progress</h3>
-            <CheckCircle className="h-5 w-5 text-green-500" />
+            <CheckCircle className="h-5 w-5 text-flanneryGreen-500" />
           </div>
           <div className="space-y-3">
             <div>
@@ -1625,7 +1625,7 @@ const FlanneryTrainingApp = () => {
               </div>
               <div className="w-full bg-gray-200 rounded-full h-2 mt-1">
                 <div 
-                  className="bg-orange-500 h-2 rounded-full transition-all"
+                  className="bg-flannery-500 h-2 rounded-full transition-all"
                   style={{ width: `${(completedSections.size / 15) * 100}%` }}
                 ></div>
               </div>
@@ -1640,7 +1640,7 @@ const FlanneryTrainingApp = () => {
               </div>
               <div className="w-full bg-gray-200 rounded-full h-3">
                 <div 
-                  className="bg-blue-500 h-3 rounded-full transition-all"
+                  className="bg-flanneryGreen-500 h-3 rounded-full transition-all"
                   style={{ 
                     width: `${knowledgeChecks.length > 0 ? (Object.values(knowledgeProgress).filter(status => status === 'correct').length / knowledgeChecks.length) * 100 : 0}%` 
                   }}
@@ -1653,7 +1653,7 @@ const FlanneryTrainingApp = () => {
         <div className="bg-white p-4 rounded-lg shadow border max-w-full">
           <div className="flex items-center justify-between mb-3">
             <h3 className="text-lg font-semibold">Safety Focus</h3>
-            <AlertTriangle className="h-5 w-5 text-amber-500" />
+            <AlertTriangle className="h-5 w-5 text-flannery-500" />
           </div>
           <p className="text-gray-600 text-sm">Always remember to OperateSAFE - your safety and that of others is paramount.</p>
         </div>
@@ -1663,13 +1663,13 @@ const FlanneryTrainingApp = () => {
           <div className="space-y-2">
             <button 
               onClick={() => setActiveSection('training')}
-              className="w-full text-left text-blue-600 hover:text-blue-800 text-sm py-2"
+              className="w-full text-left text-flannery-600 hover:text-flannery-700 text-sm py-2"
             >
               Take Knowledge Check
             </button>
             <button 
               onClick={() => setActiveSection('legislation')}
-              className="w-full text-left text-blue-600 hover:text-blue-800 text-sm py-2"
+              className="w-full text-left text-flannery-600 hover:text-flannery-700 text-sm py-2"
             >
               Review Safety Guidelines
             </button>
@@ -1684,7 +1684,7 @@ const FlanneryTrainingApp = () => {
                   alert('Please select a training section to bookmark.');
                 }
               }}
-              className="w-full text-left text-blue-600 hover:text-blue-800 text-sm py-2"
+              className="w-full text-left text-flannery-600 hover:text-flannery-700 text-sm py-2"
             >
               Bookmark Section
             </button>
@@ -1697,13 +1697,13 @@ const FlanneryTrainingApp = () => {
         <div className="space-y-2">
           {trainingData.introduction.content.objectives.slice(0, showAllObjectives ? undefined : 6).map((objective, index) => (
             <div key={index} className="flex items-start space-x-2">
-              <CheckCircle className="h-4 w-4 text-green-500 mt-0.5 flex-shrink-0" />
+              <CheckCircle className="h-4 w-4 text-flanneryGreen-500 mt-0.5 flex-shrink-0" />
               <span className="text-gray-700 text-sm">{objective}</span>
             </div>
           ))}
           <button 
             onClick={() => setShowAllObjectives(!showAllObjectives)}
-            className="text-orange-600 text-sm font-medium mt-2 hover:text-orange-700"
+            className="text-flannery-600 text-sm font-medium mt-2 hover:text-flannery-700"
           >
             {showAllObjectives ? 'Show Less' : `View All ${trainingData.introduction.content.objectives.length} Objectives`} →
           </button>
@@ -1731,7 +1731,7 @@ const FlanneryTrainingApp = () => {
             <input
               type="text"
               placeholder="Search training content..."
-              className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500"
+              className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-flannery-500"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
             />
@@ -1755,8 +1755,8 @@ const FlanneryTrainingApp = () => {
                     className="w-full p-4 text-left flex items-center justify-between hover:bg-gray-50"
                   >
                     <div className="flex items-center space-x-3">
-                      <div className="w-10 h-10 bg-orange-100 rounded-lg flex items-center justify-center">
-                        <Icon className="h-5 w-5 text-orange-600" />
+                      <div className="w-10 h-10 bg-flannery-100 rounded-lg flex items-center justify-center">
+                        <Icon className="h-5 w-5 text-flannery-600" />
                       </div>
                       <div>
                         <h3 className="font-semibold text-gray-900">{section.title}</h3>
@@ -1764,7 +1764,7 @@ const FlanneryTrainingApp = () => {
                       </div>
                     </div>
                     <div className="flex items-center space-x-2">
-                      {isCompleted && <CheckCircle className="h-4 w-4 text-green-500" />}
+                      {isCompleted && <CheckCircle className="h-4 w-4 text-flanneryGreen-500" />}
                       <ChevronRight className="h-4 w-4 text-gray-400" />
                     </div>
                   </button>
@@ -1774,24 +1774,24 @@ const FlanneryTrainingApp = () => {
           </div>
 
           {/* Final Test Section */}
-          <div className="mt-6 bg-gradient-to-r from-red-500 to-red-600 rounded-lg shadow border overflow-hidden max-w-full">
-            <div className="p-4 text-white">
+          <div className="mt-6 bg-gradient-to-r from-flannery-500 to-flannery-600 rounded-lg shadow border overflow-hidden max-w-full">
+            <div className="p-4 text-flanneryDark-950">
               <div className="flex items-center space-x-3 mb-3">
                 <div className="w-10 h-10 bg-white bg-opacity-20 rounded-lg flex items-center justify-center">
-                  <Award className="h-5 w-5 text-white" />
+                  <Award className="h-5 w-5 text-flanneryDark-950" />
                 </div>
                 <div>
-                  <h3 className="font-semibold text-white">Final Assessment</h3>
-                  <p className="text-sm text-red-100">Comprehensive test covering all modules</p>
+                  <h3 className="font-semibold text-flanneryDark-950">Final Assessment</h3>
+                  <p className="text-sm text-flanneryDark-800">Comprehensive test covering all modules</p>
                 </div>
               </div>
               
               <div className="mb-4">
-                <p className="text-sm text-red-100 mb-2">
+                <p className="text-sm text-flanneryDark-800 mb-2">
                   Test your knowledge across all 15 training modules with our comprehensive final assessment.
                 </p>
                 <div className="bg-white bg-opacity-20 p-3 rounded-lg">
-                  <p className="text-sm text-white">
+                  <p className="text-sm text-flanneryDark-950">
                     <strong>Requirements:</strong> 80% pass mark (12 out of 15 questions)
                   </p>
                 </div>
@@ -1799,7 +1799,7 @@ const FlanneryTrainingApp = () => {
 
               <button
                 onClick={() => setShowFinalTest(true)}
-                className="w-full bg-white text-red-600 px-4 py-3 rounded-lg hover:bg-red-50 text-sm font-medium transition-colors"
+                className="w-full bg-white text-flannery-600 px-4 py-3 rounded-lg hover:bg-flannery-50 text-sm font-medium transition-colors"
               >
                 Start Final Test
               </button>
@@ -2765,8 +2765,8 @@ const FlanneryTrainingApp = () => {
               onClick={() => markSectionComplete(sectionKey)}
               className={`px-4 py-2 rounded-lg flex items-center space-x-2 text-sm ${
                 completedSections.has(sectionKey) 
-                  ? 'bg-green-100 text-green-700' 
-                  : 'bg-orange-500 text-white hover:bg-orange-600'
+                  ? 'bg-flanneryGreen-100 text-flanneryGreen-700' 
+                  : 'bg-flannery-500 text-flanneryDark-950 hover:bg-flannery-600'
               }`}
             >
               <CheckCircle className="h-4 w-4" />
@@ -2793,14 +2793,14 @@ const FlanneryTrainingApp = () => {
                   {data.content.safetyInnovations.systems && (
                     <div className="space-y-4">
                       {Object.entries(data.content.safetyInnovations.systems).map(([systemKey, system]) => (
-                        <div key={systemKey} className="border-l-4 border-orange-500 pl-3">
+                        <div key={systemKey} className="border-l-4 border-flannery-500 pl-3">
                           <h4 className="font-medium text-sm mb-2">{system.title}</h4>
                           <p className="text-gray-700 text-sm mb-2">{system.description}</p>
                           {system.features && (
                             <ul className="space-y-1">
                               {system.features.map((feature, index) => (
                                 <li key={index} className="flex items-start space-x-2">
-                                  <span className="text-orange-500 mt-1 text-sm">•</span>
+                                  <span className="text-flannery-500 mt-1 text-sm">•</span>
                                   <span className="text-gray-700 text-sm">{feature}</span>
                                 </li>
                               ))}
@@ -2821,7 +2821,7 @@ const FlanneryTrainingApp = () => {
                   <ul className="space-y-2">
                     {data.content.visibilityConsiderations.points.map((point, index) => (
                       <li key={index} className="flex items-start space-x-2">
-                        <ChevronRight className="h-4 w-4 text-orange-500 mt-0.5 flex-shrink-0" />
+                        <ChevronRight className="h-4 w-4 text-flannery-500 mt-0.5 flex-shrink-0" />
                         <span className="text-gray-700 text-sm">{point}</span>
                       </li>
                     ))}
@@ -2837,7 +2837,7 @@ const FlanneryTrainingApp = () => {
                   <ul className="space-y-2">
                     {data.content.counterweightDangers.risks.map((risk, index) => (
                       <li key={index} className="flex items-start space-x-2">
-                        <ChevronRight className="h-4 w-4 text-orange-500 mt-0.5 flex-shrink-0" />
+                        <ChevronRight className="h-4 w-4 text-flannery-500 mt-0.5 flex-shrink-0" />
                         <span className="text-gray-700 text-sm">{risk}</span>
                       </li>
                     ))}
@@ -2853,7 +2853,7 @@ const FlanneryTrainingApp = () => {
                   <ul className="space-y-2">
                     {data.content.clearanceRequirements.requirements.map((requirement, index) => (
                       <li key={index} className="flex items-start space-x-2">
-                        <ChevronRight className="h-4 w-4 text-orange-500 mt-0.5 flex-shrink-0" />
+                        <ChevronRight className="h-4 w-4 text-flannery-500 mt-0.5 flex-shrink-0" />
                         <span className="text-gray-700 text-sm">{requirement}</span>
                       </li>
                     ))}
@@ -2869,7 +2869,7 @@ const FlanneryTrainingApp = () => {
                   <ul className="space-y-2">
                     {data.content.bestPractices.practices.map((practice, index) => (
                       <li key={index} className="flex items-start space-x-2">
-                        <ChevronRight className="h-4 w-4 text-orange-500 mt-0.5 flex-shrink-0" />
+                        <ChevronRight className="h-4 w-4 text-flannery-500 mt-0.5 flex-shrink-0" />
                         <span className="text-gray-700 text-sm">{practice}</span>
                       </li>
                     ))}
@@ -2901,7 +2901,7 @@ const FlanneryTrainingApp = () => {
           <ul className="space-y-2">
             {content.map((item, index) => (
               <li key={index} className="flex items-start space-x-2">
-                <ChevronRight className="h-4 w-4 text-orange-500 mt-0.5 flex-shrink-0" />
+                <ChevronRight className="h-4 w-4 text-flannery-500 mt-0.5 flex-shrink-0" />
                 <span className="text-gray-700 text-sm">{item}</span>
               </li>
             ))}
@@ -2913,7 +2913,7 @@ const FlanneryTrainingApp = () => {
         return (
           <div className="space-y-3">
             {Object.entries(content).map(([key, value]) => (
-              <div key={key} className="border-l-4 border-orange-500 pl-3">
+              <div key={key} className="border-l-4 border-flannery-500 pl-3">
                 <h4 className="font-medium capitalize text-sm mb-2">{key.replace(/([A-Z])/g, ' $1')}:</h4>
                 {typeof value === 'string' ? (
                   <p className="text-gray-700 text-sm">{value}</p>
@@ -2921,7 +2921,7 @@ const FlanneryTrainingApp = () => {
                   <ul className="space-y-1">
                     {value.map((item, index) => (
                       <li key={index} className="flex items-start space-x-2">
-                        <span className="text-orange-500 mt-1 text-sm">•</span>
+                        <span className="text-flannery-500 mt-1 text-sm">•</span>
                         <span className="text-gray-700 text-sm">{item}</span>
                       </li>
                     ))}
@@ -2946,8 +2946,8 @@ const FlanneryTrainingApp = () => {
             onClick={() => markSectionComplete(sectionKey)}
             className={`px-4 py-2 rounded-lg flex items-center space-x-2 text-sm ${
               completedSections.has(sectionKey) 
-                ? 'bg-green-100 text-green-700' 
-                : 'bg-orange-500 text-white hover:bg-orange-600'
+                ? 'bg-flanneryGreen-100 text-flanneryGreen-700' 
+                : 'bg-flannery-500 text-flanneryDark-950 hover:bg-flannery-600'
             }`}
           >
             <CheckCircle className="h-4 w-4" />
@@ -2995,7 +2995,7 @@ const FlanneryTrainingApp = () => {
                           <ul className="space-y-1">
                             {subData.content.requirements.map((req, index) => (
                               <li key={index} className="flex items-start space-x-2">
-                                <span className="text-orange-500 mt-1 text-sm">•</span>
+                                <span className="text-flannery-500 mt-1 text-sm">•</span>
                                 <span className="text-gray-700 text-sm">{req}</span>
                               </li>
                             ))}
@@ -3008,7 +3008,7 @@ const FlanneryTrainingApp = () => {
                           <ul className="space-y-1">
                             {subData.content.considerations.map((consideration, index) => (
                               <li key={index} className="flex items-start space-x-2">
-                                <span className="text-orange-500 mt-1 text-sm">•</span>
+                                <span className="text-flannery-500 mt-1 text-sm">•</span>
                                 <span className="text-gray-700 text-sm">{consideration}</span>
                               </li>
                             ))}
@@ -3259,7 +3259,7 @@ const FlanneryTrainingApp = () => {
       </main>
 
       {/* Bottom Navigation */}
-      <nav className="bg-gradient-to-r from-white to-orange-50 border-t-2 border-orange-300 shadow-xl px-4 py-3 fixed bottom-0 left-0 right-0 z-50 max-w-full">
+      <nav className="bg-gradient-to-r from-white to-flannery-50 border-t-2 border-flannery-300 shadow-xl px-4 py-3 fixed bottom-0 left-0 right-0 z-50 max-w-full">
         <div className="flex justify-around max-w-full">
           {navigationItems.map((item) => {
             const Icon = item.icon;
@@ -3271,8 +3271,8 @@ const FlanneryTrainingApp = () => {
                 onClick={() => setActiveSection(item.key)}
                 className={`flex flex-col items-center py-3 px-2 rounded-xl transition-all duration-200 min-w-[60px] max-w-[80px] ${
                   isActive 
-                    ? 'text-white bg-orange-600 shadow-lg transform scale-105' 
-                    : 'text-gray-700 hover:text-orange-600 hover:bg-orange-100'
+                    ? 'text-white bg-flannery-600 shadow-lg transform scale-105' 
+                    : 'text-gray-700 hover:text-flannery-600 hover:bg-flannery-100'
                 }`}
               >
                 <Icon className={`h-6 w-6 mb-1 ${isActive ? 'text-white' : 'text-gray-600'}`} />
