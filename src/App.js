@@ -1696,21 +1696,12 @@ const FlanneryTrainingApp = () => {
 
   const DashboardContent = () => (
     <div className="space-y-4 md:space-y-6 lg:space-y-8 max-w-full pt-6">
-      <div className="relative bg-gradient-to-r from-flannery-500 to-flannery-600 text-white p-6 md:p-8 lg:p-10 rounded-lg max-w-full overflow-hidden">
-        {/* Background Image Overlay */}
-        <div 
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-15"
-          style={{
-            backgroundImage: `url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiB2aWV3Qm94PSIwIDAgMTAwIDEwMCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICA8ZGVmcz4KICAgIDxsaW5lYXJHcmFkaWVudCBpZD0iZXhjYXZhdG9yLWJnIiB4MT0iMCUiIHkxPSIwJSIgeDI9IjEwMCUiIHkyPSIxMDAlIj4KICAgICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3R5bGU9InN0b3AtY29sb3I6I0ZGRkYwMDtzdG9wLW9wYWNpdHk6MSIgLz4KICAgICAgPHN0b3Agb2Zmc2V0PSIxMDAlIiBzdHlsZT0ic3RvcC1jb2xvcjojRkZGRjAwO3N0b3Atb3BhY2l0eTowLjgiIC8+CiAgICA8L2xpbmVhckdyYWRpZW50PgogIDwvZGVmcz4KICA8cmVjdCB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgZmlsbD0idXJsKCNleGNhdmF0b3ItYmcpIi8+CiAgPGcgZmlsbD0iIzAwMCIgc3Ryb2tlPSIjMDAwIiBzdHJva2Utd2lkdGg9IjAuNSI+CiAgICA8IS0tIEV4Y2F2YXRvciBCb2R5IC0tPgogICAgPHJlY3QgeD0iMjAiIHk9IjMwIiB3aWR0aD0iNjAiIGhlaWdodD0iNDAiIHJ4PSI1IiBmaWxsPSIjRkZGRjAwIi8+CiAgICA8IS0tIENhYmluIC0tPgogICAgPHJlY3QgeD0iMjUiIHk9IjE1IiB3aWR0aD0iNTAiIGhlaWdodD0iMjAiIHJ4PSIzIiBmaWxsPSIjMDAwIi8+CiAgICA8IS0tIEFybSAtLT4KICAgIDxyZWN0IHg9IjMwIiB5PSIzNSIgd2lkdGg9IjQwIiBoZWlnaHQ9IjEwIiByeD0iMiIgZmlsbD0iIzAwMCIvPgogICAgPCEtLSBCdWNrZXQgLS0+CiAgICA8cmVjdCB4PSI2NSIgeT0iMzAiIHdpZHRoPSIxNSIgaGVpZ2h0PSIxNSIgcng9IjMiIGZpbGw9IiNGRkZGMDAiLz4KICAgIDwhLS0gVHJhY2tzIC0tPgogICAgPHJlY3QgeD0iMjAiIHk9IjY1IiB3aWR0aD0iNjAiIGhlaWdodD0iMTAiIHJ4PSIyIiBmaWxsPSIjMDAwIi8+CiAgICA8IS0tIEJyYW5kaW5nIC0tPgogICAgPHJlY3QgeD0iMjUiIHk9IjE4IiB3aWR0aD0iNDAiIGhlaWdodD0iMTQiIHJ4PSIyIiBmaWxsPSIjRkZGRjAwIi8+CiAgICA8dGV4dCB4PSI1MCIgeT0iMjciIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSI4IiBmaWxsPSIjMDAwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj5GTEFOTkVSWTwvdGV4dD4KICA8L2c+Cjwvc3ZnPg==')`,
-          }}
-        ></div>
-        
-        {/* Text Content with Enhanced Contrast */}
-        <div className="relative z-10 text-center mb-4 md:mb-6">
+      <div className="bg-gradient-to-r from-flannery-500 to-flannery-600 text-white p-6 md:p-8 lg:p-10 rounded-lg max-w-full">
+        <div className="text-center mb-4 md:mb-6">
           <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-2 drop-shadow-lg">Skills Bootcamp</h1>
           <p className="text-lg md:text-xl lg:text-2xl drop-shadow-lg">360 Excavator Training</p>
         </div>
-        <div className="relative z-10 mt-4 md:mt-6 text-center">
+        <div className="mt-4 md:mt-6 text-center">
           <p className="text-sm md:text-base opacity-90 drop-shadow-lg">📸 Images and diagrams will be added to enhance learning</p>
         </div>
       </div>
