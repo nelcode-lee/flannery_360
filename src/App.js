@@ -3226,11 +3226,11 @@ const FlanneryTrainingApp = () => {
       <header className="bg-flanneryDark-950 shadow-sm border-b border-flannery-500 p-6 max-w-full">
         <div className="flex items-center justify-between max-w-full">
           <div className="flex items-center space-x-3">
-            <div className="flex items-center space-x-2">
+            <div className="flex flex-col">
               <FlanneryLogo />
+              <p className="text-xs text-flannery-300 mt-1">Mobile Training Platform</p>
             </div>
           </div>
-          <p className="text-xs text-flannery-300">Mobile Training Platform</p>
           <div className="flex items-center">
             <button 
               onClick={() => setShowBurgerMenu(!showBurgerMenu)}
