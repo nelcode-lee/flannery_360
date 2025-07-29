@@ -1601,11 +1601,10 @@ const FlanneryTrainingApp = () => {
   const DashboardContent = () => (
     <div className="space-y-4 max-w-full">
               <div className="bg-gradient-to-r from-flannery-500 to-flannery-600 text-flanneryDark-950 p-6 rounded-lg max-w-full">
-          <div className="flex items-center justify-center mb-4">
-            <FlanneryLogo />
+          <div className="text-center mb-4">
+            <h1 className="text-2xl font-bold mb-2">Skills Bootcamp</h1>
+            <p className="text-lg">360 Excavator Training</p>
           </div>
-          <h1 className="text-2xl font-bold mb-2 text-center">Skills Bootcamp</h1>
-          <p className="text-lg text-center">360 Excavator Training</p>
           <div className="mt-4 text-center">
             <p className="text-sm opacity-90">📸 Images and diagrams will be added to enhance learning</p>
           </div>
@@ -3230,6 +3229,9 @@ const FlanneryTrainingApp = () => {
       <header className="bg-flanneryDark-950 shadow-sm border-b border-flannery-500 p-4 max-w-full">
         <div className="flex items-center justify-between max-w-full">
           <div className="flex-1 min-w-0">
+            <div className="flex items-center space-x-3 mb-2">
+              <FlanneryLogo />
+            </div>
             <h1 className="text-lg font-semibold text-white truncate">
               {activeSection === 'dashboard' ? 'Flannery Training' : 
                activeSection === 'training' ? 'Training Modules' :
