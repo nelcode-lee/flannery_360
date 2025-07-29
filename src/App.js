@@ -3738,7 +3738,7 @@ const FlanneryTrainingApp = () => {
               </div>
               <div>
                 <h4 className="font-semibold text-sm">Premium Features Available</h4>
-                <p className="text-xs opacity-90">Enhanced 3D labels and detailed component analysis</p>
+                <p className="text-xs opacity-90">Labels can be added with premium model purchase</p>
               </div>
             </div>
             <button className="px-4 py-2 bg-white text-flanneryDark-950 rounded-lg text-sm font-medium hover:bg-gray-100 transition-colors">
