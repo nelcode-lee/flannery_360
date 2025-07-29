@@ -20,7 +20,10 @@ import {
   HelpCircle, 
   ExternalLink, 
   BookOpen,
-  Bookmark
+  Bookmark,
+  Check,
+  X as XIcon,
+  RotateCcw
 } from 'lucide-react';
 
 const FlanneryLogo = () => (
