@@ -2759,7 +2759,7 @@ const FlanneryTrainingApp = () => {
       return (
         <div className="space-y-4">
           <div className="flex items-center justify-between mb-4">
-            <h1 className="text-xl font-bold text-gray-900">{data.title}</h1>
+            <h1 className="text-xl font-bold text-black">{data.title}</h1>
             <button
               onClick={() => markSectionComplete(sectionKey)}
               className={`px-4 py-2 rounded-lg flex items-center space-x-2 text-sm ${
@@ -2778,7 +2778,7 @@ const FlanneryTrainingApp = () => {
               {/* Overview */}
               {data.content.overview && (
                 <div className="bg-white p-4 rounded-lg shadow border">
-                  <h3 className="text-lg font-semibold mb-3">Overview</h3>
+                  <h3 className="text-lg font-semibold mb-3 text-black">Overview</h3>
                   <p className="text-gray-700 text-sm">{data.content.overview}</p>
                 </div>
               )}
@@ -2786,14 +2786,14 @@ const FlanneryTrainingApp = () => {
               {/* Safety Innovations */}
               {data.content.safetyInnovations && (
                 <div className="bg-white p-4 rounded-lg shadow border">
-                  <h3 className="text-lg font-semibold mb-3">{data.content.safetyInnovations.title}</h3>
+                  <h3 className="text-lg font-semibold mb-3 text-black">{data.content.safetyInnovations.title}</h3>
                   <p className="text-gray-700 text-sm mb-3">{data.content.safetyInnovations.description}</p>
                   
                   {data.content.safetyInnovations.systems && (
                     <div className="space-y-4">
                       {Object.entries(data.content.safetyInnovations.systems).map(([systemKey, system]) => (
                         <div key={systemKey} className="border-l-4 border-flannery-500 pl-3">
-                          <h4 className="font-medium text-sm mb-2">{system.title}</h4>
+                          <h4 className="font-medium text-sm mb-2 text-black">{system.title}</h4>
                           <p className="text-gray-700 text-sm mb-2">{system.description}</p>
                           {system.features && (
                             <ul className="space-y-1">
@@ -2815,7 +2815,7 @@ const FlanneryTrainingApp = () => {
               {/* Visibility Considerations */}
               {data.content.visibilityConsiderations && (
                 <div className="bg-white p-4 rounded-lg shadow border">
-                  <h3 className="text-lg font-semibold mb-3">{data.content.visibilityConsiderations.title}</h3>
+                  <h3 className="text-lg font-semibold mb-3 text-black">{data.content.visibilityConsiderations.title}</h3>
                   <p className="text-gray-700 text-sm mb-3">{data.content.visibilityConsiderations.description}</p>
                   <ul className="space-y-2">
                     {data.content.visibilityConsiderations.points.map((point, index) => (
@@ -2831,7 +2831,7 @@ const FlanneryTrainingApp = () => {
               {/* Counterweight Dangers */}
               {data.content.counterweightDangers && (
                 <div className="bg-white p-4 rounded-lg shadow border">
-                  <h3 className="text-lg font-semibold mb-3">{data.content.counterweightDangers.title}</h3>
+                  <h3 className="text-lg font-semibold mb-3 text-black">{data.content.counterweightDangers.title}</h3>
                   <p className="text-gray-700 text-sm mb-3">{data.content.counterweightDangers.description}</p>
                   <ul className="space-y-2">
                     {data.content.counterweightDangers.risks.map((risk, index) => (
@@ -2847,7 +2847,7 @@ const FlanneryTrainingApp = () => {
               {/* Clearance Requirements */}
               {data.content.clearanceRequirements && (
                 <div className="bg-white p-4 rounded-lg shadow border">
-                  <h3 className="text-lg font-semibold mb-3">{data.content.clearanceRequirements.title}</h3>
+                  <h3 className="text-lg font-semibold mb-3 text-black">{data.content.clearanceRequirements.title}</h3>
                   <p className="text-gray-700 text-sm mb-3">{data.content.clearanceRequirements.description}</p>
                   <ul className="space-y-2">
                     {data.content.clearanceRequirements.requirements.map((requirement, index) => (
@@ -2863,7 +2863,7 @@ const FlanneryTrainingApp = () => {
               {/* Best Practices */}
               {data.content.bestPractices && (
                 <div className="bg-white p-4 rounded-lg shadow border">
-                  <h3 className="text-lg font-semibold mb-3">{data.content.bestPractices.title}</h3>
+                  <h3 className="text-lg font-semibold mb-3 text-black">{data.content.bestPractices.title}</h3>
                   <p className="text-gray-700 text-sm mb-3">{data.content.bestPractices.description}</p>
                   <ul className="space-y-2">
                     {data.content.bestPractices.practices.map((practice, index) => (
@@ -2880,7 +2880,7 @@ const FlanneryTrainingApp = () => {
 
           {relevantChecks.length > 0 && (
             <div className="space-y-4">
-              <h3 className="text-lg font-semibold">Knowledge Checks</h3>
+              <h3 className="text-lg font-semibold text-black">Knowledge Checks</h3>
               {relevantChecks.map((check, index) => (
                 <KnowledgeCheck key={index} check={check} />
               ))}
@@ -2913,7 +2913,7 @@ const FlanneryTrainingApp = () => {
           <div className="space-y-3">
             {Object.entries(content).map(([key, value]) => (
               <div key={key} className="border-l-4 border-flannery-500 pl-3">
-                <h4 className="font-medium capitalize text-sm mb-2">{key.replace(/([A-Z])/g, ' $1')}:</h4>
+                <h4 className="font-medium capitalize text-sm mb-2 text-black">{key.replace(/([A-Z])/g, ' $1')}:</h4>
                 {typeof value === 'string' ? (
                   <p className="text-gray-700 text-sm">{value}</p>
                 ) : Array.isArray(value) ? (
@@ -2940,7 +2940,7 @@ const FlanneryTrainingApp = () => {
     return (
       <div className="space-y-4">
         <div className="flex items-center justify-between mb-4">
-          <h1 className="text-xl font-bold text-gray-900">{data.title}</h1>
+          <h1 className="text-xl font-bold text-black">{data.title}</h1>
           <button
             onClick={() => markSectionComplete(sectionKey)}
             className={`px-4 py-2 rounded-lg flex items-center space-x-2 text-sm ${
@@ -2958,7 +2958,7 @@ const FlanneryTrainingApp = () => {
           <div className="space-y-4">
             {Object.entries(data.content).map(([key, value]) => (
               <div key={key} className="bg-white p-4 rounded-lg shadow border">
-                <h3 className="text-lg font-semibold mb-3 capitalize">{key.replace(/([A-Z])/g, ' $1')}</h3>
+                <h3 className="text-lg font-semibold mb-3 capitalize text-black">{key.replace(/([A-Z])/g, ' $1')}</h3>
                 {renderContentSection(value)}
               </div>
             ))}
@@ -2973,7 +2973,7 @@ const FlanneryTrainingApp = () => {
                   onClick={() => toggleSection(subKey)}
                   className="w-full p-4 text-left flex items-center justify-between hover:bg-gray-50"
                 >
-                  <h3 className="text-lg font-semibold">{subData.title}</h3>
+                  <h3 className="text-lg font-semibold text-black">{subData.title}</h3>
                   {expandedSections.has(subKey) ? 
                     <ChevronDown className="h-4 w-4" /> : 
                     <ChevronRight className="h-4 w-4" />
@@ -2984,13 +2984,13 @@ const FlanneryTrainingApp = () => {
                     <div className="pt-3 space-y-3">
                       {subData.content.purpose && (
                         <div>
-                          <h4 className="font-medium mb-2 text-sm">Purpose:</h4>
+                          <h4 className="font-medium mb-2 text-sm text-black">Purpose:</h4>
                           <p className="text-gray-700 text-sm">{subData.content.purpose}</p>
                         </div>
                       )}
                       {subData.content.requirements && (
                         <div>
-                          <h4 className="font-medium mb-2 text-sm">Requirements:</h4>
+                          <h4 className="font-medium mb-2 text-sm text-black">Requirements:</h4>
                           <ul className="space-y-1">
                             {subData.content.requirements.map((req, index) => (
                               <li key={index} className="flex items-start space-x-2">
@@ -3003,7 +3003,7 @@ const FlanneryTrainingApp = () => {
                       )}
                       {subData.content.considerations && (
                         <div>
-                          <h4 className="font-medium mb-2 text-sm">Considerations:</h4>
+                          <h4 className="font-medium mb-2 text-sm text-black">Considerations:</h4>
                           <ul className="space-y-1">
                             {subData.content.considerations.map((consideration, index) => (
                               <li key={index} className="flex items-start space-x-2">
@@ -3024,7 +3024,7 @@ const FlanneryTrainingApp = () => {
 
         {relevantChecks.length > 0 && (
           <div className="space-y-4">
-            <h3 className="text-lg font-semibold">Knowledge Checks</h3>
+            <h3 className="text-lg font-semibold text-black">Knowledge Checks</h3>
             {relevantChecks.map((check, index) => (
               <KnowledgeCheck key={index} check={check} />
             ))}
