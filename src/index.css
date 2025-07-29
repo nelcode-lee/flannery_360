@@ -5,10 +5,12 @@
 @layer base {
   html {
     font-family: 'Inter', system-ui, sans-serif;
+    background-color: #000000;
   }
   
   body {
     @apply bg-flanneryDark-950 text-white;
+    background-color: #000000 !important;
     /* Prevent horizontal scrolling on mobile */
     overflow-x: hidden;
     max-width: 100vw;
@@ -18,6 +20,7 @@
   #root {
     max-width: 100vw;
     overflow-x: hidden;
+    background-color: #000000;
   }
 }
 
