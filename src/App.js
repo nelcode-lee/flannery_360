@@ -28,7 +28,8 @@ import {
   Menu,
   Eye,
   EyeOff,
-  Box
+  Box,
+  X
 } from 'lucide-react';
 
 const FlanneryLogo = () => (
