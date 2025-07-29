@@ -24,7 +24,8 @@ import {
   Check,
   X as XIcon,
   RotateCcw,
-  ChevronDown
+  ChevronDown,
+  Menu
 } from 'lucide-react';
 
 const FlanneryLogo = () => (
@@ -55,6 +56,7 @@ const FlanneryTrainingApp = () => {
   const [sectionTimeTracking, setSectionTimeTracking] = useState({});
   const [activeSectionStartTime, setActiveSectionStartTime] = useState(null);
   const [showAllObjectives, setShowAllObjectives] = useState(false);
+  const [showBurgerMenu, setShowBurgerMenu] = useState(false);
 
   // Knowledge check answers with correct responses
   const correctAnswers = {
@@ -3223,12 +3225,18 @@ const FlanneryTrainingApp = () => {
       {/* Header */}
       <header className="bg-flanneryDark-950 shadow-sm border-b border-flannery-500 p-4 max-w-full">
         <div className="flex items-center justify-between max-w-full">
-          <div className="flex-1 min-w-0">
-            <div className="flex items-center space-x-3 mb-2">
+          <div className="flex items-center space-x-3">
+            <button 
+              onClick={() => setShowBurgerMenu(!showBurgerMenu)}
+              className="p-2 hover:bg-flanneryDark-800 rounded-lg mr-2"
+            >
+              <Menu className="h-5 w-5 text-flannery-400" />
+            </button>
+            <div className="flex items-center space-x-2">
               <FlanneryLogo />
             </div>
-            <p className="text-xs text-flannery-300">Mobile Training Platform</p>
           </div>
+          <p className="text-xs text-flannery-300">Mobile Training Platform</p>
           <div className="flex items-center space-x-2 flex-shrink-0">
             <button className="p-2 hover:bg-flanneryDark-800 rounded-lg" title="Bookmark">
               <Bookmark className="h-5 w-5 text-flannery-400" />
@@ -3241,41 +3249,88 @@ const FlanneryTrainingApp = () => {
       </header>
 
       {/* Main Content */}
-      <main className="flex-1 overflow-y-auto overflow-x-hidden pb-32 max-w-full bg-flanneryDark-950">
+      <main className="flex-1 overflow-y-auto overflow-x-hidden pb-8 max-w-full bg-flanneryDark-950">
         <div className="px-4 max-w-full">
           {renderContent()}
         </div>
       </main>
 
-      {/* Bottom Navigation */}
-      <nav className="bg-flanneryDark-950 border-t-2 border-flannery-500 shadow-xl px-4 py-3 fixed bottom-0 left-0 right-0 z-50 max-w-full">
-        <div className="flex justify-around max-w-full">
-          {navigationItems.map((item) => {
-            const Icon = item.icon;
-            const isActive = activeSection === item.key;
-            
-            return (
-              <button
-                key={item.key}
-                onClick={() => setActiveSection(item.key)}
-                className={`flex flex-col items-center py-3 px-2 rounded-xl transition-all duration-200 min-w-[60px] max-w-[80px] ${
-                  isActive 
-                    ? 'text-flanneryDark-950 bg-flannery-500 shadow-lg transform scale-105' 
-                    : 'text-flannery-400 hover:text-flannery-500 hover:bg-flanneryDark-800'
-                }`}
-              >
-                <Icon className={`h-6 w-6 mb-1 ${isActive ? 'text-flanneryDark-950' : 'text-flannery-400'}`} />
-                <span className={`text-xs font-bold text-center ${isActive ? 'text-flanneryDark-950' : 'text-flannery-400'}`}>
-                  {item.label}
-                </span>
-                {isActive && (
-                  <div className="w-2 h-2 bg-flanneryDark-950 rounded-full mt-1"></div>
-                )}
-              </button>
-            );
-          })}
+      {/* Burger Menu Overlay */}
+      {showBurgerMenu && (
+        <div className="fixed inset-0 z-50">
+          {/* Backdrop */}
+          <div 
+            className="absolute inset-0 bg-black bg-opacity-50"
+            onClick={() => setShowBurgerMenu(false)}
+          ></div>
+          
+          {/* Menu Panel */}
+          <div className="absolute left-0 top-0 h-full w-80 bg-flanneryDark-950 border-r border-flannery-500 shadow-xl">
+            <div className="p-6">
+              {/* Header */}
+              <div className="flex items-center justify-between mb-6">
+                <FlanneryLogo />
+                <button 
+                  onClick={() => setShowBurgerMenu(false)}
+                  className="p-2 hover:bg-flanneryDark-800 rounded-lg"
+                >
+                  <XIcon className="h-5 w-5 text-flannery-400" />
+                </button>
+              </div>
+              
+              {/* Navigation Items */}
+              <div className="space-y-2">
+                {navigationItems.map((item) => {
+                  const Icon = item.icon;
+                  const isActive = activeSection === item.key;
+                  
+                  return (
+                    <button
+                      key={item.key}
+                      onClick={() => {
+                        setActiveSection(item.key);
+                        setShowBurgerMenu(false);
+                      }}
+                      className={`w-full flex items-center space-x-3 p-3 rounded-lg transition-colors ${
+                        isActive 
+                          ? 'bg-flannery-500 text-flanneryDark-950' 
+                          : 'text-flannery-400 hover:bg-flanneryDark-800 hover:text-flannery-300'
+                      }`}
+                    >
+                      <Icon className="h-5 w-5" />
+                      <span className="font-medium">{item.label}</span>
+                    </button>
+                  );
+                })}
+              </div>
+              
+              {/* User Info */}
+              <div className="mt-8 pt-6 border-t border-flanneryDark-800">
+                <div className="flex items-center space-x-3 mb-4">
+                  <div className="w-10 h-10 bg-flannery-500 rounded-full flex items-center justify-center">
+                    <User className="h-5 w-5 text-flanneryDark-950" />
+                  </div>
+                  <div>
+                    <p className="text-sm font-medium text-white">John Smith</p>
+                    <p className="text-xs text-flannery-300">Excavator Operator</p>
+                  </div>
+                </div>
+                
+                <div className="space-y-2 text-sm">
+                  <div className="flex justify-between">
+                    <span className="text-flannery-300">Learning Time</span>
+                    <span className="text-white">{formatTime(getTotalLearningTime())}</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-flannery-300">Modules Completed</span>
+                    <span className="text-white">{completedSections.size}/15</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-      </nav>
+      )}
     </div>
   );
 };
