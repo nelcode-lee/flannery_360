@@ -1694,111 +1694,246 @@ const FlanneryTrainingApp = () => {
     setTotalLearningTime(6000000);
   }, []);
 
-  const DashboardContent = () => (
-    <div className="space-y-4 md:space-y-6 lg:space-y-8 max-w-full pt-6">
-      <div className="bg-gradient-to-r from-flannery-500 to-flannery-600 text-white p-6 md:p-8 lg:p-10 rounded-lg max-w-full">
-        <div className="text-center mb-4 md:mb-6">
-          <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-2">Skills Bootcamp</h1>
-          <p className="text-lg md:text-xl lg:text-2xl">360 Excavator Training</p>
-        </div>
-        <div className="mt-4 md:mt-6 text-center">
-          <p className="text-sm md:text-base opacity-90">📸 Images and diagrams will be added to enhance learning</p>
-        </div>
-      </div>
+  const DashboardContent = () => {
+    const [showMotivationalMessage, setShowMotivationalMessage] = useState(true);
+    const [currentStreak, setCurrentStreak] = useState(3); // Demo streak
+    const [nextMilestone, setNextMilestone] = useState(5); // Next milestone at 5 modules
+    const [estimatedCompletion, setEstimatedCompletion] = useState('2 weeks'); // Demo estimate
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 lg:gap-8 max-w-full">
-        <div className="bg-white p-4 md:p-6 lg:p-8 rounded-lg shadow border max-w-full">
-          <div className="flex items-center justify-between mb-3 md:mb-4">
-            <h3 className="text-lg md:text-xl lg:text-2xl font-semibold text-black">Progress</h3>
-            <CheckCircle className="h-5 w-5 md:h-6 md:w-6 text-flanneryGreen-500" />
-          </div>
-          <div className="space-y-3 md:space-y-4">
-            <div>
-              <div className="flex justify-between text-sm md:text-base">
-                <span className="text-black">Modules Completed</span>
-                <span className="font-semibold">{completedSections.size}/15</span>
-              </div>
-              <div className="w-full bg-gray-200 rounded-full h-2 md:h-3 mt-1 md:mt-2">
-                <div 
-                  className="bg-gradient-to-r from-flannery-500 to-flannery-600 h-2 md:h-3 rounded-full transition-all"
-                  style={{ width: `${(completedSections.size / 15) * 100}%` }}
-                ></div>
-              </div>
+    const getMotivationalMessage = () => {
+      const progress = (completedSections.size / 15) * 100;
+      if (progress >= 80) return "🎉 You're almost there! Keep up the excellent work!";
+      if (progress >= 60) return "🚀 Great progress! You're more than halfway there!";
+      if (progress >= 40) return "💪 You're making steady progress. Keep going!";
+      if (progress >= 20) return "🌟 Good start! Every module completed brings you closer to certification.";
+      return "🎯 Welcome! Let's start your journey to becoming a certified excavator operator.";
+    };
+
+    const getNextRecommendedModule = () => {
+      const allModules = Object.keys(trainingData).filter(key => key !== 'dashboard');
+      const incompleteModules = allModules.filter(module => !completedSections.has(module));
+      return incompleteModules[0] || 'All modules completed!';
+    };
+
+    const getLearningTimeStats = () => {
+      const totalHours = Math.floor(getTotalLearningTime() / 3600000);
+      const totalMinutes = Math.floor((getTotalLearningTime() % 3600000) / 60000);
+      return { hours: totalHours, minutes: totalMinutes };
+    };
+
+    return (
+      <div className="space-y-6 md:space-y-8 lg:space-y-10 max-w-full pt-6">
+        {/* Enhanced Header with Welcome Message */}
+        <div className="bg-gradient-to-r from-flannery-500 to-flannery-600 text-white p-6 md:p-8 lg:p-10 rounded-lg max-w-full relative overflow-hidden">
+          <div className="relative z-10">
+            <div className="text-center mb-4 md:mb-6">
+              <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-2">Skills Bootcamp</h1>
+              <p className="text-lg md:text-xl lg:text-2xl">360 Excavator Training</p>
             </div>
             
-            <div>
-              <div className="flex justify-between text-sm md:text-base">
-                <span className="text-black">Knowledge Checks</span>
-                <span className="font-semibold">
-                  {Object.values(knowledgeProgress).filter(status => status === 'correct').length}/{knowledgeChecks.length}
-                </span>
+            {showMotivationalMessage && (
+              <div className="mt-4 md:mt-6 text-center">
+                <div className="bg-white bg-opacity-20 p-3 md:p-4 rounded-lg backdrop-blur-sm">
+                  <p className="text-sm md:text-base font-medium">{getMotivationalMessage()}</p>
+                  <button 
+                    onClick={() => setShowMotivationalMessage(false)}
+                    className="mt-2 text-xs opacity-70 hover:opacity-100 transition-opacity"
+                  >
+                    Dismiss
+                  </button>
+                </div>
               </div>
-              <div className="w-full bg-gray-200 rounded-full h-3 md:h-4">
-                <div 
-                  className="bg-flanneryGreen-500 h-3 md:h-4 rounded-full transition-all"
-                  style={{ 
-                    width: `${knowledgeChecks.length > 0 ? (Object.values(knowledgeProgress).filter(status => status === 'correct').length / knowledgeChecks.length) * 100 : 0}%` 
-                  }}
-                ></div>
+            )}
+          </div>
+        </div>
+
+        {/* Enhanced Progress Overview */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 lg:gap-8 max-w-full">
+          <div className="bg-white p-4 md:p-6 lg:p-8 rounded-lg shadow-lg border max-w-full">
+            <div className="flex items-center justify-between mb-3 md:mb-4">
+              <h3 className="text-lg md:text-xl lg:text-2xl font-semibold text-black">Progress</h3>
+              <CheckCircle className="h-5 w-5 md:h-6 md:w-6 text-flanneryGreen-500" />
+            </div>
+            <div className="space-y-3 md:space-y-4">
+              <div>
+                <div className="flex justify-between text-sm md:text-base">
+                  <span className="text-black">Modules Completed</span>
+                  <span className="font-semibold">{completedSections.size}/15</span>
+                </div>
+                <div className="w-full bg-gray-200 rounded-full h-2 md:h-3 mt-1 md:mt-2">
+                  <div 
+                    className="bg-gradient-to-r from-flannery-500 to-flannery-600 h-2 md:h-3 rounded-full transition-all"
+                    style={{ width: `${(completedSections.size / 15) * 100}%` }}
+                  ></div>
+                </div>
+                <p className="text-xs text-gray-500 mt-1">
+                  {nextMilestone - completedSections.size > 0 
+                    ? `${nextMilestone - completedSections.size} more to next milestone` 
+                    : 'Milestone reached! 🎉'}
+                </p>
+              </div>
+              
+              <div>
+                <div className="flex justify-between text-sm md:text-base">
+                  <span className="text-black">Knowledge Checks</span>
+                  <span className="font-semibold">
+                    {Object.values(knowledgeProgress).filter(status => status === 'correct').length}/{knowledgeChecks.length}
+                  </span>
+                </div>
+                <div className="w-full bg-gray-200 rounded-full h-3 md:h-4">
+                  <div 
+                    className="bg-flanneryGreen-500 h-3 md:h-4 rounded-full transition-all"
+                    style={{ 
+                      width: `${knowledgeChecks.length > 0 ? (Object.values(knowledgeProgress).filter(status => status === 'correct').length / knowledgeChecks.length) * 100 : 0}%` 
+                    }}
+                  ></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Learning Stats */}
+          <div className="bg-white p-4 md:p-6 lg:p-8 rounded-lg shadow-lg border max-w-full">
+            <div className="flex items-center justify-between mb-3 md:mb-4">
+              <h3 className="text-lg md:text-xl lg:text-2xl font-semibold text-black">Learning Stats</h3>
+              <Clock className="h-5 w-5 md:h-6 md:w-6 text-blue-500" />
+            </div>
+            <div className="space-y-3 md:space-y-4">
+              <div className="text-center">
+                <div className="text-2xl md:text-3xl font-bold text-blue-600">
+                  {getLearningTimeStats().hours}h {getLearningTimeStats().minutes}m
+                </div>
+                <p className="text-sm text-gray-600">Total Learning Time</p>
+              </div>
+              <div className="text-center">
+                <div className="text-2xl md:text-3xl font-bold text-green-600">
+                  {currentStreak}
+                </div>
+                <p className="text-sm text-gray-600">Day Streak</p>
+              </div>
+              <div className="text-center">
+                <div className="text-lg md:text-xl font-bold text-purple-600">
+                  {estimatedCompletion}
+                </div>
+                <p className="text-sm text-gray-600">Estimated Completion</p>
+              </div>
+            </div>
+          </div>
+
+          {/* Safety Focus */}
+          <div className="bg-white p-4 md:p-6 lg:p-8 rounded-lg shadow-lg border max-w-full">
+            <div className="flex items-center justify-between mb-3 md:mb-4">
+              <h3 className="text-lg md:text-xl lg:text-2xl font-semibold text-black">Safety Focus</h3>
+              <AlertTriangle className="h-5 w-5 md:h-6 md:w-6 text-flannery-500" />
+            </div>
+            <div className="space-y-3">
+              <p className="text-gray-600 text-sm md:text-base">Always remember to OperateSAFE - your safety and that of others is paramount.</p>
+              <div className="bg-red-50 p-3 rounded-lg border border-red-200">
+                <p className="text-sm text-red-800 font-medium">⚠️ Safety Reminder</p>
+                <p className="text-xs text-red-700 mt-1">Complete all safety modules before practical training</p>
+              </div>
+            </div>
+          </div>
+
+          {/* Next Steps */}
+          <div className="bg-white p-4 md:p-6 lg:p-8 rounded-lg shadow-lg border max-w-full">
+            <div className="flex items-center justify-between mb-3 md:mb-4">
+              <h3 className="text-lg md:text-xl lg:text-2xl font-semibold text-black">Next Steps</h3>
+              <Play className="h-5 w-5 md:h-6 md:w-6 text-green-500" />
+            </div>
+            <div className="space-y-3">
+              <div className="bg-blue-50 p-3 rounded-lg border border-blue-200">
+                <p className="text-sm text-blue-800 font-medium">📚 Recommended Next Module</p>
+                <p className="text-xs text-blue-700 mt-1 capitalize">
+                  {getNextRecommendedModule().replace('-', ' ')}
+                </p>
+              </div>
+              <div className="bg-green-50 p-3 rounded-lg border border-green-200">
+                <p className="text-sm text-green-800 font-medium">🎯 Current Goal</p>
+                <p className="text-xs text-green-700 mt-1">
+                  Complete {nextMilestone} modules for next milestone
+                </p>
               </div>
             </div>
           </div>
         </div>
 
-        <div className="bg-white p-4 md:p-6 lg:p-8 rounded-lg shadow border max-w-full">
-          <div className="flex items-center justify-between mb-3 md:mb-4">
-            <h3 className="text-lg md:text-xl lg:text-2xl font-semibold text-black">Safety Focus</h3>
-            <AlertTriangle className="h-5 w-5 md:h-6 md:w-6 text-flannery-500" />
-          </div>
-          <p className="text-gray-600 text-sm md:text-base lg:text-lg">Always remember to OperateSAFE - your safety and that of others is paramount.</p>
-        </div>
-
-        <div className="bg-white p-4 md:p-6 lg:p-8 rounded-lg shadow border max-w-full">
-          <h3 className="text-lg md:text-xl lg:text-2xl font-semibold mb-3 md:mb-4 text-black">Quick Actions</h3>
-          <div className="space-y-2 md:space-y-3">
+        {/* Enhanced Quick Actions */}
+        <div className="bg-white p-6 md:p-8 rounded-lg shadow-lg border max-w-full">
+          <h3 className="text-xl md:text-2xl font-semibold mb-4 md:mb-6 text-black">Quick Actions</h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
             <button 
               onClick={() => setActiveSection('training')}
-              className="w-full text-left text-black hover:text-gray-700 text-sm md:text-base lg:text-lg py-2 md:py-3 flex items-center justify-between hover:bg-gray-50 rounded-lg px-2 transition-colors"
+              className="p-4 bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-lg hover:from-blue-600 hover:to-blue-700 transition-all shadow-md hover:shadow-lg"
             >
-              <span>Continue Training</span>
-              <span className="text-xs md:text-sm text-gray-500">
-                {completedSections.size}/15 modules
-              </span>
+              <div className="text-center">
+                <div className="text-2xl mb-2">📚</div>
+                <div className="font-semibold">Continue Training</div>
+                <div className="text-xs opacity-90">{completedSections.size}/15 modules</div>
+              </div>
             </button>
+            
             <button 
               onClick={() => setShowFinalTest(true)}
-              className="w-full text-left text-black hover:text-gray-700 text-sm md:text-base lg:text-lg py-2 md:py-3 flex items-center justify-between hover:bg-gray-50 rounded-lg px-2 transition-colors"
+              className="p-4 bg-gradient-to-r from-green-500 to-green-600 text-white rounded-lg hover:from-green-600 hover:to-green-700 transition-all shadow-md hover:shadow-lg"
             >
-              <span>Take Final Test</span>
-              <span className="text-xs md:text-sm text-gray-500">
-                {finalTestScore ? `${finalTestScore.score}/15` : 'Not attempted'}
-              </span>
+              <div className="text-center">
+                <div className="text-2xl mb-2">🎯</div>
+                <div className="font-semibold">Take Final Test</div>
+                <div className="text-xs opacity-90">
+                  {finalTestScore ? `${finalTestScore.score}/15` : 'Not attempted'}
+                </div>
+              </div>
             </button>
+            
             <button 
               onClick={() => setActiveSection('objectives')}
-              className="w-full text-left text-black hover:text-gray-700 text-sm md:text-base lg:text-lg py-2 md:py-3 flex items-center justify-between hover:bg-gray-50 rounded-lg px-2 transition-colors"
+              className="p-4 bg-gradient-to-r from-purple-500 to-purple-600 text-white rounded-lg hover:from-purple-600 hover:to-purple-700 transition-all shadow-md hover:shadow-lg"
             >
-              <span>View Training Objectives</span>
-              <span className="text-xs md:text-sm text-gray-500">
-                {trainingData.introduction.content.objectives.length} objectives
-              </span>
+              <div className="text-center">
+                <div className="text-2xl mb-2">📋</div>
+                <div className="font-semibold">Training Objectives</div>
+                <div className="text-xs opacity-90">{trainingData.introduction.content.objectives.length} objectives</div>
+              </div>
             </button>
+            
             <button 
               onClick={() => setActiveSection('progress')}
-              className="w-full text-left text-black hover:text-gray-700 text-sm md:text-base lg:text-lg py-2 md:py-3 flex items-center justify-between hover:bg-gray-50 rounded-lg px-2 transition-colors"
+              className="p-4 bg-gradient-to-r from-orange-500 to-orange-600 text-white rounded-lg hover:from-orange-600 hover:to-orange-700 transition-all shadow-md hover:shadow-lg"
             >
-              <span>Learning Resources</span>
-              <span className="text-xs md:text-sm text-gray-500">
-                Help & support
-              </span>
+              <div className="text-center">
+                <div className="text-2xl mb-2">📖</div>
+                <div className="font-semibold">Learning Resources</div>
+                <div className="text-xs opacity-90">Help & support</div>
+              </div>
             </button>
+          </div>
+        </div>
+
+        {/* Recent Activity */}
+        <div className="bg-white p-6 md:p-8 rounded-lg shadow-lg border max-w-full">
+          <h3 className="text-xl md:text-2xl font-semibold mb-4 md:mb-6 text-black">Recent Activity</h3>
+          <div className="space-y-3">
+            <div className="flex items-center space-x-3 p-3 bg-gray-50 rounded-lg">
+              <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+              <span className="text-sm text-gray-700">Completed Introduction module</span>
+              <span className="text-xs text-gray-500 ml-auto">2 hours ago</span>
+            </div>
+            <div className="flex items-center space-x-3 p-3 bg-gray-50 rounded-lg">
+              <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
+              <span className="text-sm text-gray-700">Passed Knowledge Check #3</span>
+              <span className="text-xs text-gray-500 ml-auto">1 day ago</span>
+            </div>
+            <div className="flex items-center space-x-3 p-3 bg-gray-50 rounded-lg">
+              <div className="w-2 h-2 bg-purple-500 rounded-full"></div>
+              <span className="text-sm text-gray-700">Started Legislation module</span>
+              <span className="text-xs text-gray-500 ml-auto">2 days ago</span>
+            </div>
           </div>
         </div>
       </div>
-
-
-    </div>
-  );
+    );
+  };
 
   const TrainingContent = () => (
     <div className="space-y-4 md:space-y-6 lg:space-y-8 max-w-full">
