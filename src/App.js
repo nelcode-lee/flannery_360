@@ -2129,18 +2129,18 @@ const FlanneryTrainingApp = () => {
       </div>
 
       <div className="bg-white p-4 rounded-lg shadow border">
-        <h3 className="text-lg font-semibold mb-3">Settings</h3>
+        <h3 className="text-lg font-semibold mb-3 text-black">Settings</h3>
         <div className="space-y-3">
           <button className="w-full text-left py-2 hover:bg-gray-50 rounded">
             <div className="flex items-center justify-between">
-              <span className="text-sm">Notifications</span>
-              <ChevronRight className="h-4 w-4 text-gray-400" />
+              <span className="text-sm text-black">Notifications</span>
+              <ChevronRight className="h-4 w-4 text-black" />
             </div>
           </button>
           <button className="w-full text-left py-2 hover:bg-gray-50 rounded">
             <div className="flex items-center justify-between">
-              <span className="text-sm">Privacy</span>
-              <ChevronRight className="h-4 w-4 text-gray-400" />
+              <span className="text-sm text-black">Privacy</span>
+              <ChevronRight className="h-4 w-4 text-black" />
             </div>
           </button>
           <button 
@@ -2148,8 +2148,8 @@ const FlanneryTrainingApp = () => {
             className="w-full text-left py-2 hover:bg-gray-50 rounded"
           >
             <div className="flex items-center justify-between">
-              <span className="text-sm">Help & Support</span>
-              <ChevronRight className="h-4 w-4 text-gray-400" />
+              <span className="text-sm text-black">Help & Support</span>
+              <ChevronRight className="h-4 w-4 text-black" />
             </div>
           </button>
         </div>
