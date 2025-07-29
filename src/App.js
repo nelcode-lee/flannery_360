@@ -1715,12 +1715,12 @@ const FlanneryTrainingApp = () => {
   const TrainingContent = () => (
     <div className="space-y-4 max-w-full">
       <div className="flex items-center justify-between mb-4 max-w-full">
-        <h1 className="text-xl font-bold text-gray-900">Training Modules</h1>
+        <h1 className="text-xl font-bold text-white">Training Modules</h1>
         <button 
           onClick={() => setShowSearch(!showSearch)}
-          className="p-2 hover:bg-gray-100 rounded-lg"
+          className="p-2 hover:bg-flanneryDark-800 rounded-lg"
         >
-          <Search className="h-5 w-5" />
+          <Search className="h-5 w-5 text-flannery-400" />
         </button>
       </div>
 
@@ -3225,12 +3225,12 @@ const FlanneryTrainingApp = () => {
   };
 
   return (
-    <div className="flex flex-col h-screen bg-gray-100 max-w-full overflow-x-hidden">
+    <div className="flex flex-col h-screen bg-flanneryDark-950 max-w-full overflow-x-hidden">
       {/* Header */}
-      <header className="bg-white shadow-sm border-b border-gray-200 p-4 max-w-full">
+      <header className="bg-flanneryDark-950 shadow-sm border-b border-flannery-500 p-4 max-w-full">
         <div className="flex items-center justify-between max-w-full">
           <div className="flex-1 min-w-0">
-            <h1 className="text-lg font-semibold text-gray-900 truncate">
+            <h1 className="text-lg font-semibold text-white truncate">
               {activeSection === 'dashboard' ? 'Flannery Training' : 
                activeSection === 'training' ? 'Training Modules' :
                activeSection === 'progress' ? 'Progress' :
@@ -3238,28 +3238,28 @@ const FlanneryTrainingApp = () => {
                activeSection === 'help-support' ? 'Help & Support' :
                trainingData[activeSection]?.title || 'Training'}
             </h1>
-            <p className="text-xs text-gray-500">Mobile Training Platform</p>
+            <p className="text-xs text-flannery-300">Mobile Training Platform</p>
           </div>
           <div className="flex items-center space-x-2 flex-shrink-0">
-            <button className="p-2 hover:bg-gray-100 rounded-lg" title="Bookmark">
-              <Bookmark className="h-5 w-5 text-gray-600" />
+            <button className="p-2 hover:bg-flanneryDark-800 rounded-lg" title="Bookmark">
+              <Bookmark className="h-5 w-5 text-flannery-400" />
             </button>
-            <button className="p-2 hover:bg-gray-100 rounded-lg" title="Reset">
-              <RotateCcw className="h-5 w-5 text-gray-600" />
+            <button className="p-2 hover:bg-flanneryDark-800 rounded-lg" title="Reset">
+              <RotateCcw className="h-5 w-5 text-flannery-400" />
             </button>
           </div>
         </div>
       </header>
 
       {/* Main Content */}
-      <main className="flex-1 overflow-y-auto overflow-x-hidden pb-32 max-w-full">
+      <main className="flex-1 overflow-y-auto overflow-x-hidden pb-32 max-w-full bg-flanneryDark-950">
         <div className="px-4 max-w-full">
           {renderContent()}
         </div>
       </main>
 
       {/* Bottom Navigation */}
-      <nav className="bg-gradient-to-r from-white to-flannery-50 border-t-2 border-flannery-300 shadow-xl px-4 py-3 fixed bottom-0 left-0 right-0 z-50 max-w-full">
+      <nav className="bg-flanneryDark-950 border-t-2 border-flannery-500 shadow-xl px-4 py-3 fixed bottom-0 left-0 right-0 z-50 max-w-full">
         <div className="flex justify-around max-w-full">
           {navigationItems.map((item) => {
             const Icon = item.icon;
@@ -3271,16 +3271,16 @@ const FlanneryTrainingApp = () => {
                 onClick={() => setActiveSection(item.key)}
                 className={`flex flex-col items-center py-3 px-2 rounded-xl transition-all duration-200 min-w-[60px] max-w-[80px] ${
                   isActive 
-                    ? 'text-white bg-flannery-600 shadow-lg transform scale-105' 
-                    : 'text-gray-700 hover:text-flannery-600 hover:bg-flannery-100'
+                    ? 'text-flanneryDark-950 bg-flannery-500 shadow-lg transform scale-105' 
+                    : 'text-flannery-400 hover:text-flannery-500 hover:bg-flanneryDark-800'
                 }`}
               >
-                <Icon className={`h-6 w-6 mb-1 ${isActive ? 'text-white' : 'text-gray-600'}`} />
-                <span className={`text-xs font-bold text-center ${isActive ? 'text-white' : 'text-gray-700'}`}>
+                <Icon className={`h-6 w-6 mb-1 ${isActive ? 'text-flanneryDark-950' : 'text-flannery-400'}`} />
+                <span className={`text-xs font-bold text-center ${isActive ? 'text-flanneryDark-950' : 'text-flannery-400'}`}>
                   {item.label}
                 </span>
                 {isActive && (
-                  <div className="w-2 h-2 bg-white rounded-full mt-1"></div>
+                  <div className="w-2 h-2 bg-flanneryDark-950 rounded-full mt-1"></div>
                 )}
               </button>
             );

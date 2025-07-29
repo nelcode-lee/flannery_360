@@ -30,7 +30,7 @@ module.exports = {
           700: '#334155',
           800: '#1e293b',
           900: '#0f172a',
-          950: '#020617', // Primary black
+          950: '#000000', // Pure black for backgrounds
         },
         flanneryGreen: {
           50: '#f0fdf4',

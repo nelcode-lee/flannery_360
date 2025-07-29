@@ -8,7 +8,7 @@
   }
   
   body {
-    @apply bg-gray-100 text-gray-900;
+    @apply bg-flanneryDark-950 text-white;
     /* Prevent horizontal scrolling on mobile */
     overflow-x: hidden;
     max-width: 100vw;
@@ -27,7 +27,7 @@
   }
   
   .btn-secondary {
-    @apply bg-gray-200 hover:bg-gray-300 text-gray-800 font-medium py-3 px-4 rounded-lg transition-colors duration-200;
+    @apply bg-flanneryDark-800 hover:bg-flanneryDark-700 text-flannery-400 font-medium py-3 px-4 rounded-lg transition-colors duration-200;
   }
   
   .card {
@@ -56,7 +56,7 @@
 
   /* Bottom navigation styles */
   .bottom-nav {
-    @apply fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 z-50;
+    @apply fixed bottom-0 left-0 right-0 bg-flanneryDark-950 border-t border-flannery-500 z-50;
   }
 
   /* Main content with bottom nav padding */
