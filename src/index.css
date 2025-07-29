@@ -34,18 +34,31 @@
     box-sizing: border-box;
   }
   
-  /* Force black background on all elements */
-  html, body, #root, div {
+  /* Force black background on main containers only */
+  html, body, #root {
     background-color: #000000 !important;
   }
   
-  /* Preserve white backgrounds for cards */
+  /* Preserve white backgrounds for cards - more specific */
   .bg-white {
     background-color: #ffffff !important;
   }
   
   /* Preserve white backgrounds for all card elements */
   .card, .bg-white, [class*="bg-white"] {
+    background-color: #ffffff !important;
+  }
+  
+  /* Force white backgrounds for specific card elements */
+  div[class*="bg-white"], 
+  div.bg-white,
+  .bg-white {
+    background-color: #ffffff !important;
+  }
+  
+  /* Target specific dashboard cards */
+  .grid div.bg-white,
+  .space-y-4 div.bg-white {
     background-color: #ffffff !important;
   }
   
