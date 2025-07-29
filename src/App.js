@@ -1696,8 +1696,17 @@ const FlanneryTrainingApp = () => {
 
   const DashboardContent = () => (
     <div className="space-y-4 md:space-y-6 lg:space-y-8 max-w-full pt-6">
-      <div className="bg-gradient-to-r from-flannery-500 to-flannery-600 text-white p-30 md:p-40 lg:p-50 rounded-lg max-w-full">
-        <div className="text-center">
+      <div className="relative bg-gradient-to-r from-flannery-500 to-flannery-600 text-white p-60 md:p-80 lg:p-100 rounded-lg max-w-full overflow-hidden">
+        {/* Background Image Overlay */}
+        <div 
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-20"
+          style={{
+            backgroundImage: `url('/flannery-excavator.png')`,
+          }}
+        ></div>
+        
+        {/* Text Content with Enhanced Contrast */}
+        <div className="relative z-10 text-center">
           <p className="text-lg md:text-xl lg:text-2xl drop-shadow-lg">360 Excavator Training</p>
         </div>
       </div>
