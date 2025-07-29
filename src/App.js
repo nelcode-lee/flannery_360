@@ -1714,7 +1714,7 @@ const FlanneryTrainingApp = () => {
   const TrainingContent = () => (
     <div className="space-y-4 max-w-full">
       <div className="flex items-center justify-between mb-4 max-w-full">
-        <h1 className="text-xl font-bold text-white">Training Modules</h1>
+        <h1 className="text-xl font-bold text-black">Training Modules</h1>
         <button 
           onClick={() => setShowSearch(!showSearch)}
           className="p-2 hover:bg-flanneryDark-800 rounded-lg"
@@ -1758,8 +1758,8 @@ const FlanneryTrainingApp = () => {
                         <Icon className="h-5 w-5 text-flannery-600" />
                       </div>
                       <div>
-                        <h3 className="font-semibold text-gray-900">{section.title}</h3>
-                        <p className="text-sm text-gray-500">Training module</p>
+                        <h3 className="font-semibold text-black">{section.title}</h3>
+                        <p className="text-sm text-gray-700">Training module</p>
                       </div>
                     </div>
                     <div className="flex items-center space-x-2">
@@ -1835,7 +1835,7 @@ const FlanneryTrainingApp = () => {
 
     return (
       <div className="space-y-4">
-        <h1 className="text-xl font-bold text-gray-900 mb-4">Your Progress</h1>
+        <h1 className="text-xl font-bold text-black mb-4">Your Progress</h1>
         
         {/* Debug Info */}
         <div className="bg-yellow-50 p-4 rounded-lg border border-yellow-200">
@@ -2098,7 +2098,7 @@ const FlanneryTrainingApp = () => {
 
   const ProfileContent = () => (
     <div className="space-y-4">
-      <h1 className="text-xl font-bold text-gray-900 mb-4">Profile</h1>
+      <h1 className="text-xl font-bold text-black mb-4">Profile</h1>
       
       <div className="bg-white p-4 rounded-lg shadow border">
         <div className="flex items-center space-x-3 mb-4">
@@ -2164,7 +2164,7 @@ const FlanneryTrainingApp = () => {
 
   const HelpSupportContent = () => (
     <div className="space-y-4">
-      <h1 className="text-xl font-bold text-gray-900 mb-4">Help & Support</h1>
+      <h1 className="text-xl font-bold text-black mb-4">Help & Support</h1>
       
       {/* Contact Information */}
       <div className="bg-white p-4 rounded-lg shadow border">
@@ -3285,4 +3285,4 @@ const FlanneryTrainingApp = () => {
   );
 };
 
-export default FlanneryTrainingApp; 
+export default FlanneryTrainingApp;
