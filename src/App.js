@@ -3536,58 +3536,62 @@ const FlanneryTrainingApp = () => {
 
       {/* Burger Menu Overlay */}
       {showBurgerMenu && (
-        <div className="fixed inset-0 z-50">
+        <>
           {/* Backdrop */}
           <div 
-            className="absolute inset-0 bg-black bg-opacity-50"
+            className="fixed inset-0 bg-black bg-opacity-50 z-40"
             onClick={() => setShowBurgerMenu(false)}
-          ></div>
+          />
           
           {/* Menu Panel */}
-          <div className="absolute left-0 top-0 h-full w-80 bg-black border-r border-flannery-500 shadow-xl transform transition-transform duration-300 ease-in-out">
-            <div className="p-6">
-              {/* Header */}
-              <div className="flex items-center justify-between mb-6">
-                <div className="flex flex-col">
-                  <FlanneryLogo />
-                  <p className="text-xs text-flannery-300 mt-1">Mobile Training Platform</p>
+          <div className="fixed left-0 top-0 h-full w-80 bg-black border-r border-flannery-500 shadow-2xl z-50 transform transition-transform duration-300 ease-in-out">
+            <div className="flex flex-col h-full">
+              {/* Menu Header */}
+              <div className="p-6 border-b border-flanneryDark-800">
+                <div className="flex items-center justify-between">
+                  <div className="flex flex-col">
+                    <FlanneryLogo />
+                    <p className="text-xs text-flannery-300 mt-1">Mobile Training Platform</p>
+                  </div>
+                  <button 
+                    onClick={() => setShowBurgerMenu(false)}
+                    className="p-2 hover:bg-flanneryDark-800 rounded-lg transition-colors"
+                  >
+                    <X className="h-5 w-5 text-flannery-400" />
+                  </button>
                 </div>
-                <button 
-                  onClick={() => setShowBurgerMenu(false)}
-                  className="p-2 hover:bg-flanneryDark-800 rounded-lg transition-colors"
-                >
-                  <X className="h-5 w-5 text-flannery-400" />
-                </button>
               </div>
               
               {/* Navigation Items */}
-              <div className="space-y-2">
-                {navigationItems.map((item) => {
-                  const Icon = item.icon;
-                  const isActive = activeSection === item.key;
-                  
-                  return (
-                    <button
-                      key={item.key}
-                      onClick={() => {
-                        setActiveSection(item.key);
-                        setShowBurgerMenu(false);
-                      }}
-                      className={`w-full flex items-center space-x-3 p-3 rounded-lg transition-colors ${
-                        isActive 
-                          ? 'bg-flannery-500 text-flanneryDark-950' 
-                          : 'text-flannery-400 hover:bg-flanneryDark-800 hover:text-flannery-300'
-                      }`}
-                    >
-                      <Icon className="h-5 w-5" />
-                      <span className="font-medium">{item.label}</span>
-                    </button>
-                  );
-                })}
+              <div className="flex-1 p-6">
+                <div className="space-y-2">
+                  {navigationItems.map((item) => {
+                    const Icon = item.icon;
+                    const isActive = activeSection === item.key;
+                    
+                    return (
+                      <button
+                        key={item.key}
+                        onClick={() => {
+                          setActiveSection(item.key);
+                          setShowBurgerMenu(false);
+                        }}
+                        className={`w-full flex items-center space-x-3 p-3 rounded-lg transition-colors ${
+                          isActive 
+                            ? 'bg-flannery-500 text-flanneryDark-950' 
+                            : 'text-flannery-400 hover:bg-flanneryDark-800 hover:text-flannery-300'
+                        }`}
+                      >
+                        <Icon className="h-5 w-5" />
+                        <span className="font-medium">{item.label}</span>
+                      </button>
+                    );
+                  })}
+                </div>
               </div>
               
               {/* User Info */}
-              <div className="mt-8 pt-6 border-t border-flanneryDark-800">
+              <div className="p-6 border-t border-flanneryDark-800">
                 <div className="flex items-center space-x-3 mb-4">
                   <div className="w-10 h-10 bg-flannery-500 rounded-full flex items-center justify-center">
                     <User className="h-5 w-5 text-flanneryDark-950" />
@@ -3611,7 +3615,7 @@ const FlanneryTrainingApp = () => {
               </div>
             </div>
           </div>
-        </div>
+        </>
       )}
     </div>
   );
