@@ -3508,7 +3508,7 @@ const FlanneryTrainingApp = () => {
   return (
     <div className="flex flex-col h-screen bg-black max-w-full overflow-x-hidden">
       {/* Header */}
-      <header className="bg-black shadow-sm border-b border-flannery-500 p-6 max-w-full">
+      <header className="bg-black shadow-sm border-b border-flannery-500 p-6 max-w-full relative z-40">
         <div className="flex items-center justify-between max-w-full">
           <div className="flex items-center space-x-3">
             <div className="flex flex-col">
@@ -3519,7 +3519,7 @@ const FlanneryTrainingApp = () => {
           <div className="flex items-center">
             <button 
               onClick={() => setShowBurgerMenu(!showBurgerMenu)}
-              className="p-3 hover:bg-flanneryDark-800 rounded-lg"
+              className="p-3 hover:bg-flanneryDark-800 rounded-lg transition-colors"
             >
               <Menu className="h-6 w-6 text-flannery-400" />
             </button>
@@ -3544,16 +3544,19 @@ const FlanneryTrainingApp = () => {
           ></div>
           
           {/* Menu Panel */}
-          <div className="absolute left-0 top-0 h-full w-80 bg-black border-r border-flannery-500 shadow-xl">
+          <div className="absolute left-0 top-0 h-full w-80 bg-black border-r border-flannery-500 shadow-xl transform transition-transform duration-300 ease-in-out">
             <div className="p-6">
               {/* Header */}
               <div className="flex items-center justify-between mb-6">
-                <FlanneryLogo />
+                <div className="flex flex-col">
+                  <FlanneryLogo />
+                  <p className="text-xs text-flannery-300 mt-1">Mobile Training Platform</p>
+                </div>
                 <button 
                   onClick={() => setShowBurgerMenu(false)}
-                  className="p-2 hover:bg-flanneryDark-800 rounded-lg"
+                  className="p-2 hover:bg-flanneryDark-800 rounded-lg transition-colors"
                 >
-                  <XIcon className="h-5 w-5 text-flannery-400" />
+                  <X className="h-5 w-5 text-flannery-400" />
                 </button>
               </div>
               
