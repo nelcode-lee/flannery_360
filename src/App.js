@@ -28,7 +28,7 @@ import {
   Menu,
   Eye,
   EyeOff,
-  Cube
+  Box
 } from 'lucide-react';
 
 const FlanneryLogo = () => (
@@ -1387,7 +1387,7 @@ const FlanneryTrainingApp = () => {
     { key: 'dashboard', label: 'Dashboard', icon: Home },
     { key: 'training', label: 'Training', icon: Book },
     { key: 'objectives', label: 'Training Objectives', icon: FileText },
-    { key: '3d-viewer', label: '3D Excavator', icon: Cube },
+    { key: '3d-viewer', label: '3D Excavator', icon: Box },
     { key: 'progress', label: 'Resources', icon: BarChart3 },
     { key: 'profile', label: 'Profile', icon: User }
   ];
