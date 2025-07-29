@@ -67,6 +67,24 @@
     border-width: 3px;
   }
   
+  /* 3D Viewer Container - Fixed positioning for labels */
+  .sketchfab-embed-wrapper {
+    position: relative !important;
+    overflow: hidden !important;
+  }
+  
+  /* Label positioning - Fixed to 3D container */
+  .sketchfab-embed-wrapper .absolute {
+    position: absolute !important;
+    z-index: 10 !important;
+  }
+  
+  /* Ensure labels stay in position during scroll */
+  .sketchfab-embed-wrapper button {
+    position: absolute !important;
+    z-index: 10 !important;
+  }
+  
   @media (max-width: 768px) {
     .sketchfab-embed-wrapper {
       height: 350px !important;

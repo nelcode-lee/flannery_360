@@ -3421,9 +3421,9 @@ const FlanneryTrainingApp = () => {
         </div>
 
         {/* 3D Viewer with Labels */}
-        <div className="relative" style={{ height: '500px' }}>
+        <div className="relative overflow-hidden" style={{ height: '500px' }}>
           {/* Your Sketchfab Embed */}
-          <div className="sketchfab-embed-wrapper w-full h-full">
+          <div className="sketchfab-embed-wrapper w-full h-full relative">
             <iframe 
               title="Excavator - MINECRAFT" 
               frameBorder="0" 
@@ -3439,17 +3439,19 @@ const FlanneryTrainingApp = () => {
             />
           </div>
 
-          {/* Label Overlay */}
+          {/* Label Overlay - Fixed to 3D container */}
           {iframeLoaded && showAllLabels && (
-            <div className="absolute inset-0 pointer-events-none">
+            <div className="absolute inset-0 pointer-events-none" style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0 }}>
               {Object.entries(components).map(([key, component]) => (
                 <button
                   key={key}
                   className="absolute pointer-events-auto group"
                   style={{
+                    position: 'absolute',
                     left: `${component.position.x}%`,
                     top: `${component.position.y}%`,
-                    transform: 'translate(-50%, -50%)'
+                    transform: 'translate(-50%, -50%)',
+                    zIndex: 10
                   }}
                   onClick={() => setSelectedComponent(component)}
                 >
@@ -3460,7 +3462,7 @@ const FlanneryTrainingApp = () => {
                     {component.icon}
                   </div>
                   
-                  <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-2 py-1 bg-gray-900 text-white text-xs rounded whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none">
+                  <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-2 py-1 bg-gray-900 text-white text-xs rounded whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none z-20">
                     {component.name}
                   </div>
                 </button>
