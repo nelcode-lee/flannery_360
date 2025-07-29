@@ -1849,7 +1849,7 @@ const FlanneryTrainingApp = () => {
         </div>
         
         <div className="bg-white p-4 rounded-lg shadow border">
-          <h3 className="text-lg font-semibold mb-3">Overall Progress</h3>
+          <h3 className="text-lg font-semibold mb-3 text-black">Overall Progress</h3>
           <div className="space-y-4">
             <div>
               <div className="flex justify-between items-center mb-2">
@@ -1914,7 +1914,7 @@ const FlanneryTrainingApp = () => {
         </div>
 
         <div className="bg-white p-4 rounded-lg shadow border">
-          <h3 className="text-lg font-semibold mb-3">Recent Activity</h3>
+          <h3 className="text-lg font-semibold mb-3 text-black">Recent Activity</h3>
           <div className="space-y-3">
             {finalTestScore && (
               <div className="flex items-center space-x-3">
