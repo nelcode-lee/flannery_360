@@ -3299,45 +3299,108 @@ const FlanneryTrainingApp = () => {
     const components = {
       boom: {
         name: "Boom",
-        position: { x: 55, y: 35 },
-        description: "Main lifting arm that provides vertical movement and supports the dipper arm and bucket.",
+        position: { x: 45, y: 25 },
+        description: "The large, primary arm segment extending upwards and forwards from the main body. Supports the dipper arm and bucket assembly.",
         color: "#4F46E5",
         icon: "🦾"
       },
       dipperArm: {
         name: "Dipper Arm", 
-        position: { x: 40, y: 30 },
-        description: "Secondary arm that extends reach and provides articulation for precise digging.",
+        position: { x: 35, y: 35 },
+        description: "Secondary arm segment extending forward from the boom, connected to the bucket via the quick hitch.",
         color: "#7C3AED",
         icon: "🔧"
       },
       bucket: {
         name: "Bucket",
-        position: { x: 25, y: 55 },
-        description: "Digging attachment for excavating, loading, and material handling.",
+        position: { x: 25, y: 60 },
+        description: "Large scoop-shaped attachment at the front of the arm assembly for digging and material handling.",
         color: "#EA580C",
         icon: "🪣"
       },
+      boomCylinder: {
+        name: "Boom Cylinder",
+        position: { x: 50, y: 40 },
+        description: "Large hydraulic cylinder positioned underneath the boom, responsible for raising and lowering the boom.",
+        color: "#DC2626",
+        icon: "💪"
+      },
+      dipperArmCylinder: {
+        name: "Dipper Arm Cylinder",
+        position: { x: 40, y: 30 },
+        description: "Long horizontal hydraulic cylinder extending from the main boom towards the front, controlling dipper arm movement.",
+        color: "#059669",
+        icon: "🔗"
+      },
+      quickHitch: {
+        name: "Quick Hitch",
+        position: { x: 30, y: 50 },
+        description: "Robust coupling mechanism connecting the dipper arm to the bucket for quick attachment changes.",
+        color: "#CA8A04",
+        icon: "🔗"
+      },
+      ram: {
+        name: "Ram",
+        position: { x: 28, y: 45 },
+        description: "Hydraulic cylinder positioned vertically, connecting the dipper arm to the link for bucket articulation.",
+        color: "#0891B2",
+        icon: "⚡"
+      },
+      link: {
+        name: "Link",
+        position: { x: 27, y: 55 },
+        description: "Short connecting piece in the linkage system that articulates the bucket between the ram and bucket.",
+        color: "#7C2D12",
+        icon: "🔗"
+      },
       cab: {
         name: "Cab",
-        position: { x: 65, y: 48 },
-        description: "Operator compartment with controls and safety features (ROPS/FOPS).",
+        position: { x: 65, y: 45 },
+        description: "Operator's compartment with windows and controls, located on the left side of the main body.",
         color: "#16A34A",
         icon: "🏠"
       },
       counterweight: {
         name: "Counterweight",
-        position: { x: 78, y: 42 },
-        description: "Heavy mass providing stability and balance during operation.",
+        position: { x: 80, y: 40 },
+        description: "Large rectangular section at the back of the main body providing stability and balance during operation.",
         color: "#0891B2",
         icon: "⚖️"
       },
       track: {
         name: "Track",
-        position: { x: 62, y: 75 },
-        description: "Provides mobility and distributes machine weight evenly.",
+        position: { x: 60, y: 80 },
+        description: "Continuous belt system providing mobility, running along the entire length of the undercarriage.",
         color: "#4338CA",
         icon: "🛤️"
+      },
+      driveSprocket: {
+        name: "Drive Sprocket",
+        position: { x: 75, y: 85 },
+        description: "Large toothed wheel at the rear end of the track system responsible for driving the track.",
+        color: "#1F2937",
+        icon: "⚙️"
+      },
+      idlerWheel: {
+        name: "Idler Wheel",
+        position: { x: 45, y: 85 },
+        description: "Large circular wheel at the front end of the track system, providing track tension and support.",
+        color: "#6B7280",
+        icon: "⭕"
+      },
+      trackRoller: {
+        name: "Track Roller",
+        position: { x: 55, y: 90 },
+        description: "Smaller circular rollers along the bottom of the track system supporting the track.",
+        color: "#9CA3AF",
+        icon: "🔘"
+      },
+      carrierRoller: {
+        name: "Carrier Roller",
+        position: { x: 55, y: 75 },
+        description: "Smaller rollers along the top of the track system supporting the upper part of the track.",
+        color: "#D1D5DB",
+        icon: "🔘"
       }
     };
 
@@ -3364,8 +3427,6 @@ const FlanneryTrainingApp = () => {
               title="Excavator - MINECRAFT" 
               frameBorder="0" 
               allowFullScreen 
-              mozallowfullscreen="true" 
-              webkitallowfullscreen="true" 
               allow="autoplay; fullscreen; xr-spatial-tracking" 
               xr-spatial-tracking="true"
               execution-while-out-of-viewport="true"
