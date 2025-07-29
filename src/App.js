@@ -25,7 +25,10 @@ import {
   X as XIcon,
   RotateCcw,
   ChevronDown,
-  Menu
+  Menu,
+  Eye,
+  EyeOff,
+  Cube
 } from 'lucide-react';
 
 const FlanneryLogo = () => (
@@ -1384,6 +1387,7 @@ const FlanneryTrainingApp = () => {
     { key: 'dashboard', label: 'Dashboard', icon: Home },
     { key: 'training', label: 'Training', icon: Book },
     { key: 'objectives', label: 'Training Objectives', icon: FileText },
+    { key: '3d-viewer', label: '3D Excavator', icon: Cube },
     { key: 'progress', label: 'Resources', icon: BarChart3 },
     { key: 'profile', label: 'Profile', icon: User }
   ];
@@ -1665,30 +1669,39 @@ const FlanneryTrainingApp = () => {
           <div className="space-y-2">
             <button 
               onClick={() => setActiveSection('training')}
-              className="w-full text-left text-black hover:text-gray-700 text-sm py-2"
+              className="w-full text-left text-black hover:text-gray-700 text-sm py-2 flex items-center justify-between"
             >
-              Take Knowledge Check
+              <span>Continue Training</span>
+              <span className="text-xs text-gray-500">
+                {completedSections.size}/15 modules
+              </span>
             </button>
             <button 
-              onClick={() => setActiveSection('legislation')}
-              className="w-full text-left text-black hover:text-gray-700 text-sm py-2"
+              onClick={() => setShowFinalTest(true)}
+              className="w-full text-left text-black hover:text-gray-700 text-sm py-2 flex items-center justify-between"
             >
-              Review Safety Guidelines
+              <span>Take Final Test</span>
+              <span className="text-xs text-gray-500">
+                {finalTestScore ? `${finalTestScore.score}/15` : 'Not attempted'}
+              </span>
             </button>
             <button 
-              onClick={() => {
-                // Bookmark current section functionality
-                const currentSection = activeSection;
-                if (currentSection && currentSection !== 'dashboard') {
-                  // In a real app, this would save to localStorage or backend
-                  alert(`Section "${trainingData[currentSection]?.title || currentSection}" has been bookmarked!`);
-                } else {
-                  alert('Please select a training section to bookmark.');
-                }
-              }}
-              className="w-full text-left text-black hover:text-gray-700 text-sm py-2"
+              onClick={() => setActiveSection('objectives')}
+              className="w-full text-left text-black hover:text-gray-700 text-sm py-2 flex items-center justify-between"
             >
-              Bookmark Section
+              <span>View Training Objectives</span>
+              <span className="text-xs text-gray-500">
+                {trainingData.introduction.content.objectives.length} objectives
+              </span>
+            </button>
+            <button 
+              onClick={() => setActiveSection('progress')}
+              className="w-full text-left text-black hover:text-gray-700 text-sm py-2 flex items-center justify-between"
+            >
+              <span>Learning Resources</span>
+              <span className="text-xs text-gray-500">
+                Help & support
+              </span>
             </button>
           </div>
         </div>
@@ -3024,6 +3037,8 @@ const FlanneryTrainingApp = () => {
         return <TrainingContent />;
       case 'objectives':
         return <TrainingObjectivesContent />;
+      case '3d-viewer':
+        return <SketchfabExcavatorViewer />;
       case 'progress':
         return <ResourcesContent />;
       case 'profile':
@@ -3274,6 +3289,159 @@ const FlanneryTrainingApp = () => {
       </div>
     </div>
   );
+
+  const SketchfabExcavatorViewer = () => {
+    const [selectedComponent, setSelectedComponent] = useState(null);
+    const [showAllLabels, setShowAllLabels] = useState(true);
+    const [iframeLoaded, setIframeLoaded] = useState(false);
+
+    // Component positions - adjust these percentages to match your model
+    const components = {
+      boom: {
+        name: "Boom",
+        position: { x: 55, y: 35 },
+        description: "Main lifting arm that provides vertical movement and supports the dipper arm and bucket.",
+        color: "#4F46E5",
+        icon: "🦾"
+      },
+      dipperArm: {
+        name: "Dipper Arm", 
+        position: { x: 40, y: 30 },
+        description: "Secondary arm that extends reach and provides articulation for precise digging.",
+        color: "#7C3AED",
+        icon: "🔧"
+      },
+      bucket: {
+        name: "Bucket",
+        position: { x: 25, y: 55 },
+        description: "Digging attachment for excavating, loading, and material handling.",
+        color: "#EA580C",
+        icon: "🪣"
+      },
+      cab: {
+        name: "Cab",
+        position: { x: 65, y: 48 },
+        description: "Operator compartment with controls and safety features (ROPS/FOPS).",
+        color: "#16A34A",
+        icon: "🏠"
+      },
+      counterweight: {
+        name: "Counterweight",
+        position: { x: 78, y: 42 },
+        description: "Heavy mass providing stability and balance during operation.",
+        color: "#0891B2",
+        icon: "⚖️"
+      },
+      track: {
+        name: "Track",
+        position: { x: 62, y: 75 },
+        description: "Provides mobility and distributes machine weight evenly.",
+        color: "#4338CA",
+        icon: "🛤️"
+      }
+    };
+
+    return (
+      <div className="w-full max-w-4xl mx-auto bg-white rounded-lg shadow-lg overflow-hidden">
+        {/* Header */}
+        <div className="bg-gradient-to-r from-flannery-500 to-flannery-600 text-flanneryDark-950 px-4 py-3 flex items-center justify-between">
+          <h2 className="text-xl font-bold">360° Excavator Components</h2>
+          <div className="flex gap-2">
+            <button
+              onClick={() => setShowAllLabels(!showAllLabels)}
+              className="p-2 bg-white bg-opacity-20 rounded-lg hover:bg-opacity-30 transition-colors"
+            >
+              {showAllLabels ? <EyeOff size={18} /> : <Eye size={18} />}
+            </button>
+          </div>
+        </div>
+
+        {/* 3D Viewer with Labels */}
+        <div className="relative" style={{ height: '500px' }}>
+          {/* Your Sketchfab Embed */}
+          <div className="sketchfab-embed-wrapper w-full h-full">
+            <iframe 
+              title="Excavator - MINECRAFT" 
+              frameBorder="0" 
+              allowFullScreen 
+              mozallowfullscreen="true" 
+              webkitallowfullscreen="true" 
+              allow="autoplay; fullscreen; xr-spatial-tracking" 
+              xr-spatial-tracking="true"
+              execution-while-out-of-viewport="true"
+              execution-while-not-rendered="true" 
+              web-share="true"
+              src="https://sketchfab.com/models/5d7bf58696c0465a9d116f0ea77ed578/embed?autostart=1&ui_controls=1&ui_infos=0&ui_watermark=0"
+              className="w-full h-full"
+              onLoad={() => setIframeLoaded(true)}
+            />
+          </div>
+
+          {/* Label Overlay */}
+          {iframeLoaded && showAllLabels && (
+            <div className="absolute inset-0 pointer-events-none">
+              {Object.entries(components).map(([key, component]) => (
+                <button
+                  key={key}
+                  className="absolute pointer-events-auto group"
+                  style={{
+                    left: `${component.position.x}%`,
+                    top: `${component.position.y}%`,
+                    transform: 'translate(-50%, -50%)'
+                  }}
+                  onClick={() => setSelectedComponent(component)}
+                >
+                  <div
+                    className="w-8 h-8 rounded-full border-3 border-white shadow-lg flex items-center justify-center text-white font-bold text-sm transition-all duration-200 hover:scale-110 animate-pulse cursor-pointer"
+                    style={{ backgroundColor: component.color }}
+                  >
+                    {component.icon}
+                  </div>
+                  
+                  <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-2 py-1 bg-gray-900 text-white text-xs rounded whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none">
+                    {component.name}
+                  </div>
+                </button>
+              ))}
+            </div>
+          )}
+
+          {/* Loading indicator */}
+          {!iframeLoaded && (
+            <div className="absolute inset-0 bg-gray-100 flex items-center justify-center">
+              <div className="text-center">
+                <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-flannery-500 mx-auto mb-4"></div>
+                <p className="text-gray-600">Loading 3D model...</p>
+              </div>
+            </div>
+          )}
+        </div>
+
+        {/* Component Info Panel */}
+        {selectedComponent && (
+          <div className="bg-gray-50 border-t p-4">
+            <div className="flex items-start justify-between mb-3">
+              <div className="flex items-center gap-3">
+                <div className="text-2xl">{selectedComponent.icon}</div>
+                <h3 className="text-lg font-semibold text-gray-800">
+                  {selectedComponent.name}
+                </h3>
+              </div>
+              <button
+                onClick={() => setSelectedComponent(null)}
+                className="p-1 text-gray-400 hover:text-gray-600 transition-colors"
+              >
+                <X size={20} />
+              </button>
+            </div>
+            <p className="text-gray-700 leading-relaxed">
+              {selectedComponent.description}
+            </p>
+          </div>
+        )}
+      </div>
+    );
+  };
 
   return (
     <div className="flex flex-col h-screen bg-black max-w-full overflow-x-hidden">

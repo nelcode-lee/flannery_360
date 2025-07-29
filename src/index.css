@@ -62,6 +62,21 @@
     background-color: #ffffff !important;
   }
   
+  /* 3D Viewer Styles */
+  .border-3 {
+    border-width: 3px;
+  }
+  
+  @media (max-width: 768px) {
+    .sketchfab-embed-wrapper {
+      height: 350px !important;
+    }
+    
+    .absolute button {
+      transform: translate(-50%, -50%) scale(1.2);
+    }
+  }
+  
   /* Target viewport and status bar area */
   @media screen and (max-width: 768px) {
     html, body {
