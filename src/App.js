@@ -2755,6 +2755,142 @@ const FlanneryTrainingApp = () => {
 
     const relevantChecks = knowledgeChecks.filter(check => check.section === sectionKey);
 
+    // Special renderer for confined areas due to complex nested structure
+    if (sectionKey === 'confinedAreas') {
+      return (
+        <div className="space-y-4">
+          <div className="flex items-center justify-between mb-4">
+            <h1 className="text-xl font-bold text-gray-900">{data.title}</h1>
+            <button
+              onClick={() => markSectionComplete(sectionKey)}
+              className={`px-4 py-2 rounded-lg flex items-center space-x-2 text-sm ${
+                completedSections.has(sectionKey) 
+                  ? 'bg-green-100 text-green-700' 
+                  : 'bg-orange-500 text-white hover:bg-orange-600'
+              }`}
+            >
+              <CheckCircle className="h-4 w-4" />
+              <span>{completedSections.has(sectionKey) ? 'Completed' : 'Complete'}</span>
+            </button>
+          </div>
+
+          {data.content && (
+            <div className="space-y-4">
+              {/* Overview */}
+              {data.content.overview && (
+                <div className="bg-white p-4 rounded-lg shadow border">
+                  <h3 className="text-lg font-semibold mb-3">Overview</h3>
+                  <p className="text-gray-700 text-sm">{data.content.overview}</p>
+                </div>
+              )}
+
+              {/* Safety Innovations */}
+              {data.content.safetyInnovations && (
+                <div className="bg-white p-4 rounded-lg shadow border">
+                  <h3 className="text-lg font-semibold mb-3">{data.content.safetyInnovations.title}</h3>
+                  <p className="text-gray-700 text-sm mb-3">{data.content.safetyInnovations.description}</p>
+                  
+                  {data.content.safetyInnovations.systems && (
+                    <div className="space-y-4">
+                      {Object.entries(data.content.safetyInnovations.systems).map(([systemKey, system]) => (
+                        <div key={systemKey} className="border-l-4 border-orange-500 pl-3">
+                          <h4 className="font-medium text-sm mb-2">{system.title}</h4>
+                          <p className="text-gray-700 text-sm mb-2">{system.description}</p>
+                          {system.features && (
+                            <ul className="space-y-1">
+                              {system.features.map((feature, index) => (
+                                <li key={index} className="flex items-start space-x-2">
+                                  <span className="text-orange-500 mt-1 text-sm">•</span>
+                                  <span className="text-gray-700 text-sm">{feature}</span>
+                                </li>
+                              ))}
+                            </ul>
+                          )}
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              )}
+
+              {/* Visibility Considerations */}
+              {data.content.visibilityConsiderations && (
+                <div className="bg-white p-4 rounded-lg shadow border">
+                  <h3 className="text-lg font-semibold mb-3">{data.content.visibilityConsiderations.title}</h3>
+                  <p className="text-gray-700 text-sm mb-3">{data.content.visibilityConsiderations.description}</p>
+                  <ul className="space-y-2">
+                    {data.content.visibilityConsiderations.points.map((point, index) => (
+                      <li key={index} className="flex items-start space-x-2">
+                        <ChevronRight className="h-4 w-4 text-orange-500 mt-0.5 flex-shrink-0" />
+                        <span className="text-gray-700 text-sm">{point}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+
+              {/* Counterweight Dangers */}
+              {data.content.counterweightDangers && (
+                <div className="bg-white p-4 rounded-lg shadow border">
+                  <h3 className="text-lg font-semibold mb-3">{data.content.counterweightDangers.title}</h3>
+                  <p className="text-gray-700 text-sm mb-3">{data.content.counterweightDangers.description}</p>
+                  <ul className="space-y-2">
+                    {data.content.counterweightDangers.risks.map((risk, index) => (
+                      <li key={index} className="flex items-start space-x-2">
+                        <ChevronRight className="h-4 w-4 text-orange-500 mt-0.5 flex-shrink-0" />
+                        <span className="text-gray-700 text-sm">{risk}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+
+              {/* Clearance Requirements */}
+              {data.content.clearanceRequirements && (
+                <div className="bg-white p-4 rounded-lg shadow border">
+                  <h3 className="text-lg font-semibold mb-3">{data.content.clearanceRequirements.title}</h3>
+                  <p className="text-gray-700 text-sm mb-3">{data.content.clearanceRequirements.description}</p>
+                  <ul className="space-y-2">
+                    {data.content.clearanceRequirements.requirements.map((requirement, index) => (
+                      <li key={index} className="flex items-start space-x-2">
+                        <ChevronRight className="h-4 w-4 text-orange-500 mt-0.5 flex-shrink-0" />
+                        <span className="text-gray-700 text-sm">{requirement}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+
+              {/* Best Practices */}
+              {data.content.bestPractices && (
+                <div className="bg-white p-4 rounded-lg shadow border">
+                  <h3 className="text-lg font-semibold mb-3">{data.content.bestPractices.title}</h3>
+                  <p className="text-gray-700 text-sm mb-3">{data.content.bestPractices.description}</p>
+                  <ul className="space-y-2">
+                    {data.content.bestPractices.practices.map((practice, index) => (
+                      <li key={index} className="flex items-start space-x-2">
+                        <ChevronRight className="h-4 w-4 text-orange-500 mt-0.5 flex-shrink-0" />
+                        <span className="text-gray-700 text-sm">{practice}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+            </div>
+          )}
+
+          {relevantChecks.length > 0 && (
+            <div className="space-y-4">
+              <h3 className="text-lg font-semibold">Knowledge Checks</h3>
+              {relevantChecks.map((check, index) => (
+                <KnowledgeCheck key={index} check={check} />
+              ))}
+            </div>
+          )}
+        </div>
+      );
+    }
+
     const renderContentSection = (content, sectionTitle = '') => {
       if (typeof content === 'string') {
         return <p className="text-gray-700 text-sm">{content}</p>;
@@ -2779,7 +2915,20 @@ const FlanneryTrainingApp = () => {
             {Object.entries(content).map(([key, value]) => (
               <div key={key} className="border-l-4 border-orange-500 pl-3">
                 <h4 className="font-medium capitalize text-sm mb-2">{key.replace(/([A-Z])/g, ' $1')}:</h4>
-                {renderContentSection(value)}
+                {typeof value === 'string' ? (
+                  <p className="text-gray-700 text-sm">{value}</p>
+                ) : Array.isArray(value) ? (
+                  <ul className="space-y-1">
+                    {value.map((item, index) => (
+                      <li key={index} className="flex items-start space-x-2">
+                        <span className="text-orange-500 mt-1 text-sm">•</span>
+                        <span className="text-gray-700 text-sm">{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                ) : (
+                  <p className="text-gray-700 text-sm">{String(value)}</p>
+                )}
               </div>
             ))}
           </div>
