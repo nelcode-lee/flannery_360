@@ -3232,14 +3232,6 @@ const FlanneryTrainingApp = () => {
             <div className="flex items-center space-x-3 mb-2">
               <FlanneryLogo />
             </div>
-            <h1 className="text-lg font-semibold text-white truncate">
-              {activeSection === 'dashboard' ? 'Flannery Training' : 
-               activeSection === 'training' ? 'Training Modules' :
-               activeSection === 'progress' ? 'Progress' :
-               activeSection === 'profile' ? 'Profile' :
-               activeSection === 'help-support' ? 'Help & Support' :
-               trainingData[activeSection]?.title || 'Training'}
-            </h1>
             <p className="text-xs text-flannery-300">Mobile Training Platform</p>
           </div>
           <div className="flex items-center space-x-2 flex-shrink-0">
