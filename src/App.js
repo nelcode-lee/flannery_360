@@ -3728,6 +3728,24 @@ const FlanneryTrainingApp = () => {
             </p>
           </div>
         )}
+
+        {/* Premium Features Note */}
+        <div className="bg-gradient-to-r from-flannery-500 to-flannery-600 text-flanneryDark-950 p-4 border-t">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center space-x-3">
+              <div className="w-8 h-8 bg-white bg-opacity-20 rounded-full flex items-center justify-center">
+                <span className="text-lg">💎</span>
+              </div>
+              <div>
+                <h4 className="font-semibold text-sm">Premium Features Available</h4>
+                <p className="text-xs opacity-90">Enhanced 3D labels and detailed component analysis</p>
+              </div>
+            </div>
+            <button className="px-4 py-2 bg-white text-flanneryDark-950 rounded-lg text-sm font-medium hover:bg-gray-100 transition-colors">
+              Upgrade
+            </button>
+          </div>
+        </div>
       </div>
     );
   };
