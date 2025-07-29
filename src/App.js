@@ -1704,15 +1704,6 @@ const FlanneryTrainingApp = () => {
             backgroundImage: `url('/flannery-excavator.png')`,
           }}
         ></div>
-        
-        {/* Text Content with Enhanced Contrast */}
-        <div className="relative z-10 text-center mb-4 md:mb-6">
-          <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-2 drop-shadow-lg">Skills Bootcamp</h1>
-          <p className="text-lg md:text-xl lg:text-2xl drop-shadow-lg">360 Excavator Training</p>
-        </div>
-        <div className="relative z-10 mt-4 md:mt-6 text-center">
-          <p className="text-sm md:text-base opacity-90 drop-shadow-lg">📸 Images and diagrams will be added to enhance learning</p>
-        </div>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 lg:gap-8 max-w-full">
