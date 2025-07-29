@@ -3223,20 +3223,22 @@ const FlanneryTrainingApp = () => {
   return (
     <div className="flex flex-col h-screen bg-flanneryDark-950 max-w-full overflow-x-hidden">
       {/* Header */}
-      <header className="bg-flanneryDark-950 shadow-sm border-b border-flannery-500 p-4 max-w-full">
+      <header className="bg-flanneryDark-950 shadow-sm border-b border-flannery-500 p-6 max-w-full">
         <div className="flex items-center justify-between max-w-full">
           <div className="flex items-center space-x-3">
-            <button 
-              onClick={() => setShowBurgerMenu(!showBurgerMenu)}
-              className="p-2 hover:bg-flanneryDark-800 rounded-lg mr-2"
-            >
-              <Menu className="h-5 w-5 text-flannery-400" />
-            </button>
             <div className="flex items-center space-x-2">
               <FlanneryLogo />
             </div>
           </div>
           <p className="text-xs text-flannery-300">Mobile Training Platform</p>
+          <div className="flex items-center">
+            <button 
+              onClick={() => setShowBurgerMenu(!showBurgerMenu)}
+              className="p-3 hover:bg-flanneryDark-800 rounded-lg"
+            >
+              <Menu className="h-6 w-6 text-flannery-400" />
+            </button>
+          </div>
         </div>
       </header>
 
