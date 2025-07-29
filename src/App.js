@@ -301,23 +301,34 @@ const FlanneryTrainingApp = () => {
     },
     'confined-1': {
       type: 'multiple-choice',
-      question: 'What is a confined area?',
+      question: 'What is the primary purpose of Human Detection Systems in confined areas?',
       options: [
-        'Any small area',
-        'Areas with limited access only',
-        'An area with limited access, restricted movement, or poor ventilation',
-        'Areas with poor ventilation only'
+        'To increase machine speed',
+        'To warn operators and pedestrians of potential collision risks',
+        'To reduce fuel consumption',
+        'To improve machine performance'
       ],
-      correctAnswer: 2
+      correctAnswer: 1
     },
     'confined-2': {
       type: 'multiple-choice',
-      question: 'What should you do before entering a confined area?',
+      question: 'What is the main danger of counterweights in confined spaces?',
       options: [
-        'Enter immediately',
-        'Check for hazards and ensure proper ventilation',
-        'Check for hazards only',
-        'Ensure ventilation only'
+        'They increase fuel consumption',
+        'They can extend beyond machine footprint and strike personnel or structures',
+        'They make the machine slower',
+        'They reduce machine stability'
+      ],
+      correctAnswer: 1
+    },
+    'confined-3': {
+      type: 'multiple-choice',
+      question: 'What should you do when operating in a confined area with limited visibility?',
+      options: [
+        'Work faster to complete the task quickly',
+        'Use all available visibility aids and consider using a spotter or marshaller',
+        'Ignore visibility issues and continue working',
+        'Stop working until conditions improve naturally'
       ],
       correctAnswer: 1
     },
@@ -597,14 +608,14 @@ const FlanneryTrainingApp = () => {
     },
     'final-confined': {
       type: 'multiple-choice',
-      question: 'What is a confined area?',
+      question: 'What is the primary purpose of Safety Shield AI technology in confined areas?',
       options: [
-        'Any small area',
-        'Only areas with limited access',
-        'An area with limited access, restricted movement, or poor ventilation',
-        'Only areas with poor ventilation'
+        'To increase machine speed and efficiency',
+        'To detect human form and warn operators of pedestrian proximity',
+        'To reduce fuel consumption',
+        'To improve machine performance'
       ],
-      correctAnswer: 2,
+      correctAnswer: 1,
       module: 'Confined Areas'
     },
     'final-quickhitch': {
@@ -978,23 +989,77 @@ const FlanneryTrainingApp = () => {
       title: 'Operating in Confined Areas',
       icon: AlertTriangle,
       content: {
-        overview: 'Special considerations for operating in confined areas.',
+        overview: 'Special considerations and safety innovations for operating in confined areas with limited space and visibility.',
         safetyInnovations: {
-          title: 'Safety Innovations',
-          humanDetection: {
-            title: 'Human Detection Systems',
-            spillard: 'Spillard Human Detection System identifies human form through deep intelligent mapping',
-            safetyShield: 'Safety Shield AI Collision Avoidance Technology with HD cameras and LED alerts'
+          title: 'Safety Innovations in Focus',
+          subtitle: 'Human Detection Systems',
+          description: 'Advanced technology systems designed to improve operator awareness and reduce collision risks in confined spaces.',
+          systems: {
+            spillard: {
+              title: 'Spillard Human Detection System',
+              description: 'Identifies only human form through deep intelligent mapping. It aims to:',
+              features: [
+                'Warn operators and pedestrians of potential risks of collision',
+                'Improve operators all around awareness of their surroundings',
+                'Detect human form whilst ignoring ever changing backgrounds',
+                'Reduce risk whilst improving the operator and pedestrian interaction'
+              ]
+            },
+            safetyShield: {
+              title: 'Safety Shield AI Collision Avoidance Technology',
+              description: 'Advanced AI human form recognition safety system that cleverly integrates AI human form recognition (HFR) with strategically placed HD cameras.',
+              features: [
+                'In-cab LED visual and audio alert warns the driver of a pedestrian in proximity',
+                'Additional module can be fitted for external alarm and Digital Thumbs Up LED display',
+                'Allows site personnel to approach the machine safely and from the correct direction',
+                'Scans and detects all objects around it, but smart technology will only alert to pedestrians',
+                'Filters out objects other than humans, reducing unnecessary distractions for plant operators'
+              ]
+            }
           }
         },
-        considerations: {
-          title: 'Key Considerations',
+        visibilityConsiderations: {
+          title: 'Visibility Considerations',
+          description: 'Critical factors for maintaining awareness in confined operating environments.',
           points: [
             'Always ensure visibility around the machine',
             'Use visibility aids including LED lights and approach lighting',
             'Consider need for plant and vehicle marshaller',
-            'Be aware of counterweight dangers in confined spaces',
-            'Maintain safe distances from obstructions'
+            'Maintain safe distances from obstructions',
+            'Be aware of counterweight dangers in confined spaces'
+          ]
+        },
+        counterweightDangers: {
+          title: 'Counterweight Dangers',
+          description: 'Understanding the risks associated with machine counterweights in confined spaces.',
+          risks: [
+            'Counterweight can extend beyond machine footprint',
+            'Risk of striking personnel or structures during rotation',
+            'Clearance requirements must be calculated and maintained',
+            'Operator must be aware of full machine envelope during operation'
+          ]
+        },
+        clearanceRequirements: {
+          title: 'Clearance Requirements',
+          description: 'Essential safety measures for operating in restricted spaces.',
+          requirements: [
+            'Calculate and maintain minimum clearance distances',
+            'Consider full machine envelope including counterweight',
+            'Establish exclusion zones around machine',
+            'Use spotters or marshallers when visibility is limited',
+            'Stop operation if safe clearance cannot be maintained'
+          ]
+        },
+        bestPractices: {
+          title: 'Best Practices for Confined Area Operation',
+          description: 'Proven techniques for safe operation in restricted spaces.',
+          practices: [
+            'Conduct thorough risk assessment before entering confined area',
+            'Establish clear communication protocols with ground personnel',
+            'Use all available visibility aids and technology',
+            'Maintain constant awareness of machine envelope',
+            'Stop immediately if safety cannot be maintained',
+            'Consider alternative approaches if space is too restricted'
           ]
         }
       }
