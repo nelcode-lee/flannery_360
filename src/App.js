@@ -1658,17 +1658,17 @@ const FlanneryTrainingApp = () => {
         </div>
 
         <div className="bg-white p-4 rounded-lg shadow border max-w-full">
-          <h3 className="text-lg font-semibold mb-3">Quick Actions</h3>
+          <h3 className="text-lg font-semibold mb-3 text-black">Quick Actions</h3>
           <div className="space-y-2">
             <button 
               onClick={() => setActiveSection('training')}
-              className="w-full text-left text-flannery-600 hover:text-flannery-700 text-sm py-2"
+              className="w-full text-left text-black hover:text-gray-700 text-sm py-2"
             >
               Take Knowledge Check
             </button>
             <button 
               onClick={() => setActiveSection('legislation')}
-              className="w-full text-left text-flannery-600 hover:text-flannery-700 text-sm py-2"
+              className="w-full text-left text-black hover:text-gray-700 text-sm py-2"
             >
               Review Safety Guidelines
             </button>
@@ -1683,7 +1683,7 @@ const FlanneryTrainingApp = () => {
                   alert('Please select a training section to bookmark.');
                 }
               }}
-              className="w-full text-left text-flannery-600 hover:text-flannery-700 text-sm py-2"
+              className="w-full text-left text-black hover:text-gray-700 text-sm py-2"
             >
               Bookmark Section
             </button>
@@ -1702,7 +1702,7 @@ const FlanneryTrainingApp = () => {
           ))}
           <button 
             onClick={() => setShowAllObjectives(!showAllObjectives)}
-            className="text-flannery-600 text-sm font-medium mt-2 hover:text-flannery-700"
+            className="text-black text-sm font-medium mt-2 hover:text-gray-700"
           >
             {showAllObjectives ? 'Show Less' : `View All ${trainingData.introduction.content.objectives.length} Objectives`} →
           </button>
@@ -1798,7 +1798,7 @@ const FlanneryTrainingApp = () => {
 
               <button
                 onClick={() => setShowFinalTest(true)}
-                className="w-full bg-white text-flannery-600 px-4 py-3 rounded-lg hover:bg-flannery-50 text-sm font-medium transition-colors"
+                className="w-full bg-white text-black px-4 py-3 rounded-lg hover:bg-gray-50 text-sm font-medium transition-colors"
               >
                 Start Final Test
               </button>
