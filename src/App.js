@@ -1,5 +1,26 @@
 import React, { useState, useEffect } from 'react';
-import { Search, Menu, X, CheckCircle, AlertTriangle, Book, Users, Settings, Home, FileText, Award, ChevronRight, ChevronDown, Play, Bookmark, RotateCcw, User, BarChart3, Check, X as XIcon, Phone, Mail, MessageCircle, Globe, HelpCircle, ExternalLink, BookOpen, Clock } from 'lucide-react';
+import { 
+  Home, 
+  Book, 
+  User, 
+  BarChart3, 
+  Search, 
+  ChevronRight, 
+  CheckCircle, 
+  Clock, 
+  AlertTriangle, 
+  Settings, 
+  Play, 
+  Award, 
+  FileText,
+  Phone, 
+  Mail, 
+  MessageCircle, 
+  Globe, 
+  HelpCircle, 
+  ExternalLink, 
+  BookOpen 
+} from 'lucide-react';
 
 const FlanneryLogo = () => (
   <div className="flex items-center space-x-2">
@@ -722,7 +743,8 @@ const FlanneryTrainingApp = () => {
           'Explain the procedures for loading and unloading on and off a transporter',
           'Shut down machinery safely and secure it at the end of the operation'
         ],
-        constructionSite: 'Construction sites are busy places and present many dangers. You will be taught how to act responsibly on site, identify common hazards, and operate your machine safely and efficiently.'
+        constructionSite: 'Construction sites are busy places and present many dangers. You will be taught how to act responsibly on site, identify common hazards, and operate your machine safely and efficiently.',
+        safeWorking: 'Always put safety first and STOP any activity that could lead to harm to yourself or others. Always seek assistance and OperateSAFE.'
       }
     },
     legislation: {
@@ -730,11 +752,40 @@ const FlanneryTrainingApp = () => {
       icon: AlertTriangle,
       content: {
         overview: 'Understanding health and safety legislation is crucial for safe operation of plant machinery.',
-        topics: [
-          'Health and Safety at Work Act 1974',
-          'PUWER 98 Regulations',
-          'Management of Health and Safety at Work Regulations',
-          'Construction (Design and Management) Regulations'
+        hseAct: {
+          title: 'Health and Safety at Work Act 1974',
+          description: 'Designed to protect people and the environment from workplace activities. It places certain duties and responsibilities on employers, employees, self-employed, designers and manufacturers.',
+          employerDuties: [
+            'Provide safe working conditions',
+            'Ensure equipment is properly maintained',
+            'Provide adequate training and supervision',
+            'Conduct risk assessments'
+          ],
+          employeeDuties: [
+            'Take reasonable care of themselves and others',
+            'Co-operate with employer on health and safety',
+            'Use equipment and safety devices properly'
+          ]
+        },
+        puwer: {
+          title: 'PUWER 98 Regulations',
+          description: 'Provision & Use of Work Equipment Regulations 1998',
+          scope: 'Work equipment is any machinery, appliance, apparatus, tool or installation for use at work',
+          requirements: [
+            'Equipment must be suitable for intended use',
+            'Equipment must be maintained in safe condition',
+            'Users must receive adequate information and training',
+            'Equipment must have appropriate safety measures',
+            'ROPS and FOPS must be in place for protection'
+          ]
+        },
+        additionalLegislation: [
+          'Management of Health and Safety at Work Regulations (MHSWR)',
+          'Construction (Design and Management) Regulations (CDM)',
+          'Vibration at Work Regulations',
+          'Road Traffic Act',
+          'Control of Substances Hazardous to Health Regulations',
+          'The Control of Noise Regulations'
         ]
       }
     },
@@ -743,26 +794,63 @@ const FlanneryTrainingApp = () => {
       icon: FileText,
       content: {
         overview: 'Risk assessment and method statements are essential for safe work practices.',
-        topics: [
-          'Identifying hazards',
-          'Assessing risks',
-          'Implementing control measures',
-          'Method statement requirements'
-        ]
+        riskAssessment: {
+          title: 'Risk Assessment Process',
+          steps: [
+            'Identify what could cause injury or illness (hazards)',
+            'Decide how likely it is that someone could be harmed and how seriously (the risk)',
+            'Take action to eliminate the hazard, or if not possible, control the risk'
+          ]
+        },
+        methodStatement: {
+          title: 'Method Statements',
+          purpose: 'Document specific instructions on how to SAFELY perform a work-related task. It is the plant operator\'s responsibility to COMPLY with the Method Statement.'
+        },
+        socialResponsibilities: {
+          title: 'Social Responsibilities',
+          points: [
+            'Environmental protection',
+            'Community safety',
+            'Sustainable practices',
+            'Noise and pollution control'
+          ]
+        }
       }
     },
     siteInduction: {
       title: 'Site Induction & Responsibilities',
-      icon: Users,
+      icon: User,
       content: {
         overview: 'Site induction covers essential safety topics and operator responsibilities.',
-        topics: [
-          'Access and egress procedures',
-          'Safety signs and signals',
-          'Emergency procedures',
-          'PPE requirements',
-          'Site layout and traffic routes'
-        ]
+        siteInduction: {
+          title: 'Site Induction Topics',
+          topics: [
+            'Access and egress',
+            'Safety signs and signals',
+            'Accident reporting',
+            'Emergency procedures',
+            'PPE/RPE requirements',
+            'Welfare facilities',
+            'Site layout and traffic routes',
+            'Restricted/prohibited areas',
+            'Confined spaces',
+            'Buried services',
+            'Lifting operations',
+            'Working from/at height'
+          ]
+        },
+        operatorResponsibilities: {
+          title: 'Operator Roles & Responsibilities',
+          requirements: [
+            'Only use site plant if trained, competent and authorised',
+            'Only authorised operators should hold vehicle keys',
+            'Work safely, efficiently and comply with method statements',
+            'Be punctual and co-operate with other workers',
+            'Use operator\'s manual for the specific machine',
+            'Understand layout and operation of controls',
+            'Know stability limits and daily checks'
+          ]
+        }
       }
     },
     components: {
@@ -770,15 +858,37 @@ const FlanneryTrainingApp = () => {
       icon: Settings,
       content: {
         overview: 'Understanding the major components of the 360 excavator is essential for safe operation.',
-        components: [
-          'Power Unit & Engine',
-          'Hydraulic System',
-          'Fuel System',
-          'Cooling System',
-          'Safety Features (ROPS/FOPS)',
-          'Track Assembly',
-          'Electrical System'
-        ]
+        powerUnit: {
+          title: 'Power Unit & Oils',
+          safety: 'Always wear gloves when checking engine oil to prevent skin disease and contamination'
+        },
+        hydraulicSystem: {
+          title: 'Hydraulic System',
+          safety: 'Ensure filler cap area is clean and pressure is released before removing cap. Use clean container when filling'
+        },
+        fuelSystem: {
+          title: 'Fuel System',
+          safety: 'Fill up at end of shift to prevent condensation building up in tank'
+        },
+        coolingSystem: {
+          title: 'Cooling System',
+          safety: 'Cooling systems are pressurised - removing cap can allow hot water to escape causing SEVERE burns'
+        },
+        safetyFeatures: {
+          title: 'Safety Features',
+          rops: 'Roll Over Protective Structure - provides protection in event of overturn',
+          fops: 'Falling Object Protective Structure - protects from falling materials. Hard hat not needed in FOPS cab',
+          seatbelt: 'Must be worn even with cab door closed to keep operator within confines of operating seat'
+        },
+        otherComponents: {
+          title: 'Other Components',
+          items: [
+            'Chassis/Track Assembly',
+            'Electrical System',
+            'Hydraulic Lockout Control (Deadman)',
+            'Quick Hitch Coupler'
+          ]
+        }
       }
     },
     preOperational: {
@@ -786,14 +896,33 @@ const FlanneryTrainingApp = () => {
       icon: CheckCircle,
       content: {
         overview: 'Pre-operational checks are essential for safe machine operation.',
-        checks: [
+        itemsToCheck: [
           'Hydraulic oil system level',
-          'Engine oil level',
-          'Fuel level',
-          'Coolant level',
-          'Track tension',
+          'Windscreen washer level',
+          'Greasing',
+          'Indicators and gauges',
+          'Seat belt inspection',
+          'Track adjustment',
+          'Travel alarm (if fitted)',
+          'Mirrors and windows'
+        ],
+        runningChecks: [
+          'Hydraulic system - hydraulic lockout control',
+          'Lights - flashing beacon',
+          'Horn functionality',
+          'Slew and movement of excavator',
+          'Quick hitch operation',
           'Safety systems',
-          'PPE requirements'
+          'Re-fuelling procedures'
+        ],
+        ppe: [
+          'Head protection',
+          'Foot protection',
+          'High-visibility clothing',
+          'Weather-appropriate clothing',
+          'Hearing protection',
+          'Eye protection',
+          'Gloves'
         ]
       }
     },
@@ -802,13 +931,43 @@ const FlanneryTrainingApp = () => {
       icon: Play,
       content: {
         overview: 'Safe site travel and maneuvering techniques for 360 excavators.',
-        topics: [
-          'Getting on and off safely',
-          'Pre-travel checks',
-          'Visibility aids',
-          'Travel in restricted spaces',
-          'Traffic management'
-        ]
+        gettingOnOff: {
+          title: 'Safely Getting On and Off',
+          procedures: [
+            'Face the machine using specific steps and handrails',
+            'Maintain 3 points of contact wherever possible',
+            'Ensure steps and handrails are clean and clear of debris',
+            'Ensure ground is firm and clear of obstructions before exiting cab',
+            'Wear correct boots laced up fully'
+          ]
+        },
+        siteTravel: {
+          title: 'Preparing for Site Travel',
+          checklist: [
+            'Check controls are neutralised',
+            'Adjust seat for comfort/reach',
+            'Wear seatbelt - adjust as required',
+            'Turn engine speed dial to operating range',
+            'Move hydraulic lockout control to unlocked position',
+            'Raise boom enough to provide ground clearance',
+            'Select desired travel speed',
+            'Drive sprockets should be to rear of machine'
+          ]
+        },
+        visibilityAids: {
+          title: 'Visibility Aids',
+          requirements: 'Always ensure all mirrors/cameras are correctly fitted, unbroken, clean and correctly adjusted'
+        },
+        restrictedSpace: {
+          title: 'Travel in Restricted Space',
+          considerations: [
+            'Static dimensions: overall height, length, tail-swing, track width',
+            'Maintain minimum 0.5m clearance from obstructions',
+            'Use height and slew restrictors where fitted',
+            'Consider need for plant and vehicle marshaller',
+            'Plan traffic routes to minimise congestion and collision risk'
+          ]
+        }
       }
     },
     confinedAreas: {
@@ -816,13 +975,24 @@ const FlanneryTrainingApp = () => {
       icon: AlertTriangle,
       content: {
         overview: 'Special considerations for operating in confined areas.',
-        topics: [
-          'Safety innovations',
-          'Human detection systems',
-          'Visibility considerations',
-          'Marshaller requirements',
-          'Counterweight dangers'
-        ]
+        safetyInnovations: {
+          title: 'Safety Innovations',
+          humanDetection: {
+            title: 'Human Detection Systems',
+            spillard: 'Spillard Human Detection System identifies human form through deep intelligent mapping',
+            safetyShield: 'Safety Shield AI Collision Avoidance Technology with HD cameras and LED alerts'
+          }
+        },
+        considerations: {
+          title: 'Key Considerations',
+          points: [
+            'Always ensure visibility around the machine',
+            'Use visibility aids including LED lights and approach lighting',
+            'Consider need for plant and vehicle marshaller',
+            'Be aware of counterweight dangers in confined spaces',
+            'Maintain safe distances from obstructions'
+          ]
+        }
       }
     },
     quickHitch: {
@@ -830,13 +1000,33 @@ const FlanneryTrainingApp = () => {
       icon: Settings,
       content: {
         overview: 'Understanding quick hitch systems and bucket attachments.',
-        topics: [
-          'Bucket types',
-          'Quick hitch classifications',
-          'Pre-use checks',
-          'Safety procedures',
-          'Attachment compatibility'
-        ]
+        bucketTypes: {
+          title: 'Bucket Types',
+          types: [
+            'Digging buckets',
+            'Trenching buckets',
+            'Ditching buckets',
+            'Grading buckets',
+            'Trapezoidal buckets',
+            '360° Rotating buckets'
+          ]
+        },
+        quickHitchTypes: {
+          title: 'Quick Hitch Classifications',
+          manual: 'Manual Quick Hitch - operator must isolate controls, switch off machine, manually remove pins',
+          semiAutomatic: 'Semi-Automatic Quick Hitch - hydraulic rams operated from cab, locking pin inserted manually',
+          fullyAutomatic: 'Fully Automatic Quick Hitch - all functions from cab, hydraulic pressure applied to locking system'
+        },
+        preUseChecks: {
+          title: 'Pre-Use Checks',
+          checks: [
+            'Check for damage of quick hitch coupler',
+            'Check for any cracks',
+            'Check hydraulic lines for damage or oil leaks',
+            'Ensure all pins and clips are in place and secure',
+            'Carry out visual and physical inspection after coupling'
+          ]
+        }
       }
     },
     excavating: {
@@ -844,13 +1034,32 @@ const FlanneryTrainingApp = () => {
       icon: FileText,
       content: {
         overview: 'Safe excavating techniques and procedures.',
-        topics: [
-          'Safety checks at work area',
-          'Setting up for excavating',
-          'Setting up for loading',
-          'Excavation techniques',
-          'Material handling'
-        ]
+        safetyChecks: {
+          title: 'Safety Checks at Work Area',
+          requirements: 'Prior to setting up for work, conduct safety checks to identify potential hazards'
+        },
+        setup: {
+          title: 'Setting Up for Excavating',
+          considerations: [
+            'Establish exclusion zones with clear communication',
+            'Make full observations prior to and whilst maneuvering',
+            'Machine must be level',
+            'Operator should slew to left whenever possible',
+            'Avoid digging downhill where possible',
+            'Adhere to all drawings and plans',
+            'Ensure correct spoil placement'
+          ]
+        },
+        loading: {
+          title: 'Setting Up for Loading',
+          requirements: [
+            'Ensure vehicle is on level ground and secure',
+            'Vehicle should be parked for minimal excavator movement',
+            'Cut level platform for machine to stand on',
+            'Use correct size and type of bucket',
+            'For forward tipping dumpers - operator must be clear of machine before loading'
+          ]
+        }
       }
     },
     services: {
@@ -858,13 +1067,25 @@ const FlanneryTrainingApp = () => {
       icon: AlertTriangle,
       content: {
         overview: 'Working safely near underground and overhead services.',
-        topics: [
-          'Overhead power lines',
-          'Underground services',
-          'Color coding systems',
-          'Safe distances',
-          'Emergency procedures'
-        ]
+        overheadServices: {
+          title: 'Overhead Services',
+          guidance: 'All work near overhead lines must be properly planned and managed. Follow HSE publication "Avoiding danger from overhead power lines" (GS6)',
+          requirements: 'Minimum distances determined by voltage and type of line'
+        },
+        undergroundServices: {
+          title: 'Underground Services',
+          guidance: 'Follow HSE publication "Avoiding danger from underground services" (HSG47)',
+          colorCoding: {
+            red: 'Electricity',
+            black: 'Electricity',
+            orange: 'Street lighting',
+            yellow: 'Gas',
+            green: 'Communications',
+            blue: 'Water',
+            grey: 'Telecommunications/Water'
+          },
+          identification: 'Methods include desktop studies, site investigation, physical identification, and marker tapes'
+        }
       }
     },
     excavationTypes: {
@@ -872,13 +1093,38 @@ const FlanneryTrainingApp = () => {
       icon: FileText,
       content: {
         overview: 'Different types of excavation and their requirements.',
-        types: [
-          'Topsoil excavation',
-          'Earth excavation',
-          'Rock excavation',
-          'Trench excavation',
-          'Foundation excavation'
-        ]
+        materialTypes: {
+          title: 'Material Types',
+          types: [
+            { name: 'Topsoil excavation', description: 'Removal of exposed layer' },
+            { name: 'Earth excavation', description: 'Removal of layer beneath topsoil' },
+            { name: 'Rock excavation', description: 'Removal requiring special methods' },
+            { name: 'Muck excavation', description: 'Removal of excessively wet material' },
+            { name: 'Unclassified excavation', description: 'Combination of above materials' }
+          ]
+        },
+        purposeTypes: {
+          title: 'Purpose Types',
+          types: [
+            { name: 'Cut and fill excavation', description: 'Material that is cut or stripped' },
+            { name: 'Trench excavation', description: 'Length greatly exceeds depth' },
+            { name: 'Footing excavation', description: 'Used to form strip foundations' },
+            { name: 'Basement excavation', description: 'Part of building below ground level' },
+            { name: 'Road excavation', description: 'Stripping topsoil, cut and fill' },
+            { name: 'Bridge excavation', description: 'Footing and abutments of bridges' }
+          ]
+        },
+        supportTypes: {
+          title: 'Excavation Support',
+          types: [
+            'Timber Support',
+            'Trench Boxes',
+            'Trench Sheets',
+            'Caissons',
+            'Cofferdams'
+          ],
+          instability: 'Excavations may become unstable due to vibration, weather conditions, loads near edges, or failure of support systems'
+        }
       }
     },
     trenching: {
@@ -886,13 +1132,16 @@ const FlanneryTrainingApp = () => {
       icon: FileText,
       content: {
         overview: 'Specialized trenching techniques and safety considerations.',
-        topics: [
-          'Layered excavation',
-          'Trench support systems',
-          'Backfill procedures',
-          'Compaction requirements',
-          'Safety considerations'
-        ]
+        techniques: [
+          'Always start at top and work in layers - reduces cycle and makes process easier',
+          'Begin at edge of trench',
+          'Ensure excavator is facing work area - avoid digging over side where possible',
+          'Always work within machine\'s digging envelope for efficiency and full bucket loads'
+        ],
+        backfill: {
+          title: 'Backfill and Compaction',
+          requirements: 'Backfill and sub-base layers critical to reinstatement performance. Materials must be assessed before use and laid in stages for proper compaction'
+        }
       }
     },
     lifting: {
@@ -900,13 +1149,41 @@ const FlanneryTrainingApp = () => {
       icon: Award,
       content: {
         overview: 'Safe lifting operations with excavators.',
-        topics: [
-          'Capacity charts',
-          'Machine requirements',
-          'Lifting procedures',
-          'Safety considerations',
-          'Load planning'
-        ]
+        capacityChart: {
+          title: 'Reading Lifting Capacity Charts',
+          factors: [
+            'Dipper arm length - longer arms reduce lifting capacity',
+            'Reach - found across top of chart, never exceed for each weight',
+            'Height/depth - found down left side, 0m is ground level',
+            'Weight/SWL - safe working load must never be exceeded',
+            'Machine configuration - in line with tracks is most stable'
+          ]
+        },
+        requirements: {
+          title: 'Machine Requirements',
+          lessThan1Tonne: [
+            'Load chart',
+            'Lifting eye'
+          ],
+          greaterThan1Tonne: [
+            'Load chart',
+            'Lifting eye',
+            'Overload warning device',
+            'Check values',
+            'RCI (Rate Capacity Indicator)'
+          ]
+        },
+        procedures: {
+          title: 'Lifting Procedures',
+          requirements: [
+            'Ensure lift plan or method statement in place',
+            'Disengage hydraulics before slinger approaches',
+            'Communicate with slinger/signaller on signals',
+            'Ensure all lifts are fully controlled with smooth operations',
+            'Stop if overload warning sounds and reduce load radius',
+            'Ensure ground is level and firm'
+          ]
+        }
       }
     },
     environmental: {
@@ -914,12 +1191,16 @@ const FlanneryTrainingApp = () => {
       icon: Award,
       content: {
         overview: 'Minimizing environmental impact during operations.',
-        topics: [
-          'Air pollution prevention',
-          'Water pollution prevention',
-          'Noise pollution control',
-          'Fuel efficiency',
-          'Waste management'
+        pollutionTypes: [
+          'Air pollution',
+          'Water pollution',
+          'Noise pollution'
+        ],
+        prevention: [
+          'Lower engine speeds where possible',
+          'Ensure no spillage of fluids',
+          'Keep machine well maintained',
+          'Ensure prior planning of work task'
         ]
       }
     },
@@ -928,13 +1209,37 @@ const FlanneryTrainingApp = () => {
       icon: Award,
       content: {
         overview: 'Safe loading and unloading procedures for transport.',
-        topics: [
-          'Pre-loading checks',
-          'Loading process',
-          'Unloading procedures',
-          'Exclusion zones',
-          'Safety requirements'
-        ]
+        preLoading: {
+          title: 'Pre-Loading Checks',
+          checks: [
+            'Ground support',
+            'Ramp condition',
+            'Overhead and other hazards',
+            'Positioning on trailer',
+            'Direction of travel'
+          ]
+        },
+        loadingProcess: {
+          title: 'Loading Process',
+          steps: [
+            'Remove dirt or debris from trailer',
+            'Check parking brake',
+            'Check trailer bodywork for damage',
+            'Position loading ramps securely',
+            'Align machine with loading ramps',
+            'Track forward onto ramps slowly',
+            'Lower bucket onto transporter',
+            'Stop engine and secure machine'
+          ]
+        },
+        exclusionZone: {
+          title: 'Exclusion Zone',
+          requirements: [
+            'Always clear of personnel',
+            'Minimum clearance of machine height',
+            'Risk assessment for restricted space sites'
+          ]
+        }
       }
     },
     shutdown: {
@@ -942,13 +1247,53 @@ const FlanneryTrainingApp = () => {
       icon: Award,
       content: {
         overview: 'Proper shutdown procedures and parking considerations.',
-        topics: [
-          'Shutdown procedures',
-          'Parking considerations',
-          'Final safety checks',
-          'Machine security',
-          'Documentation'
-        ]
+        procedures: {
+          title: 'Shutdown Procedures',
+          steps: [
+            'Follow full shutdown procedure when parking',
+            'Lower bucket/attachment',
+            'Switch off engine',
+            'Remove key and secure machine',
+            'Carry out final safety checks'
+          ]
+        },
+        parking: {
+          title: 'Parking Considerations',
+          avoid: [
+            'Site roads',
+            'Pedestrian routes',
+            'Soft/wet/steep ground',
+            'Blocking access/egress routes from buildings'
+          ]
+        }
+      }
+    },
+    resources: {
+      title: 'Training Resources',
+      icon: FileText,
+      content: {
+        overview: 'Additional resources and reference materials for 360 excavator training.',
+        manuals: {
+          title: 'Operator Manuals',
+          importance: 'Always refer to the specific machine\'s operator manual for detailed procedures and specifications'
+        },
+        qrCodes: {
+          title: 'QR Code Resources',
+          description: 'Scan QR codes throughout the workbook for additional content including videos and reading materials'
+        },
+        operateSafe: {
+          title: 'OperateSAFE Campaign',
+          description: 'Company-wide Health & Safety campaign championed by Flannery Plant Hire. Familiarize yourself with internal and external health and safety campaigns when starting at new jobs.'
+        },
+        literacyNumeracy: {
+          title: 'Literacy, Numeracy & ICT',
+          requirements: [
+            'Extract information from operator manuals',
+            'Conduct simple calculations of bucket capacities',
+            'Read digital screens in the cab',
+            'Use training simulators effectively'
+          ]
+        }
       }
     }
   };
@@ -966,7 +1311,7 @@ const FlanneryTrainingApp = () => {
   const navigationItems = [
     { key: 'dashboard', label: 'Dashboard', icon: Home },
     { key: 'training', label: 'Training', icon: Book },
-    { key: 'progress', label: 'Progress', icon: BarChart3 },
+    { key: 'resources', label: 'Resources', icon: FileText },
     { key: 'profile', label: 'Profile', icon: User }
   ];
 
@@ -2471,8 +2816,8 @@ const FlanneryTrainingApp = () => {
         return <DashboardContent />;
       case 'training':
         return <TrainingContent />;
-      case 'progress':
-        return <ProgressContent />;
+      case 'resources':
+        return <ResourcesContent />;
       case 'profile':
         return <ProfileContent />;
       case 'help-support':
@@ -2509,6 +2854,150 @@ const FlanneryTrainingApp = () => {
       return () => clearTimeout(timer);
     }
   }, [activeSection]); // Add activeSection as dependency
+
+  const ResourcesContent = () => {
+    return (
+      <div className="space-y-4">
+        <h1 className="text-xl font-bold text-gray-900 mb-4">Training Resources</h1>
+        
+        <div className="bg-white p-4 rounded-lg shadow border">
+          <h3 className="text-lg font-semibold mb-3 text-blue-900">📚 Operator Manuals</h3>
+          <p className="text-sm text-gray-700 mb-3">
+            Always refer to the specific machine's operator manual for detailed procedures and specifications.
+          </p>
+          <div className="bg-blue-50 p-3 rounded-lg">
+            <p className="text-sm text-blue-800">
+              <strong>Important:</strong> Each excavator model may have specific requirements and procedures. 
+              Always consult the manufacturer's manual for your specific machine.
+            </p>
+          </div>
+        </div>
+
+        <div className="bg-white p-4 rounded-lg shadow border">
+          <h3 className="text-lg font-semibold mb-3 text-green-900">📱 QR Code Resources</h3>
+          <p className="text-sm text-gray-700 mb-3">
+            Scan QR codes throughout the workbook for additional content including videos and reading materials.
+          </p>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+            <div className="bg-green-50 p-3 rounded-lg">
+              <h4 className="font-medium text-green-800 mb-2">📹 Video Content</h4>
+              <p className="text-sm text-green-700">Safety procedures, operating techniques, and best practices</p>
+            </div>
+            <div className="bg-green-50 p-3 rounded-lg">
+              <h4 className="font-medium text-green-800 mb-2">📖 Reading Materials</h4>
+              <p className="text-sm text-green-700">Additional guides, regulations, and technical documents</p>
+            </div>
+          </div>
+        </div>
+
+        <div className="bg-white p-4 rounded-lg shadow border">
+          <h3 className="text-lg font-semibold mb-3 text-orange-900">🛡️ OperateSAFE Campaign</h3>
+          <p className="text-sm text-gray-700 mb-3">
+            Company-wide Health & Safety campaign championed by Flannery Plant Hire. 
+            Familiarize yourself with internal and external health and safety campaigns when starting at new jobs.
+          </p>
+          <div className="bg-orange-50 p-3 rounded-lg">
+            <p className="text-sm text-orange-800">
+              <strong>Safety First:</strong> Always put safety first and STOP any activity that could lead to harm 
+              to yourself or others. Always seek assistance and OperateSAFE.
+            </p>
+          </div>
+        </div>
+
+        <div className="bg-white p-4 rounded-lg shadow border">
+          <h3 className="text-lg font-semibold mb-3 text-purple-900">📊 Literacy, Numeracy & ICT</h3>
+          <p className="text-sm text-gray-700 mb-3">
+            English, Mathematics and ICT are embedded into the content. You will be required to:
+          </p>
+          <div className="space-y-2">
+            <div className="flex items-center space-x-2">
+              <div className="w-2 h-2 bg-purple-500 rounded-full"></div>
+              <span className="text-sm text-gray-700">Extract information from operator manuals</span>
+            </div>
+            <div className="flex items-center space-x-2">
+              <div className="w-2 h-2 bg-purple-500 rounded-full"></div>
+              <span className="text-sm text-gray-700">Conduct simple calculations of bucket capacities</span>
+            </div>
+            <div className="flex items-center space-x-2">
+              <div className="w-2 h-2 bg-purple-500 rounded-full"></div>
+              <span className="text-sm text-gray-700">Read digital screens in the cab</span>
+            </div>
+            <div className="flex items-center space-x-2">
+              <div className="w-2 h-2 bg-purple-500 rounded-full"></div>
+              <span className="text-sm text-gray-700">Use training simulators effectively</span>
+            </div>
+          </div>
+        </div>
+
+        <div className="bg-white p-4 rounded-lg shadow border">
+          <h3 className="text-lg font-semibold mb-3 text-red-900">⚠️ Knowledge Stops</h3>
+          <p className="text-sm text-gray-700 mb-3">
+            Throughout the training, you will encounter Knowledge Stops - your chance to put your learning to the test.
+          </p>
+          <div className="bg-red-50 p-3 rounded-lg">
+            <p className="text-sm text-red-800">
+              <strong>Assessment:</strong> These knowledge checks help reinforce learning and ensure understanding 
+              of key safety and operational concepts.
+            </p>
+          </div>
+        </div>
+
+        <div className="bg-white p-4 rounded-lg shadow border">
+          <h3 className="text-lg font-semibold mb-3 text-indigo-900">🎯 Course Objectives</h3>
+          <p className="text-sm text-gray-700 mb-3">
+            All content delivered on this course meets the requirements set out in the National Occupational Standards for this machine type.
+          </p>
+          <div className="space-y-2">
+            <div className="flex items-center space-x-2">
+              <div className="w-2 h-2 bg-indigo-500 rounded-full"></div>
+              <span className="text-sm text-gray-700">Understand relevant legislation</span>
+            </div>
+            <div className="flex items-center space-x-2">
+              <div className="w-2 h-2 bg-indigo-500 rounded-full"></div>
+              <span className="text-sm text-gray-700">Identify hazards and control measures</span>
+            </div>
+            <div className="flex items-center space-x-2">
+              <div className="w-2 h-2 bg-indigo-500 rounded-full"></div>
+              <span className="text-sm text-gray-700">Perform pre-operational checks</span>
+            </div>
+            <div className="flex items-center space-x-2">
+              <div className="w-2 h-2 bg-indigo-500 rounded-full"></div>
+              <span className="text-sm text-gray-700">Operate safely in various conditions</span>
+            </div>
+            <div className="flex items-center space-x-2">
+              <div className="w-2 h-2 bg-indigo-500 rounded-full"></div>
+              <span className="text-sm text-gray-700">Shut down machinery safely</span>
+            </div>
+          </div>
+        </div>
+
+        <div className="bg-gradient-to-r from-blue-500 to-purple-600 p-4 rounded-lg text-white">
+          <h3 className="text-lg font-semibold mb-2">💡 Getting Maximum Benefit</h3>
+          <p className="text-sm mb-3">
+            To get the maximum benefit from your training:
+          </p>
+          <div className="space-y-2 text-sm">
+            <div className="flex items-center space-x-2">
+              <div className="w-2 h-2 bg-white rounded-full"></div>
+              <span>Complete all knowledge stops thoroughly</span>
+            </div>
+            <div className="flex items-center space-x-2">
+              <div className="w-2 h-2 bg-white rounded-full"></div>
+              <span>Review operator manuals regularly</span>
+            </div>
+            <div className="flex items-center space-x-2">
+              <div className="w-2 h-2 bg-white rounded-full"></div>
+              <span>Practice safety procedures consistently</span>
+            </div>
+            <div className="flex items-center space-x-2">
+              <div className="w-2 h-2 bg-white rounded-full"></div>
+              <span>Seek clarification when needed</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  };
 
   return (
     <div className="flex flex-col h-screen bg-gray-100">
