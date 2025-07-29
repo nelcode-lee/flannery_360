@@ -1383,7 +1383,8 @@ const FlanneryTrainingApp = () => {
   const navigationItems = [
     { key: 'dashboard', label: 'Dashboard', icon: Home },
     { key: 'training', label: 'Training', icon: Book },
-    { key: 'resources', label: 'Resources', icon: FileText },
+    { key: 'objectives', label: 'Training Objectives', icon: FileText },
+    { key: 'progress', label: 'Resources', icon: BarChart3 },
     { key: 'profile', label: 'Profile', icon: User }
   ];
 
@@ -3037,14 +3038,17 @@ const FlanneryTrainingApp = () => {
         return <DashboardContent />;
       case 'training':
         return <TrainingContent />;
-      case 'resources':
+      case 'objectives':
+        return <TrainingObjectivesContent />;
+      case 'progress':
         return <ResourcesContent />;
       case 'profile':
         return <ProfileContent />;
-      case 'help-support':
-        return <HelpSupportContent />;
       default:
-        return <SectionContent sectionKey={activeSection} data={trainingData[activeSection]} />;
+        if (trainingData[activeSection]) {
+          return <SectionContent sectionKey={activeSection} data={trainingData[activeSection]} />;
+        }
+        return <DashboardContent />;
     }
   };
 
@@ -3219,6 +3223,73 @@ const FlanneryTrainingApp = () => {
       </div>
     );
   };
+
+  const TrainingObjectivesContent = () => (
+    <div className="space-y-4">
+      <h1 className="text-xl font-bold text-black mb-4">Training Objectives</h1>
+      
+      <div className="bg-white p-6 rounded-lg shadow border">
+        <h2 className="text-lg font-semibold mb-4 text-black">Complete Training Objectives</h2>
+        <div className="space-y-3">
+          {trainingData.introduction.content.objectives.map((objective, index) => (
+            <div key={index} className="flex items-start space-x-3 p-3 bg-gray-50 rounded-lg">
+              <div className="flex-shrink-0 w-6 h-6 bg-flannery-500 rounded-full flex items-center justify-center">
+                <span className="text-xs font-bold text-flanneryDark-950">{index + 1}</span>
+              </div>
+              <div className="flex-1">
+                <p className="text-sm text-gray-800 leading-relaxed">{objective}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div className="bg-gradient-to-r from-flannery-500 to-flannery-600 p-6 rounded-lg text-flanneryDark-950">
+        <h3 className="text-lg font-semibold mb-3">Training Overview</h3>
+        <div className="space-y-2 text-sm">
+          <p><strong>Total Objectives:</strong> {trainingData.introduction.content.objectives.length}</p>
+          <p><strong>Training Focus:</strong> 360 Excavator Operation</p>
+          <p><strong>Safety Priority:</strong> OperateSAFE principles</p>
+          <p><strong>Certification:</strong> Industry-recognized training</p>
+        </div>
+      </div>
+
+      <div className="bg-white p-6 rounded-lg shadow border">
+        <h3 className="text-lg font-semibold mb-4 text-black">Learning Journey</h3>
+        <div className="space-y-4">
+          <div className="flex items-center space-x-3">
+            <div className="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center">
+              <CheckCircle className="h-4 w-4 text-green-600" />
+            </div>
+            <div>
+              <p className="text-sm font-medium text-black">Foundation Knowledge</p>
+              <p className="text-xs text-gray-600">Understanding basic principles and safety</p>
+            </div>
+          </div>
+          
+          <div className="flex items-center space-x-3">
+            <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center">
+              <Book className="h-4 w-4 text-blue-600" />
+            </div>
+            <div>
+              <p className="text-sm font-medium text-black">Practical Skills</p>
+              <p className="text-xs text-gray-600">Hands-on operation and techniques</p>
+            </div>
+          </div>
+          
+          <div className="flex items-center space-x-3">
+            <div className="w-8 h-8 bg-purple-100 rounded-full flex items-center justify-center">
+              <Award className="h-4 w-4 text-purple-600" />
+            </div>
+            <div>
+              <p className="text-sm font-medium text-black">Certification</p>
+              <p className="text-xs text-gray-600">Industry-recognized qualification</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 
   return (
     <div className="flex flex-col h-screen bg-flanneryDark-950 max-w-full overflow-x-hidden">
