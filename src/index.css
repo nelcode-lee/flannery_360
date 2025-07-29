@@ -67,30 +67,10 @@
     border-width: 3px;
   }
   
-  /* 3D Viewer Container - Labels integrated with model */
+  /* 3D Viewer Container */
   .sketchfab-embed-wrapper {
     position: relative !important;
     overflow: hidden !important;
-  }
-  
-  /* Label positioning - Integrated with 3D model */
-  .sketchfab-embed-wrapper .absolute {
-    position: absolute !important;
-    z-index: 10 !important;
-    pointer-events: none !important;
-  }
-  
-  /* Ensure labels move with 3D model */
-  .sketchfab-embed-wrapper button {
-    position: absolute !important;
-    z-index: 10 !important;
-    pointer-events: auto !important;
-    transition: all 0.3s ease !important;
-  }
-  
-  /* Label hover effects */
-  .sketchfab-embed-wrapper button:hover {
-    transform: translate(-50%, -50%) scale(1.1) !important;
   }
   
   @media (max-width: 768px) {
@@ -98,9 +78,7 @@
       height: 350px !important;
     }
     
-    .absolute button {
-      transform: translate(-50%, -50%) scale(1.2);
-    }
+
   }
   
   /* Target viewport and status bar area */

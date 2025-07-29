@@ -3560,17 +3560,8 @@ const FlanneryTrainingApp = () => {
     return (
       <div className="w-full max-w-4xl mx-auto bg-white rounded-lg shadow-lg overflow-hidden">
         {/* Header */}
-        <div className="bg-gradient-to-r from-flannery-500 to-flannery-600 text-flanneryDark-950 px-4 py-3 flex items-center justify-between">
+        <div className="bg-gradient-to-r from-flannery-500 to-flannery-600 text-flanneryDark-950 px-4 py-3">
           <h2 className="text-xl font-bold">Interactive 360° Excavator</h2>
-          <div className="flex gap-2">
-            <button
-              onClick={() => setShowAllLabels(!showAllLabels)}
-              className="p-2 bg-white bg-opacity-20 rounded-lg hover:bg-opacity-30 transition-colors"
-              title="Toggle clickable areas"
-            >
-              {showAllLabels ? <EyeOff size={18} /> : <Eye size={18} />}
-            </button>
-          </div>
         </div>
 
         {/* 3D Interactive Viewer */}
