@@ -3574,14 +3574,7 @@ const FlanneryTrainingApp = () => {
         </div>
 
         {/* 3D Interactive Viewer */}
-        <div className="relative overflow-hidden" style={{ height: '500px' }}>
-          {/* Instructions */}
-          {iframeLoaded && (
-            <div className="absolute top-4 left-4 z-10 bg-black bg-opacity-75 text-white px-3 py-2 rounded-lg text-sm">
-              <p>💡 <strong>Click on any part</strong> of the excavator to learn about it!</p>
-            </div>
-          )}
-          
+        <div className="relative overflow-hidden mt-4" style={{ height: '500px' }}>
           {/* Your Sketchfab Embed */}
           <div className="sketchfab-embed-wrapper w-full h-full relative">
             <iframe 
@@ -3599,101 +3592,6 @@ const FlanneryTrainingApp = () => {
               id="sketchfab-iframe"
             />
           </div>
-
-          {/* Fallback Clickable Overlay - Works even if Sketchfab API doesn't support clicks */}
-          {iframeLoaded && showAllLabels && (
-            <div className="absolute inset-0 pointer-events-none z-20">
-              {/* Boom Area */}
-              <button
-                className="absolute pointer-events-auto group"
-                style={{ left: '45%', top: '25%', width: '15%', height: '20%' }}
-                onClick={() => setSelectedComponent(components.boom)}
-              >
-                <div className="w-8 h-8 rounded-full border-3 border-white shadow-lg flex items-center justify-center text-white font-bold text-sm transition-all duration-200 hover:scale-110 animate-pulse cursor-pointer opacity-0 group-hover:opacity-100"
-                     style={{ backgroundColor: components.boom.color }}>
-                  {components.boom.icon}
-                </div>
-                <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-2 py-1 bg-gray-900 text-white text-xs rounded whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none">
-                  {components.boom.name}
-                </div>
-              </button>
-
-              {/* Bucket Area */}
-              <button
-                className="absolute pointer-events-auto group"
-                style={{ left: '25%', top: '45%', width: '12%', height: '15%' }}
-                onClick={() => setSelectedComponent(components.bucket)}
-              >
-                <div className="w-8 h-8 rounded-full border-3 border-white shadow-lg flex items-center justify-center text-white font-bold text-sm transition-all duration-200 hover:scale-110 animate-pulse cursor-pointer opacity-0 group-hover:opacity-100"
-                     style={{ backgroundColor: components.bucket.color }}>
-                  {components.bucket.icon}
-                </div>
-                <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-2 py-1 bg-gray-900 text-white text-xs rounded whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none">
-                  {components.bucket.name}
-                </div>
-              </button>
-
-              {/* Cab Area */}
-              <button
-                className="absolute pointer-events-auto group"
-                style={{ left: '65%', top: '35%', width: '12%', height: '15%' }}
-                onClick={() => setSelectedComponent(components.cab)}
-              >
-                <div className="w-8 h-8 rounded-full border-3 border-white shadow-lg flex items-center justify-center text-white font-bold text-sm transition-all duration-200 hover:scale-110 animate-pulse cursor-pointer opacity-0 group-hover:opacity-100"
-                     style={{ backgroundColor: components.cab.color }}>
-                  {components.cab.icon}
-                </div>
-                <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-2 py-1 bg-gray-900 text-white text-xs rounded whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none">
-                  {components.cab.name}
-                </div>
-              </button>
-
-              {/* Counterweight Area */}
-              <button
-                className="absolute pointer-events-auto group"
-                style={{ left: '80%', top: '30%', width: '12%', height: '15%' }}
-                onClick={() => setSelectedComponent(components.counterweight)}
-              >
-                <div className="w-8 h-8 rounded-full border-3 border-white shadow-lg flex items-center justify-center text-white font-bold text-sm transition-all duration-200 hover:scale-110 animate-pulse cursor-pointer opacity-0 group-hover:opacity-100"
-                     style={{ backgroundColor: components.counterweight.color }}>
-                  {components.counterweight.icon}
-                </div>
-                <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-2 py-1 bg-gray-900 text-white text-xs rounded whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none">
-                  {components.counterweight.name}
-                </div>
-              </button>
-
-              {/* Track Area */}
-              <button
-                className="absolute pointer-events-auto group"
-                style={{ left: '60%', top: '70%', width: '25%', height: '15%' }}
-                onClick={() => setSelectedComponent(components.track)}
-              >
-                <div className="w-8 h-8 rounded-full border-3 border-white shadow-lg flex items-center justify-center text-white font-bold text-sm transition-all duration-200 hover:scale-110 animate-pulse cursor-pointer opacity-0 group-hover:opacity-100"
-                     style={{ backgroundColor: components.track.color }}>
-                  {components.track.icon}
-                </div>
-                <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-2 py-1 bg-gray-900 text-white text-xs rounded whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none">
-                  {components.track.name}
-                </div>
-              </button>
-
-              {/* Dipper Arm Area */}
-              <button
-                className="absolute pointer-events-auto group"
-                style={{ left: '35%', top: '35%', width: '15%', height: '15%' }}
-                onClick={() => setSelectedComponent(components.dipperArm)}
-              >
-                <div className="w-8 h-8 rounded-full border-3 border-white shadow-lg flex items-center justify-center text-white font-bold text-sm transition-all duration-200 hover:scale-110 animate-pulse cursor-pointer opacity-0 group-hover:opacity-100"
-                     style={{ backgroundColor: components.dipperArm.color }}>
-                  {components.dipperArm.icon}
-                </div>
-                <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-2 py-1 bg-gray-900 text-white text-xs rounded whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none">
-                  {components.dipperArm.name}
-                </div>
-              </button>
-            </div>
-          )}
 
           {/* Loading indicator */}
           {!iframeLoaded && (
