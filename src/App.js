@@ -78,10 +78,10 @@ const FlanneryTrainingApp = () => {
       type: 'multiple-choice',
       question: 'List 4 main hazards commonly found on construction sites:',
       options: [
-        'Moving vehicles and machinery only',
+        'Moving vehicles, machinery, excavations, falling materials',
         'Moving vehicles, working at height, excavations, falling materials',
-        'Working at height and excavations only',
-        'Falling materials and excavations only'
+        'Working at height, excavations, falling materials, noise',
+        'Falling materials, excavations, noise, vibration'
       ],
       correctAnswer: 1
     },
@@ -89,10 +89,10 @@ const FlanneryTrainingApp = () => {
       type: 'multiple-choice',
       question: 'List 5 effects of hazards:',
       options: [
-        'Injury or death only',
-        'Property damage and environmental damage',
+        'Injury, death, property damage, environmental damage, financial loss',
+        'Property damage, environmental damage, financial loss, legal consequences, reputation damage',
         'Injury, property damage, environmental damage, financial loss, legal consequences',
-        'Environmental damage and financial loss only'
+        'Death, property damage, environmental damage, financial loss, legal consequences'
       ],
       correctAnswer: 2
     },
@@ -111,10 +111,10 @@ const FlanneryTrainingApp = () => {
       type: 'multiple-choice',
       question: 'List the 3 main duties placed on employees under the Health and Safety at Work act 1974:',
       options: [
-        'Take reasonable care of themselves only',
+        'Take reasonable care of themselves, others, and equipment',
         'Take reasonable care of themselves and others, co-operate with employer, use equipment properly',
-        'Co-operate with employer only',
-        'Use equipment and safety devices only'
+        'Co-operate with employer, use equipment properly, report hazards',
+        'Use equipment and safety devices, report incidents, follow procedures'
       ],
       correctAnswer: 1
     },
@@ -133,10 +133,10 @@ const FlanneryTrainingApp = () => {
       type: 'multiple-choice',
       question: 'If an operator has to top-up the hydraulic oil, state two precautions that ensure cleanliness of the system:',
       options: [
-        'Ensure filler cap area is clean only',
+        'Ensure filler cap area is clean and check oil level',
         'Ensure filler cap area is clean and use clean container when filling',
-        'Use clean container only',
-        'No special precautions are needed'
+        'Use clean container and check for leaks',
+        'Check oil level and use clean container'
       ],
       correctAnswer: 1
     },
@@ -177,10 +177,10 @@ const FlanneryTrainingApp = () => {
       type: 'multiple-choice',
       question: 'What should you check before starting the engine?',
       options: [
-        'Fuel level only',
-        'Hydraulic oil level only',
+        'Fuel level, hydraulic oil level, coolant level, engine oil level',
+        'Hydraulic oil level, coolant level, engine oil level, tracks',
         'Fuel level, hydraulic oil level, coolant level, and engine oil level',
-        'Coolant level only'
+        'Engine oil level, coolant level, tracks, fuel level'
       ],
       correctAnswer: 2
     },
@@ -243,10 +243,10 @@ const FlanneryTrainingApp = () => {
       type: 'multiple-choice',
       question: 'What should you do during site induction?',
       options: [
-        'Learn site rules only',
+        'Learn site rules, emergency procedures, safety protocols',
         'Learn site rules, emergency procedures, and identify key personnel',
-        'Learn emergency procedures only',
-        'Identify key personnel only'
+        'Learn emergency procedures, identify key personnel, review procedures',
+        'Identify key personnel, review procedures, learn site rules'
       ],
       correctAnswer: 1
     },
@@ -276,10 +276,10 @@ const FlanneryTrainingApp = () => {
       type: 'multiple-choice',
       question: 'What should you check before starting work?',
       options: [
-        'Engine only',
+        'Engine, hydraulic system, tracks, safety devices',
         'Engine, hydraulic system, tracks, and safety devices',
-        'Hydraulic system only',
-        'Tracks only'
+        'Hydraulic system, tracks, safety devices, attachments',
+        'Tracks, safety devices, attachments, engine'
       ],
       correctAnswer: 1
     },
@@ -287,10 +287,10 @@ const FlanneryTrainingApp = () => {
       type: 'multiple-choice',
       question: 'What should you check before site travel?',
       options: [
-        'Route safety only',
+        'Route safety, ground conditions, overhead obstructions',
         'Route safety, ground conditions, and overhead obstructions',
-        'Ground conditions only',
-        'Overhead obstructions only'
+        'Ground conditions, overhead obstructions, traffic',
+        'Overhead obstructions, traffic, route safety'
       ],
       correctAnswer: 1
     },
