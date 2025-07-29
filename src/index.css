@@ -39,6 +39,16 @@
     background-color: #000000 !important;
   }
   
+  /* Preserve white backgrounds for cards */
+  .bg-white {
+    background-color: #ffffff !important;
+  }
+  
+  /* Preserve white backgrounds for all card elements */
+  .card, .bg-white, [class*="bg-white"] {
+    background-color: #ffffff !important;
+  }
+  
   /* Target viewport and status bar area */
   @media screen and (max-width: 768px) {
     html, body {
