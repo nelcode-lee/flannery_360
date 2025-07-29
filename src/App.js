@@ -1651,7 +1651,7 @@ const FlanneryTrainingApp = () => {
 
         <div className="bg-white p-4 rounded-lg shadow border max-w-full">
           <div className="flex items-center justify-between mb-3">
-            <h3 className="text-lg font-semibold">Safety Focus</h3>
+            <h3 className="text-lg font-semibold text-black">Safety Focus</h3>
             <AlertTriangle className="h-5 w-5 text-flannery-500" />
           </div>
           <p className="text-gray-600 text-sm">Always remember to OperateSAFE - your safety and that of others is paramount.</p>
