@@ -3443,22 +3443,26 @@ const FlanneryTrainingApp = () => {
 
     // Function to set up click handlers on 3D model parts
     const setupModelClickHandlers = (client) => {
+      console.log('Setting up click handlers for 3D model');
+      
       // Add click event listener to the 3D model
       client.api.addEventListener('click', (event) => {
-        console.log('Click event:', event);
+        console.log('Click event received:', event);
         
         // Get the clicked object/mesh
         if (event.object && event.object.name) {
           const clickedMeshName = event.object.name.toLowerCase();
-          console.log('Clicked mesh:', clickedMeshName);
+          console.log('Clicked mesh name:', clickedMeshName);
           
           // Find which component was clicked
           let clickedComponent = null;
           for (const [key, component] of Object.entries(components)) {
+            console.log(`Checking component ${key} with mesh names:`, component.meshNames);
             if (component.meshNames.some(name => 
               clickedMeshName.includes(name.toLowerCase())
             )) {
               clickedComponent = component;
+              console.log('Found matching component:', clickedComponent.name);
               break;
             }
           }
@@ -3467,26 +3471,49 @@ const FlanneryTrainingApp = () => {
             console.log('Component clicked:', clickedComponent.name);
             setSelectedComponent(clickedComponent);
             
-            // Highlight the clicked part
-            client.api.setMaterial({
-              name: event.object.name,
-              parameters: {
-                emissive: clickedComponent.color,
-                emissiveIntensity: 0.3
-              }
-            });
-            
-            // Reset highlight after 2 seconds
-            setTimeout(() => {
+            // Try to highlight the clicked part (this might not work with all models)
+            try {
               client.api.setMaterial({
                 name: event.object.name,
                 parameters: {
-                  emissive: [0, 0, 0],
-                  emissiveIntensity: 0
+                  emissive: clickedComponent.color,
+                  emissiveIntensity: 0.3
                 }
               });
+              console.log('Highlighted component:', clickedComponent.name);
+            } catch (error) {
+              console.log('Could not highlight component (this is normal for some models):', error);
+            }
+            
+            // Reset highlight after 2 seconds
+            setTimeout(() => {
+              try {
+                client.api.setMaterial({
+                  name: event.object.name,
+                  parameters: {
+                    emissive: [0, 0, 0],
+                    emissiveIntensity: 0
+                  }
+                });
+              } catch (error) {
+                console.log('Could not reset highlight:', error);
+              }
             }, 2000);
+          } else {
+            console.log('No matching component found for mesh:', clickedMeshName);
+            console.log('Available components:', Object.keys(components));
+            
+            // Fallback: Show a generic message for any clicked part
+            const fallbackComponent = {
+              name: "Unknown Part",
+              description: `You clicked on "${clickedMeshName}". This part of the excavator may not be specifically labeled in our training materials, but it's part of the overall machine structure.`,
+              icon: "🔧",
+              color: "#6B7280"
+            };
+            setSelectedComponent(fallbackComponent);
           }
+        } else {
+          console.log('Click event has no object or object name');
         }
       });
       
@@ -3502,6 +3529,7 @@ const FlanneryTrainingApp = () => {
             )) {
               // Show tooltip or cursor change
               document.body.style.cursor = 'pointer';
+              console.log('Hovering over clickable component:', component.name);
               break;
             }
           }
@@ -3511,6 +3539,8 @@ const FlanneryTrainingApp = () => {
       client.api.addEventListener('mouseout', (event) => {
         document.body.style.cursor = 'default';
       });
+      
+      console.log('Click handlers set up successfully');
     };
 
     return (
