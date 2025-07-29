@@ -1853,7 +1853,7 @@ const FlanneryTrainingApp = () => {
           <div className="space-y-4">
             <div>
               <div className="flex justify-between items-center mb-2">
-                <span className="text-sm text-gray-600">Completed Sections</span>
+                <span className="text-sm text-black">Completed Sections</span>
                 <span className="font-semibold">{completedSectionsCount}/{totalSections}</span>
               </div>
               <div className="w-full bg-gray-200 rounded-full h-3">
@@ -1866,7 +1866,7 @@ const FlanneryTrainingApp = () => {
             
             <div>
               <div className="flex justify-between items-center mb-2">
-                <span className="text-sm text-gray-600">Knowledge Checks Passed</span>
+                <span className="text-sm text-black">Knowledge Checks Passed</span>
                 <span className="font-semibold">{passedKnowledgeChecks}/{totalKnowledgeChecks}</span>
               </div>
               <div className="w-full bg-gray-200 rounded-full h-3">
@@ -1879,7 +1879,7 @@ const FlanneryTrainingApp = () => {
 
             <div>
               <div className="flex justify-between items-center mb-2">
-                <span className="text-sm text-gray-600">Final Assessment</span>
+                <span className="text-sm text-black">Final Assessment</span>
                 <span className="font-semibold">
                   {finalTestScore ? (finalTestScore.passed ? 'PASSED' : 'FAILED') : 'Not Attempted'}
                 </span>
@@ -1892,25 +1892,20 @@ const FlanneryTrainingApp = () => {
                       : 'bg-gray-300'
                   }`}
                   style={{ 
-                    width: finalTestScore ? '100%' : '0%'
+                    width: finalTestScore ? (finalTestScore.passed ? '100%' : '100%') : '0%'
                   }}
                 ></div>
               </div>
-              {finalTestScore && (
-                <p className="text-xs text-gray-500 mt-1">
-                  Score: {finalTestScore.correct}/{finalTestScore.total} ({finalTestScore.percentage.toFixed(1)}%)
-                </p>
-              )}
             </div>
 
             <div>
               <div className="flex justify-between items-center mb-2">
-                <span className="text-sm text-gray-600">Overall Training Progress</span>
+                <span className="text-sm text-black">Overall Training Progress</span>
                 <span className="font-semibold">{Math.round(overallProgress)}%</span>
               </div>
               <div className="w-full bg-gray-200 rounded-full h-3">
                 <div 
-                  className="bg-green-500 h-3 rounded-full transition-all"
+                  className="bg-gradient-to-r from-green-500 to-blue-500 h-3 rounded-full transition-all"
                   style={{ width: `${overallProgress}%` }}
                 ></div>
               </div>
@@ -2113,21 +2108,21 @@ const FlanneryTrainingApp = () => {
         
         <div className="space-y-3">
           <div className="flex justify-between">
-            <span className="text-sm text-gray-600">Experience</span>
+            <span className="text-sm text-black">Experience</span>
             <span className="text-sm font-medium">5 years</span>
           </div>
           <div className="flex justify-between">
-            <span className="text-sm text-gray-600">Learning Time</span>
+            <span className="text-sm text-black">Learning Time</span>
             <span className="text-sm font-medium">{formatTime(getTotalLearningTime())}</span>
           </div>
           <div className="flex justify-between">
-            <span className="text-sm text-gray-600">Active Learning</span>
+            <span className="text-sm text-black">Active Learning</span>
             <span className="text-sm font-medium">
               {isActivelyLearning(activeSection) ? 'In Progress' : 'Not Active'}
             </span>
           </div>
           <div className="flex justify-between">
-            <span className="text-sm text-gray-600">Certifications</span>
+            <span className="text-sm text-black">Certifications</span>
             <span className="text-sm font-medium">3</span>
           </div>
         </div>
@@ -2181,8 +2176,8 @@ const FlanneryTrainingApp = () => {
             </div>
             <div>
               <p className="text-sm font-medium">Phone Support</p>
-              <p className="text-sm text-gray-600">0800 123 4567</p>
-              <p className="text-xs text-gray-500">Mon-Fri 8am-6pm</p>
+              <p className="text-sm text-black">0800 123 4567</p>
+              <p className="text-xs text-gray-700">Mon-Fri 8am-6pm</p>
             </div>
           </div>
           
@@ -2192,19 +2187,19 @@ const FlanneryTrainingApp = () => {
             </div>
             <div>
               <p className="text-sm font-medium">Email Support</p>
-              <p className="text-sm text-gray-600">support@flannery.com</p>
-              <p className="text-xs text-gray-500">Response within 24 hours</p>
+              <p className="text-sm text-black">support@flannery.com</p>
+              <p className="text-xs text-gray-700">Response within 24 hours</p>
             </div>
           </div>
           
           <div className="flex items-center space-x-3">
-            <div className="w-8 h-8 bg-orange-100 rounded-full flex items-center justify-center">
-              <MessageCircle className="h-4 w-4 text-orange-600" />
+            <div className="w-8 h-8 bg-purple-100 rounded-full flex items-center justify-center">
+              <MessageCircle className="h-4 w-4 text-purple-600" />
             </div>
             <div>
               <p className="text-sm font-medium">Live Chat</p>
-              <p className="text-sm text-gray-600">Available on website</p>
-              <p className="text-xs text-gray-500">Instant support</p>
+              <p className="text-sm text-black">Available on website</p>
+              <p className="text-xs text-gray-700">Instant support</p>
             </div>
           </div>
         </div>
@@ -2228,7 +2223,7 @@ const FlanneryTrainingApp = () => {
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm font-medium text-blue-600">CITB - Construction Industry Training Board</p>
-                <p className="text-xs text-gray-600">Official training standards and qualifications</p>
+                <p className="text-xs text-black">Official training standards and qualifications</p>
               </div>
               <ExternalLink className="h-4 w-4 text-gray-400" />
             </div>
@@ -2243,7 +2238,7 @@ const FlanneryTrainingApp = () => {
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm font-medium text-blue-600">HSE - Health and Safety Executive</p>
-                <p className="text-xs text-gray-600">Safety guidelines and regulations</p>
+                <p className="text-xs text-black">Safety guidelines and regulations</p>
               </div>
               <ExternalLink className="h-4 w-4 text-gray-400" />
             </div>
@@ -2258,7 +2253,7 @@ const FlanneryTrainingApp = () => {
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm font-medium text-blue-600">CITB Plant Operator Cards</p>
-                <p className="text-xs text-gray-600">CPCS and NPORS card information</p>
+                <p className="text-xs text-black">CPCS and NPORS card information</p>
               </div>
               <ExternalLink className="h-4 w-4 text-gray-400" />
             </div>
@@ -2273,7 +2268,7 @@ const FlanneryTrainingApp = () => {
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm font-medium text-blue-600">CITB Training Standards</p>
-                <p className="text-xs text-gray-600">Industry training standards and requirements</p>
+                <p className="text-xs text-black">Industry training standards and requirements</p>
               </div>
               <ExternalLink className="h-4 w-4 text-gray-400" />
             </div>
@@ -2297,7 +2292,7 @@ const FlanneryTrainingApp = () => {
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm font-medium text-blue-600">Training Modules</p>
-                <p className="text-xs text-gray-600">Access all training content</p>
+                <p className="text-xs text-black">Access all training content</p>
               </div>
               <ChevronRight className="h-4 w-4 text-gray-400" />
             </div>
@@ -2313,7 +2308,7 @@ const FlanneryTrainingApp = () => {
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm font-medium text-blue-600">Final Assessment</p>
-                <p className="text-xs text-gray-600">Take the comprehensive final test</p>
+                <p className="text-xs text-black">Take the comprehensive final test</p>
               </div>
               <ChevronRight className="h-4 w-4 text-gray-400" />
             </div>
@@ -2326,7 +2321,7 @@ const FlanneryTrainingApp = () => {
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm font-medium text-blue-600">Progress Tracking</p>
-                <p className="text-xs text-gray-600">View your training progress</p>
+                <p className="text-xs text-black">View your training progress</p>
               </div>
               <ChevronRight className="h-4 w-4 text-gray-400" />
             </div>
