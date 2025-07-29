@@ -2931,12 +2931,12 @@ const FlanneryTrainingApp = () => {
       </header>
 
       {/* Main Content */}
-      <main className="flex-1 overflow-auto p-4">
+      <main className="flex-1 overflow-auto p-4 pb-20">
         {renderContent()}
       </main>
 
       {/* Bottom Navigation */}
-      <nav className="bg-white border-t border-gray-200 px-4 py-2">
+      <nav className="bg-gradient-to-r from-white to-orange-50 border-t-2 border-orange-300 shadow-xl px-4 py-3 fixed bottom-0 left-0 right-0 z-50">
         <div className="flex justify-around">
           {navigationItems.map((item) => {
             const Icon = item.icon;
@@ -2946,14 +2946,19 @@ const FlanneryTrainingApp = () => {
               <button
                 key={item.key}
                 onClick={() => setActiveSection(item.key)}
-                className={`flex flex-col items-center py-2 px-3 rounded-lg transition-colors ${
+                className={`flex flex-col items-center py-3 px-4 rounded-xl transition-all duration-200 min-w-[60px] ${
                   isActive 
-                    ? 'text-orange-600 bg-orange-50' 
-                    : 'text-gray-500 hover:text-gray-700'
+                    ? 'text-white bg-orange-600 shadow-lg transform scale-105' 
+                    : 'text-gray-700 hover:text-orange-600 hover:bg-orange-100'
                 }`}
               >
-                <Icon className="h-5 w-5 mb-1" />
-                <span className="text-xs font-medium">{item.label}</span>
+                <Icon className={`h-6 w-6 mb-1 ${isActive ? 'text-white' : 'text-gray-600'}`} />
+                <span className={`text-xs font-bold ${isActive ? 'text-white' : 'text-gray-700'}`}>
+                  {item.label}
+                </span>
+                {isActive && (
+                  <div className="w-2 h-2 bg-white rounded-full mt-1"></div>
+                )}
               </button>
             );
           })}
