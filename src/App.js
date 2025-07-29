@@ -2092,64 +2092,64 @@ const FlanneryTrainingApp = () => {
   };
 
   const ProfileContent = () => (
-    <div className="space-y-4">
-      <h1 className="text-xl font-bold text-black mb-4">Profile</h1>
+    <div className="space-y-4 md:space-y-6">
+      <h1 className="text-xl md:text-2xl lg:text-3xl font-bold text-black mb-4 md:mb-6">Profile</h1>
       
-      <div className="bg-white p-4 rounded-lg shadow border">
-        <div className="flex items-center space-x-3 mb-4">
-          <div className="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center">
-            <User className="h-6 w-6 text-orange-600" />
+      <div className="bg-white p-4 md:p-6 lg:p-8 rounded-lg shadow border">
+        <div className="flex items-center space-x-3 md:space-x-4 mb-4 md:mb-6">
+          <div className="w-12 h-12 md:w-16 md:h-16 bg-orange-100 rounded-full flex items-center justify-center">
+            <User className="h-6 w-6 md:h-8 md:w-8 text-orange-600" />
           </div>
           <div>
-            <h3 className="font-semibold">John Smith</h3>
-            <p className="text-sm text-gray-500">Excavator Operator</p>
+            <h3 className="font-semibold text-black text-base md:text-lg lg:text-xl">John Smith</h3>
+            <p className="text-sm md:text-base text-gray-500">Excavator Operator</p>
           </div>
         </div>
         
-        <div className="space-y-3">
+        <div className="space-y-3 md:space-y-4">
           <div className="flex justify-between">
-            <span className="text-sm text-black">Experience</span>
-            <span className="text-sm font-medium">5 years</span>
+            <span className="text-sm md:text-base text-black">Experience</span>
+            <span className="text-sm md:text-base font-medium text-black">5 years</span>
           </div>
           <div className="flex justify-between">
-            <span className="text-sm text-black">Learning Time</span>
-            <span className="text-sm font-medium">{formatTime(getTotalLearningTime())}</span>
+            <span className="text-sm md:text-base text-black">Learning Time</span>
+            <span className="text-sm md:text-base font-medium text-black">{formatTime(getTotalLearningTime())}</span>
           </div>
           <div className="flex justify-between">
-            <span className="text-sm text-black">Active Learning</span>
-            <span className="text-sm font-medium">
+            <span className="text-sm md:text-base text-black">Active Learning</span>
+            <span className="text-sm md:text-base font-medium text-black">
               {isActivelyLearning(activeSection) ? 'In Progress' : 'Not Active'}
             </span>
           </div>
           <div className="flex justify-between">
-            <span className="text-sm text-black">Certifications</span>
-            <span className="text-sm font-medium">3</span>
+            <span className="text-sm md:text-base text-black">Certifications</span>
+            <span className="text-sm md:text-base font-medium text-black">3</span>
           </div>
         </div>
       </div>
 
-      <div className="bg-white p-4 rounded-lg shadow border">
-        <h3 className="text-lg font-semibold mb-3 text-black">Settings</h3>
-        <div className="space-y-3">
-          <button className="w-full text-left py-2 hover:bg-gray-50 rounded">
+      <div className="bg-white p-4 md:p-6 lg:p-8 rounded-lg shadow border">
+        <h3 className="text-lg md:text-xl lg:text-2xl font-semibold mb-3 md:mb-4 text-black">Settings</h3>
+        <div className="space-y-3 md:space-y-4">
+          <button className="w-full text-left py-2 md:py-3 hover:bg-gray-50 rounded transition-colors">
             <div className="flex items-center justify-between">
-              <span className="text-sm text-black">Notifications</span>
-              <ChevronRight className="h-4 w-4 text-black" />
+              <span className="text-sm md:text-base text-black">Notifications</span>
+              <ChevronRight className="h-4 w-4 md:h-5 md:w-5 text-black" />
             </div>
           </button>
-          <button className="w-full text-left py-2 hover:bg-gray-50 rounded">
+          <button className="w-full text-left py-2 md:py-3 hover:bg-gray-50 rounded transition-colors">
             <div className="flex items-center justify-between">
-              <span className="text-sm text-black">Privacy</span>
-              <ChevronRight className="h-4 w-4 text-black" />
+              <span className="text-sm md:text-base text-black">Privacy</span>
+              <ChevronRight className="h-4 w-4 md:h-5 md:w-5 text-black" />
             </div>
           </button>
           <button 
             onClick={() => setActiveSection('help-support')}
-            className="w-full text-left py-2 hover:bg-gray-50 rounded"
+            className="w-full text-left py-2 md:py-3 hover:bg-gray-50 rounded transition-colors"
           >
             <div className="flex items-center justify-between">
-              <span className="text-sm text-black">Help & Support</span>
-              <ChevronRight className="h-4 w-4 text-black" />
+              <span className="text-sm md:text-base text-black">Help & Support</span>
+              <ChevronRight className="h-4 w-4 md:h-5 md:w-5 text-black" />
             </div>
           </button>
         </div>
