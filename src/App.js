@@ -1720,7 +1720,7 @@ const FlanneryTrainingApp = () => {
               </div>
               <div className="w-full bg-gray-200 rounded-full h-2 md:h-3 mt-1 md:mt-2">
                 <div 
-                  className="bg-flannery-500 h-2 md:h-3 rounded-full transition-all"
+                  className="bg-gradient-to-r from-flannery-500 to-flannery-600 h-2 md:h-3 rounded-full transition-all"
                   style={{ width: `${(completedSections.size / 15) * 100}%` }}
                 ></div>
               </div>
