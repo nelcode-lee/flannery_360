@@ -1771,19 +1771,7 @@ const FlanneryTrainingApp = () => {
               <p className="text-lg md:text-xl lg:text-2xl">360 Excavator Training</p>
             </div>
             
-            {showMotivationalMessage && (
-              <div className="mt-4 md:mt-6 text-center">
-                <div className="bg-white bg-opacity-20 p-3 md:p-4 rounded-lg backdrop-blur-sm">
-                  <p className="text-sm md:text-base font-medium">{getMotivationalMessage()}</p>
-                  <button 
-                    onClick={() => setShowMotivationalMessage(false)}
-                    className="mt-2 text-xs opacity-70 hover:opacity-100 transition-opacity"
-                  >
-                    Dismiss
-                  </button>
-                </div>
-              </div>
-            )}
+
           </div>
         </div>
 
