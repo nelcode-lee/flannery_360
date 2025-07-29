@@ -1533,8 +1533,8 @@ const FlanneryTrainingApp = () => {
   }, []);
 
   const DashboardContent = () => (
-    <div className="space-y-4">
-              <div className="bg-gradient-to-r from-orange-500 to-orange-600 text-white p-6 rounded-lg">
+    <div className="space-y-4 max-w-full">
+              <div className="bg-gradient-to-r from-orange-500 to-orange-600 text-white p-6 rounded-lg max-w-full">
           <div className="flex items-center justify-center mb-4">
             <FlanneryLogo />
           </div>
@@ -1545,8 +1545,8 @@ const FlanneryTrainingApp = () => {
           </div>
         </div>
 
-      <div className="grid grid-cols-1 gap-4">
-        <div className="bg-white p-4 rounded-lg shadow border">
+      <div className="grid grid-cols-1 gap-4 max-w-full">
+        <div className="bg-white p-4 rounded-lg shadow border max-w-full">
           <div className="flex items-center justify-between mb-3">
             <h3 className="text-lg font-semibold">Progress</h3>
             <CheckCircle className="h-5 w-5 text-green-500" />
@@ -1584,7 +1584,7 @@ const FlanneryTrainingApp = () => {
           </div>
         </div>
 
-        <div className="bg-white p-4 rounded-lg shadow border">
+        <div className="bg-white p-4 rounded-lg shadow border max-w-full">
           <div className="flex items-center justify-between mb-3">
             <h3 className="text-lg font-semibold">Safety Focus</h3>
             <AlertTriangle className="h-5 w-5 text-amber-500" />
@@ -1592,7 +1592,7 @@ const FlanneryTrainingApp = () => {
           <p className="text-gray-600 text-sm">Always remember to OperateSAFE - your safety and that of others is paramount.</p>
         </div>
 
-        <div className="bg-white p-4 rounded-lg shadow border">
+        <div className="bg-white p-4 rounded-lg shadow border max-w-full">
           <h3 className="text-lg font-semibold mb-3">Quick Actions</h3>
           <div className="space-y-2">
             <button 
@@ -1626,7 +1626,7 @@ const FlanneryTrainingApp = () => {
         </div>
       </div>
 
-      <div className="bg-white p-4 rounded-lg shadow border">
+      <div className="bg-white p-4 rounded-lg shadow border max-w-full">
         <h3 className="text-lg font-semibold mb-3">Training Objectives</h3>
         <div className="space-y-2">
           {trainingData.introduction.content.objectives.slice(0, showAllObjectives ? undefined : 6).map((objective, index) => (
@@ -1647,8 +1647,8 @@ const FlanneryTrainingApp = () => {
   );
 
   const TrainingContent = () => (
-    <div className="space-y-4">
-      <div className="flex items-center justify-between mb-4">
+    <div className="space-y-4 max-w-full">
+      <div className="flex items-center justify-between mb-4 max-w-full">
         <h1 className="text-xl font-bold text-gray-900">Training Modules</h1>
         <button 
           onClick={() => setShowSearch(!showSearch)}
@@ -1659,7 +1659,7 @@ const FlanneryTrainingApp = () => {
       </div>
 
       {showSearch && (
-        <div className="mb-4">
+        <div className="mb-4 max-w-full">
           <div className="relative">
             <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
             <input
@@ -1677,13 +1677,13 @@ const FlanneryTrainingApp = () => {
         <FinalTest />
       ) : (
         <>
-          <div className="space-y-3">
+          <div className="space-y-3 max-w-full">
             {Object.entries(trainingData).filter(([key]) => key !== 'dashboard').map(([key, section]) => {
               const Icon = section.icon;
               const isCompleted = completedSections.has(key);
               
               return (
-                <div key={key} className="bg-white rounded-lg shadow border overflow-hidden">
+                <div key={key} className="bg-white rounded-lg shadow border overflow-hidden max-w-full">
                   <button
                     onClick={() => setActiveSection(key)}
                     className="w-full p-4 text-left flex items-center justify-between hover:bg-gray-50"
@@ -1708,7 +1708,7 @@ const FlanneryTrainingApp = () => {
           </div>
 
           {/* Final Test Section */}
-          <div className="mt-6 bg-gradient-to-r from-red-500 to-red-600 rounded-lg shadow border overflow-hidden">
+          <div className="mt-6 bg-gradient-to-r from-red-500 to-red-600 rounded-lg shadow border overflow-hidden max-w-full">
             <div className="p-4 text-white">
               <div className="flex items-center space-x-3 mb-3">
                 <div className="w-10 h-10 bg-white bg-opacity-20 rounded-lg flex items-center justify-center">
@@ -3004,12 +3004,12 @@ const FlanneryTrainingApp = () => {
   };
 
   return (
-    <div className="flex flex-col h-screen bg-gray-100">
+    <div className="flex flex-col h-screen bg-gray-100 max-w-full overflow-x-hidden">
       {/* Header */}
-      <header className="bg-white shadow-sm border-b border-gray-200 p-4">
-        <div className="flex items-center justify-between">
-          <div>
-            <h1 className="text-lg font-semibold text-gray-900">
+      <header className="bg-white shadow-sm border-b border-gray-200 p-4 max-w-full">
+        <div className="flex items-center justify-between max-w-full">
+          <div className="flex-1 min-w-0">
+            <h1 className="text-lg font-semibold text-gray-900 truncate">
               {activeSection === 'dashboard' ? 'Flannery Training' : 
                activeSection === 'training' ? 'Training Modules' :
                activeSection === 'progress' ? 'Progress' :
@@ -3019,7 +3019,7 @@ const FlanneryTrainingApp = () => {
             </h1>
             <p className="text-xs text-gray-500">Mobile Training Platform</p>
           </div>
-          <div className="flex items-center space-x-2">
+          <div className="flex items-center space-x-2 flex-shrink-0">
             <button className="p-2 hover:bg-gray-100 rounded-lg" title="Bookmark">
               <Bookmark className="h-5 w-5 text-gray-600" />
             </button>
@@ -3031,13 +3031,15 @@ const FlanneryTrainingApp = () => {
       </header>
 
       {/* Main Content */}
-      <main className="flex-1 overflow-y-auto pb-32">
-        {renderContent()}
+      <main className="flex-1 overflow-y-auto overflow-x-hidden pb-32 max-w-full">
+        <div className="px-4 max-w-full">
+          {renderContent()}
+        </div>
       </main>
 
       {/* Bottom Navigation */}
-      <nav className="bg-gradient-to-r from-white to-orange-50 border-t-2 border-orange-300 shadow-xl px-4 py-3 fixed bottom-0 left-0 right-0 z-50">
-        <div className="flex justify-around">
+      <nav className="bg-gradient-to-r from-white to-orange-50 border-t-2 border-orange-300 shadow-xl px-4 py-3 fixed bottom-0 left-0 right-0 z-50 max-w-full">
+        <div className="flex justify-around max-w-full">
           {navigationItems.map((item) => {
             const Icon = item.icon;
             const isActive = activeSection === item.key;
@@ -3046,14 +3048,14 @@ const FlanneryTrainingApp = () => {
               <button
                 key={item.key}
                 onClick={() => setActiveSection(item.key)}
-                className={`flex flex-col items-center py-3 px-4 rounded-xl transition-all duration-200 min-w-[60px] ${
+                className={`flex flex-col items-center py-3 px-2 rounded-xl transition-all duration-200 min-w-[60px] max-w-[80px] ${
                   isActive 
                     ? 'text-white bg-orange-600 shadow-lg transform scale-105' 
                     : 'text-gray-700 hover:text-orange-600 hover:bg-orange-100'
                 }`}
               >
                 <Icon className={`h-6 w-6 mb-1 ${isActive ? 'text-white' : 'text-gray-600'}`} />
-                <span className={`text-xs font-bold ${isActive ? 'text-white' : 'text-gray-700'}`}>
+                <span className={`text-xs font-bold text-center ${isActive ? 'text-white' : 'text-gray-700'}`}>
                   {item.label}
                 </span>
                 {isActive && (

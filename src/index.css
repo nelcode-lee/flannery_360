@@ -11,6 +11,13 @@
     @apply bg-gray-100 text-gray-900;
     /* Prevent horizontal scrolling on mobile */
     overflow-x: hidden;
+    max-width: 100vw;
+  }
+  
+  /* Ensure root element doesn't overflow */
+  #root {
+    max-width: 100vw;
+    overflow-x: hidden;
   }
 }
 
@@ -40,6 +47,11 @@
     .touch-target {
       @apply min-h-[44px] min-w-[44px];
     }
+    
+    /* Ensure content doesn't overflow on mobile */
+    .mobile-container {
+      @apply max-w-full overflow-x-hidden;
+    }
   }
 
   /* Bottom navigation styles */
@@ -50,5 +62,10 @@
   /* Main content with bottom nav padding */
   .main-content {
     @apply pb-20;
+  }
+  
+  /* Container constraints */
+  .app-container {
+    @apply max-w-full overflow-x-hidden;
   }
 } 
