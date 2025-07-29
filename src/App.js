@@ -3410,12 +3410,21 @@ const FlanneryTrainingApp = () => {
     // Initialize Sketchfab API when iframe loads
     useEffect(() => {
       if (iframeLoaded) {
+        console.log('Iframe loaded, initializing Sketchfab API...');
+        
         // Wait for Sketchfab API to be available
         const initSketchfab = () => {
           if (window.Sketchfab) {
+            console.log('Sketchfab API found, creating client...');
             const client = new window.Sketchfab('1.12.1');
             const iframe = document.getElementById('sketchfab-iframe');
             
+            if (!iframe) {
+              console.error('Sketchfab iframe not found');
+              return;
+            }
+            
+            console.log('Initializing Sketchfab client...');
             client.init(iframe, {
               autostart: 1,
               ui_controls: 1,
@@ -3431,7 +3440,12 @@ const FlanneryTrainingApp = () => {
               // Set up click handlers for 3D model parts
               setupModelClickHandlers(client);
             });
+            
+            client.addEventListener('error', (error) => {
+              console.error('Sketchfab error:', error);
+            });
           } else {
+            console.log('Sketchfab API not available, retrying...');
             // Retry after a short delay
             setTimeout(initSketchfab, 100);
           }
@@ -3552,7 +3566,7 @@ const FlanneryTrainingApp = () => {
             <button
               onClick={() => setShowAllLabels(!showAllLabels)}
               className="p-2 bg-white bg-opacity-20 rounded-lg hover:bg-opacity-30 transition-colors"
-              title="Toggle component highlighting"
+              title="Toggle clickable areas"
             >
               {showAllLabels ? <EyeOff size={18} /> : <Eye size={18} />}
             </button>
@@ -3585,6 +3599,101 @@ const FlanneryTrainingApp = () => {
               id="sketchfab-iframe"
             />
           </div>
+
+          {/* Fallback Clickable Overlay - Works even if Sketchfab API doesn't support clicks */}
+          {iframeLoaded && showAllLabels && (
+            <div className="absolute inset-0 pointer-events-none z-20">
+              {/* Boom Area */}
+              <button
+                className="absolute pointer-events-auto group"
+                style={{ left: '45%', top: '25%', width: '15%', height: '20%' }}
+                onClick={() => setSelectedComponent(components.boom)}
+              >
+                <div className="w-8 h-8 rounded-full border-3 border-white shadow-lg flex items-center justify-center text-white font-bold text-sm transition-all duration-200 hover:scale-110 animate-pulse cursor-pointer opacity-0 group-hover:opacity-100"
+                     style={{ backgroundColor: components.boom.color }}>
+                  {components.boom.icon}
+                </div>
+                <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-2 py-1 bg-gray-900 text-white text-xs rounded whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none">
+                  {components.boom.name}
+                </div>
+              </button>
+
+              {/* Bucket Area */}
+              <button
+                className="absolute pointer-events-auto group"
+                style={{ left: '25%', top: '45%', width: '12%', height: '15%' }}
+                onClick={() => setSelectedComponent(components.bucket)}
+              >
+                <div className="w-8 h-8 rounded-full border-3 border-white shadow-lg flex items-center justify-center text-white font-bold text-sm transition-all duration-200 hover:scale-110 animate-pulse cursor-pointer opacity-0 group-hover:opacity-100"
+                     style={{ backgroundColor: components.bucket.color }}>
+                  {components.bucket.icon}
+                </div>
+                <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-2 py-1 bg-gray-900 text-white text-xs rounded whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none">
+                  {components.bucket.name}
+                </div>
+              </button>
+
+              {/* Cab Area */}
+              <button
+                className="absolute pointer-events-auto group"
+                style={{ left: '65%', top: '35%', width: '12%', height: '15%' }}
+                onClick={() => setSelectedComponent(components.cab)}
+              >
+                <div className="w-8 h-8 rounded-full border-3 border-white shadow-lg flex items-center justify-center text-white font-bold text-sm transition-all duration-200 hover:scale-110 animate-pulse cursor-pointer opacity-0 group-hover:opacity-100"
+                     style={{ backgroundColor: components.cab.color }}>
+                  {components.cab.icon}
+                </div>
+                <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-2 py-1 bg-gray-900 text-white text-xs rounded whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none">
+                  {components.cab.name}
+                </div>
+              </button>
+
+              {/* Counterweight Area */}
+              <button
+                className="absolute pointer-events-auto group"
+                style={{ left: '80%', top: '30%', width: '12%', height: '15%' }}
+                onClick={() => setSelectedComponent(components.counterweight)}
+              >
+                <div className="w-8 h-8 rounded-full border-3 border-white shadow-lg flex items-center justify-center text-white font-bold text-sm transition-all duration-200 hover:scale-110 animate-pulse cursor-pointer opacity-0 group-hover:opacity-100"
+                     style={{ backgroundColor: components.counterweight.color }}>
+                  {components.counterweight.icon}
+                </div>
+                <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-2 py-1 bg-gray-900 text-white text-xs rounded whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none">
+                  {components.counterweight.name}
+                </div>
+              </button>
+
+              {/* Track Area */}
+              <button
+                className="absolute pointer-events-auto group"
+                style={{ left: '60%', top: '70%', width: '25%', height: '15%' }}
+                onClick={() => setSelectedComponent(components.track)}
+              >
+                <div className="w-8 h-8 rounded-full border-3 border-white shadow-lg flex items-center justify-center text-white font-bold text-sm transition-all duration-200 hover:scale-110 animate-pulse cursor-pointer opacity-0 group-hover:opacity-100"
+                     style={{ backgroundColor: components.track.color }}>
+                  {components.track.icon}
+                </div>
+                <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-2 py-1 bg-gray-900 text-white text-xs rounded whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none">
+                  {components.track.name}
+                </div>
+              </button>
+
+              {/* Dipper Arm Area */}
+              <button
+                className="absolute pointer-events-auto group"
+                style={{ left: '35%', top: '35%', width: '15%', height: '15%' }}
+                onClick={() => setSelectedComponent(components.dipperArm)}
+              >
+                <div className="w-8 h-8 rounded-full border-3 border-white shadow-lg flex items-center justify-center text-white font-bold text-sm transition-all duration-200 hover:scale-110 animate-pulse cursor-pointer opacity-0 group-hover:opacity-100"
+                     style={{ backgroundColor: components.dipperArm.color }}>
+                  {components.dipperArm.icon}
+                </div>
+                <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-2 py-1 bg-gray-900 text-white text-xs rounded whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none">
+                  {components.dipperArm.name}
+                </div>
+              </button>
+            </div>
+          )}
 
           {/* Loading indicator */}
           {!iframeLoaded && (
