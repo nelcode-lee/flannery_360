@@ -1827,74 +1827,68 @@ const FlanneryTrainingApp = () => {
         </div>
       )}
 
-      {showFinalTest ? (
-        <FinalTest />
-      ) : (
-        <>
-          <div className="space-y-3 md:space-y-4 max-w-full">
-            {Object.entries(trainingData).filter(([key]) => key !== 'dashboard').map(([key, section]) => {
-              const Icon = section.icon;
-              const isCompleted = completedSections.has(key);
-              
-              return (
-                <div key={key} className="bg-white rounded-lg shadow border overflow-hidden max-w-full">
-                  <button
-                    onClick={() => setActiveSection(key)}
-                    className="w-full p-4 md:p-6 lg:p-8 text-left flex items-center justify-between hover:bg-gray-50 transition-colors"
-                  >
-                    <div className="flex items-center space-x-3 md:space-x-4">
-                      <div className="w-10 h-10 md:w-12 md:h-12 bg-flannery-100 rounded-lg flex items-center justify-center">
-                        <Icon className="h-5 w-5 md:h-6 md:w-6 text-flannery-600" />
-                      </div>
-                      <div>
-                        <h3 className="font-semibold text-black text-base md:text-lg lg:text-xl">{section.title}</h3>
-                        <p className="text-sm md:text-base text-gray-700">Training module</p>
-                      </div>
-                    </div>
-                    <div className="flex items-center space-x-2 md:space-x-3">
-                      {isCompleted && <CheckCircle className="h-4 w-4 md:h-5 md:w-5 text-flanneryGreen-500" />}
-                      <ChevronRight className="h-4 w-4 md:h-5 md:w-5 text-gray-400" />
-                    </div>
-                  </button>
-                </div>
-              );
-            })}
-          </div>
-
-          {/* Final Test Section */}
-          <div className="mt-6 bg-gradient-to-r from-flannery-500 to-flannery-600 rounded-lg shadow border overflow-hidden max-w-full">
-            <div className="p-4 text-flanneryDark-950">
-              <div className="flex items-center space-x-3 mb-3">
-                <div className="w-10 h-10 bg-white bg-opacity-20 rounded-lg flex items-center justify-center">
-                  <Award className="h-5 w-5 text-flanneryDark-950" />
-                </div>
-                <div>
-                  <h3 className="font-semibold text-flanneryDark-950">Final Assessment</h3>
-                  <p className="text-sm text-flanneryDark-800">Comprehensive test covering all modules</p>
-                </div>
-              </div>
-              
-              <div className="mb-4">
-                <p className="text-sm text-flanneryDark-800 mb-2">
-                  Test your knowledge across all 15 training modules with our comprehensive final assessment.
-                </p>
-                <div className="bg-white bg-opacity-20 p-3 rounded-lg">
-                  <p className="text-sm text-flanneryDark-950">
-                    <strong>Requirements:</strong> 80% pass mark (12 out of 15 questions)
-                  </p>
-                </div>
-              </div>
-
+      <div className="space-y-3 md:space-y-4 max-w-full">
+        {Object.entries(trainingData).filter(([key]) => key !== 'dashboard').map(([key, section]) => {
+          const Icon = section.icon;
+          const isCompleted = completedSections.has(key);
+          
+          return (
+            <div key={key} className="bg-white rounded-lg shadow border overflow-hidden max-w-full">
               <button
-                onClick={() => setShowFinalTest(true)}
-                className="w-full bg-white text-black px-4 py-3 rounded-lg hover:bg-gray-50 text-sm font-medium transition-colors"
+                onClick={() => setActiveSection(key)}
+                className="w-full p-4 md:p-6 lg:p-8 text-left flex items-center justify-between hover:bg-gray-50 transition-colors"
               >
-                Start Final Test
+                <div className="flex items-center space-x-3 md:space-x-4">
+                  <div className="w-10 h-10 md:w-12 md:h-12 bg-flannery-100 rounded-lg flex items-center justify-center">
+                    <Icon className="h-5 w-5 md:h-6 md:w-6 text-flannery-600" />
+                  </div>
+                  <div>
+                    <h3 className="font-semibold text-black text-base md:text-lg lg:text-xl">{section.title}</h3>
+                    <p className="text-sm md:text-base text-gray-700">Training module</p>
+                  </div>
+                </div>
+                <div className="flex items-center space-x-2 md:space-x-3">
+                  {isCompleted && <CheckCircle className="h-4 w-4 md:h-5 md:w-5 text-flanneryGreen-500" />}
+                  <ChevronRight className="h-4 w-4 md:h-5 md:w-5 text-gray-400" />
+                </div>
               </button>
             </div>
+          );
+        })}
+      </div>
+
+      {/* Final Test Section */}
+      <div className="mt-6 bg-gradient-to-r from-flannery-500 to-flannery-600 rounded-lg shadow border overflow-hidden max-w-full">
+        <div className="p-4 text-flanneryDark-950">
+          <div className="flex items-center space-x-3 mb-3">
+            <div className="w-10 h-10 bg-white bg-opacity-20 rounded-lg flex items-center justify-center">
+              <Award className="h-5 w-5 text-flanneryDark-950" />
+            </div>
+            <div>
+              <h3 className="font-semibold text-flanneryDark-950">Final Assessment</h3>
+              <p className="text-sm text-flanneryDark-800">Comprehensive test covering all modules</p>
+            </div>
           </div>
-        </>
-      )}
+          
+          <div className="mb-4">
+            <p className="text-sm text-flanneryDark-800 mb-2">
+              Test your knowledge across all 15 training modules with our comprehensive final assessment.
+            </p>
+            <div className="bg-white bg-opacity-20 p-3 rounded-lg">
+              <p className="text-sm text-flanneryDark-950">
+                <strong>Requirements:</strong> 80% pass mark (12 out of 15 questions)
+              </p>
+            </div>
+          </div>
+
+          <button
+            onClick={() => setShowFinalTest(true)}
+            className="w-full bg-white text-black px-4 py-3 rounded-lg hover:bg-gray-50 text-sm font-medium transition-colors"
+          >
+            Start Final Test
+          </button>
+        </div>
+      </div>
     </div>
   );
 
@@ -3119,6 +3113,11 @@ const FlanneryTrainingApp = () => {
   };
 
   const renderContent = () => {
+    // Show final test if it's active, regardless of current section
+    if (showFinalTest) {
+      return <FinalTest />;
+    }
+    
     switch (activeSection) {
       case 'dashboard':
         return <DashboardContent />;
