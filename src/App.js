@@ -2861,7 +2861,7 @@ const FlanneryTrainingApp = () => {
 
   const ResourcesContent = () => {
     return (
-      <div className="space-y-4">
+      <div className="space-y-4 pb-8">
         <h1 className="text-xl font-bold text-gray-900 mb-4">Training Resources</h1>
         
         <div className="bg-white p-4 rounded-lg shadow border">
@@ -2975,7 +2975,7 @@ const FlanneryTrainingApp = () => {
           </div>
         </div>
 
-        <div className="bg-gradient-to-r from-blue-500 to-purple-600 p-4 rounded-lg text-white">
+        <div className="bg-gradient-to-r from-blue-500 to-purple-600 p-4 rounded-lg text-white mb-8">
           <h3 className="text-lg font-semibold mb-2">💡 Getting Maximum Benefit</h3>
           <p className="text-sm mb-3">
             To get the maximum benefit from your training:
@@ -3031,7 +3031,7 @@ const FlanneryTrainingApp = () => {
       </header>
 
       {/* Main Content */}
-      <main className="flex-1 overflow-auto p-4 pb-20">
+      <main className="flex-1 overflow-y-auto pb-32">
         {renderContent()}
       </main>
 
