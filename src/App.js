@@ -1694,23 +1694,7 @@ const FlanneryTrainingApp = () => {
         </div>
       </div>
 
-      <div className="bg-white p-4 rounded-lg shadow border max-w-full">
-        <h3 className="text-lg font-semibold mb-3 text-black">Training Objectives</h3>
-        <div className="space-y-2">
-          {trainingData.introduction.content.objectives.slice(0, showAllObjectives ? undefined : 6).map((objective, index) => (
-            <div key={index} className="flex items-start space-x-2">
-              <CheckCircle className="h-4 w-4 text-flanneryGreen-500 mt-0.5 flex-shrink-0" />
-              <span className="text-gray-700 text-sm">{objective}</span>
-            </div>
-          ))}
-          <button 
-            onClick={() => setShowAllObjectives(!showAllObjectives)}
-            className="text-black text-sm font-medium mt-2 hover:text-gray-700"
-          >
-            {showAllObjectives ? 'Show Less' : `View All ${trainingData.introduction.content.objectives.length} Objectives`} →
-          </button>
-        </div>
-      </div>
+
     </div>
   );
 
