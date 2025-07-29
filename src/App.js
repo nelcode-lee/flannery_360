@@ -26,8 +26,7 @@ import {
   RotateCcw,
   ChevronDown,
   Menu,
-  Eye,
-  EyeOff,
+
   Box,
   X
 } from 'lucide-react';
@@ -3293,7 +3292,6 @@ const FlanneryTrainingApp = () => {
 
   const SketchfabExcavatorViewer = () => {
     const [selectedComponent, setSelectedComponent] = useState(null);
-    const [showAllLabels, setShowAllLabels] = useState(true);
     const [iframeLoaded, setIframeLoaded] = useState(false);
     const [viewer, setViewer] = useState(null);
 
@@ -3565,7 +3563,7 @@ const FlanneryTrainingApp = () => {
         </div>
 
         {/* 3D Interactive Viewer */}
-        <div className="relative overflow-hidden mt-4" style={{ height: '500px' }}>
+        <div className="relative overflow-hidden mt-8" style={{ height: '500px' }}>
           {/* Your Sketchfab Embed */}
           <div className="sketchfab-embed-wrapper w-full h-full relative">
             <iframe 
