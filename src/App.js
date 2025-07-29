@@ -23,7 +23,8 @@ import {
   Bookmark,
   Check,
   X as XIcon,
-  RotateCcw
+  RotateCcw,
+  ChevronDown
 } from 'lucide-react';
 
 const FlanneryLogo = () => (
@@ -2754,6 +2755,40 @@ const FlanneryTrainingApp = () => {
 
     const relevantChecks = knowledgeChecks.filter(check => check.section === sectionKey);
 
+    const renderContentSection = (content, sectionTitle = '') => {
+      if (typeof content === 'string') {
+        return <p className="text-gray-700 text-sm">{content}</p>;
+      }
+      
+      if (Array.isArray(content)) {
+        return (
+          <ul className="space-y-2">
+            {content.map((item, index) => (
+              <li key={index} className="flex items-start space-x-2">
+                <ChevronRight className="h-4 w-4 text-orange-500 mt-0.5 flex-shrink-0" />
+                <span className="text-gray-700 text-sm">{item}</span>
+              </li>
+            ))}
+          </ul>
+        );
+      }
+      
+      if (typeof content === 'object' && content !== null) {
+        return (
+          <div className="space-y-3">
+            {Object.entries(content).map(([key, value]) => (
+              <div key={key} className="border-l-4 border-orange-500 pl-3">
+                <h4 className="font-medium capitalize text-sm mb-2">{key.replace(/([A-Z])/g, ' $1')}:</h4>
+                {renderContentSection(value)}
+              </div>
+            ))}
+          </div>
+        );
+      }
+      
+      return null;
+    };
+
     return (
       <div className="space-y-4">
         <div className="flex items-center justify-between mb-4">
@@ -2775,41 +2810,8 @@ const FlanneryTrainingApp = () => {
           <div className="space-y-4">
             {Object.entries(data.content).map(([key, value]) => (
               <div key={key} className="bg-white p-4 rounded-lg shadow border">
-                {typeof value === 'string' ? (
-                  <p className="text-gray-700 text-sm">{value}</p>
-                ) : Array.isArray(value) ? (
-                  <div>
-                    <h3 className="text-lg font-semibold mb-3 capitalize">{key.replace(/([A-Z])/g, ' $1')}</h3>
-                    <ul className="space-y-2">
-                      {value.map((item, index) => (
-                        <li key={index} className="flex items-start space-x-2">
-                          <ChevronRight className="h-4 w-4 text-orange-500 mt-0.5 flex-shrink-0" />
-                          <span className="text-gray-700 text-sm">
-                            {typeof item === 'object' ? (
-                              <div>
-                                <strong>{item.name}:</strong> {item.description}
-                              </div>
-                            ) : (
-                              item
-                            )}
-                          </span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                ) : (
-                  <div>
-                    <h3 className="text-lg font-semibold mb-3 capitalize">{key.replace(/([A-Z])/g, ' $1')}</h3>
-                    <div className="space-y-2">
-                      {Object.entries(value).map(([subKey, subValue]) => (
-                        <div key={subKey} className="border-l-4 border-orange-500 pl-3">
-                          <h4 className="font-medium capitalize text-sm">{subKey.replace(/([A-Z])/g, ' $1')}:</h4>
-                          <p className="text-gray-700 mt-1 text-sm">{subValue}</p>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                )}
+                <h3 className="text-lg font-semibold mb-3 capitalize">{key.replace(/([A-Z])/g, ' $1')}</h3>
+                {renderContentSection(value)}
               </div>
             ))}
           </div>
@@ -2851,14 +2853,14 @@ const FlanneryTrainingApp = () => {
                           </ul>
                         </div>
                       )}
-                      {subData.content.responsibilities && (
+                      {subData.content.considerations && (
                         <div>
-                          <h4 className="font-medium mb-2 text-sm">Key Responsibilities:</h4>
+                          <h4 className="font-medium mb-2 text-sm">Considerations:</h4>
                           <ul className="space-y-1">
-                            {subData.content.responsibilities.map((resp, index) => (
+                            {subData.content.considerations.map((consideration, index) => (
                               <li key={index} className="flex items-start space-x-2">
                                 <span className="text-orange-500 mt-1 text-sm">•</span>
-                                <span className="text-gray-700 text-sm">{resp}</span>
+                                <span className="text-gray-700 text-sm">{consideration}</span>
                               </li>
                             ))}
                           </ul>
@@ -2872,9 +2874,14 @@ const FlanneryTrainingApp = () => {
           </div>
         )}
 
-        {relevantChecks.map((check, index) => (
-          <KnowledgeCheck key={check.id} check={check} />
-        ))}
+        {relevantChecks.length > 0 && (
+          <div className="space-y-4">
+            <h3 className="text-lg font-semibold">Knowledge Checks</h3>
+            {relevantChecks.map((check, index) => (
+              <KnowledgeCheck key={index} check={check} />
+            ))}
+          </div>
+        )}
       </div>
     );
   };
