@@ -26,7 +26,8 @@ import {
   RotateCcw,
   ChevronDown,
   Menu,
-
+  Bot,
+  Send,
   Box,
   X
 } from 'lucide-react';
@@ -60,6 +61,12 @@ const FlanneryTrainingApp = () => {
   const [activeSectionStartTime, setActiveSectionStartTime] = useState(null);
   const [showAllObjectives, setShowAllObjectives] = useState(false);
   const [showBurgerMenu, setShowBurgerMenu] = useState(false);
+  
+  // AI Research Chat State
+  const [aiChatMessages, setAiChatMessages] = useState([]);
+  const [aiChatInput, setAiChatInput] = useState('');
+  const [isAiLoading, setIsAiLoading] = useState(false);
+  const [aiChatHistory, setAiChatHistory] = useState([]);
 
   // Knowledge check answers with correct responses from flannery.md
   const correctAnswers = {
@@ -1477,6 +1484,7 @@ const FlanneryTrainingApp = () => {
     { key: 'training', label: 'Training', icon: Book },
     { key: 'objectives', label: 'Training Objectives', icon: FileText },
     { key: '3d-viewer', label: '3D Excavator', icon: Box },
+    { key: 'ai-research', label: 'AI Research', icon: Bot },
     { key: 'progress', label: 'Resources', icon: BarChart3 },
     { key: 'profile', label: 'Profile', icon: User }
   ];
@@ -3298,6 +3306,8 @@ const FlanneryTrainingApp = () => {
         return <TrainingObjectivesContent />;
       case '3d-viewer':
         return <SketchfabExcavatorViewer />;
+      case 'ai-research':
+        return <AIResearchContent />;
       case 'progress':
         return <ResourcesContent />;
       case 'profile':
@@ -3863,6 +3873,367 @@ const FlanneryTrainingApp = () => {
     </div>
   );
 
+  // AI Research Component - CITB Training Instructor Simulation
+  const AIResearchContent = () => {
+    const [localMessages, setLocalMessages] = useState([]);
+    const [localInput, setLocalInput] = useState('');
+    const [localLoading, setLocalLoading] = useState(false);
+    const [apiKey, setApiKey] = useState(process.env.REACT_APP_OPENAI_API_KEY || '');
+    const [useAPI, setUseAPI] = useState(!!process.env.REACT_APP_OPENAI_API_KEY);
+    const [apiStatus, setApiStatus] = useState(process.env.REACT_APP_OPENAI_API_KEY ? 'connected' : 'disconnected'); // 'disconnected', 'connected', 'error'
+
+    // CITB Training Instructor Knowledge Base
+    const citbInstructorKnowledge = {
+      safety: {
+        topics: ['OperateSAFE', 'PUWER 98', 'HSE Act 1974', 'Risk Assessment', 'PPE'],
+        responses: {
+          'OperateSAFE': 'OperateSAFE is our core safety methodology. It stands for: Stop, Assess, Fix, Execute. Always stop when unsure, assess the situation, fix any issues, and only then execute the task safely.',
+          'PUWER 98': 'PUWER 98 (Provision and Use of Work Equipment Regulations) requires that all work equipment is suitable for its intended use, properly maintained, and used only by trained personnel.',
+          'HSE Act 1974': 'The Health and Safety at Work Act 1974 is the primary legislation covering occupational health and safety in Great Britain. It places duties on employers and employees.',
+          'Risk Assessment': 'Risk assessment involves identifying hazards, evaluating risks, and implementing control measures. Always follow the hierarchy of control: eliminate, substitute, engineer, administrative, PPE.',
+          'PPE': 'Personal Protective Equipment is the last line of defense. For excavator operation, this includes high-visibility clothing, safety boots, hard hat, and hearing protection when necessary.'
+        }
+      },
+      excavator: {
+        topics: ['360 Excavator', 'Components', 'Operation', 'Maintenance', 'Techniques'],
+        responses: {
+          '360 Excavator': 'A 360° excavator is a heavy construction machine with a rotating platform that allows the superstructure to rotate 360 degrees. It consists of a boom, dipper arm, bucket, and cab mounted on tracks or wheels.',
+          'Components': 'Key components include: Boom (main arm), Dipper Arm (secondary arm), Bucket (digging attachment), Cab (operator compartment), Counterweight (stability), and Tracks (mobility).',
+          'Operation': 'Safe operation requires pre-operational checks, proper positioning, awareness of surroundings, and following safe working procedures. Always check for overhead and underground services.',
+          'Maintenance': 'Regular maintenance includes checking fluid levels, inspecting for damage, greasing moving parts, and following manufacturer guidelines. Never perform maintenance while the machine is running.',
+          'Techniques': 'Proper digging techniques include starting from the top, working in layers, maintaining proper depth, and ensuring the machine is stable. Always work within the machine\'s capabilities.'
+        }
+      },
+      legislation: {
+        topics: ['Health and Safety', 'Construction Regulations', 'Environmental', 'Transportation'],
+        responses: {
+          'Health and Safety': 'Construction sites must comply with CDM 2015, PUWER 98, and various HSE regulations. Safety is always the priority - if in doubt, stop and seek guidance.',
+          'Construction Regulations': 'The Construction (Design and Management) Regulations 2015 require proper planning, coordination, and supervision of construction work.',
+          'Environmental': 'Environmental considerations include noise control, fuel efficiency, waste management, and protecting natural habitats. Always follow site environmental procedures.',
+          'Transportation': 'Transporting excavators requires proper securing, route planning, and compliance with road traffic regulations. Always use appropriate transport equipment.'
+        }
+      }
+    };
+
+    // API Integration for LLM
+    const callLLMAPI = async (question) => {
+      try {
+        const response = await fetch('https://api.openai.com/v1/chat/completions', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${apiKey}`
+          },
+          body: JSON.stringify({
+            model: 'gpt-3.5-turbo',
+            messages: [
+              {
+                role: 'system',
+                content: `You are an experienced CITB (Construction Industry Training Board) training instructor specializing in 360° excavator operation and safety. You have extensive knowledge of:
+
+- OperateSAFE principles and safety protocols
+- PUWER 98 and HSE Act 1974 regulations
+- 360° excavator components, operation, and maintenance
+- Construction site safety and risk assessment
+- Environmental considerations and best practices
+- Industry standards and certification requirements
+
+Always respond in a professional, authoritative tone as a CITB instructor would. Prioritize safety in all responses. Be comprehensive but clear, using industry terminology appropriately. If you're unsure about something, recommend seeking guidance from a supervisor or qualified instructor.`
+              },
+              {
+                role: 'user',
+                content: question
+              }
+            ],
+            max_tokens: 500,
+            temperature: 0.7
+          })
+        });
+
+        if (!response.ok) {
+          throw new Error(`API Error: ${response.status}`);
+        }
+
+        const data = await response.json();
+        return data.choices[0].message.content;
+      } catch (error) {
+        console.error('API Error:', error);
+        throw error;
+      }
+    };
+
+    // Simulate AI response based on CITB instructor knowledge
+    const generateAIResponse = (userQuestion) => {
+      const question = userQuestion.toLowerCase();
+      
+      // Check for safety-related questions
+      if (question.includes('safety') || question.includes('safe') || question.includes('operatesafe')) {
+        if (question.includes('operatesafe')) {
+          return citbInstructorKnowledge.safety.responses['OperateSAFE'];
+        }
+        if (question.includes('ppuwer') || question.includes('equipment')) {
+          return citbInstructorKnowledge.safety.responses['PUWER 98'];
+        }
+        if (question.includes('hse') || question.includes('act')) {
+          return citbInstructorKnowledge.safety.responses['HSE Act 1974'];
+        }
+        if (question.includes('risk') || question.includes('assessment')) {
+          return citbInstructorKnowledge.safety.responses['Risk Assessment'];
+        }
+        if (question.includes('ppe') || question.includes('protective')) {
+          return citbInstructorKnowledge.safety.responses['PPE'];
+        }
+        return "Safety is our top priority. Remember the OperateSAFE principles: Stop, Assess, Fix, Execute. If you're unsure about any safety aspect, always stop and seek guidance from your supervisor.";
+      }
+      
+      // Check for excavator-related questions
+      if (question.includes('excavator') || question.includes('machine') || question.includes('dig')) {
+        if (question.includes('component') || question.includes('part')) {
+          return citbInstructorKnowledge.excavator.responses['Components'];
+        }
+        if (question.includes('operate') || question.includes('use')) {
+          return citbInstructorKnowledge.excavator.responses['Operation'];
+        }
+        if (question.includes('maintain') || question.includes('service')) {
+          return citbInstructorKnowledge.excavator.responses['Maintenance'];
+        }
+        if (question.includes('technique') || question.includes('digging')) {
+          return citbInstructorKnowledge.excavator.responses['Techniques'];
+        }
+        return citbInstructorKnowledge.excavator.responses['360 Excavator'];
+      }
+      
+      // Check for legislation-related questions
+      if (question.includes('law') || question.includes('regulation') || question.includes('legal')) {
+        if (question.includes('construction') || question.includes('cdm')) {
+          return citbInstructorKnowledge.legislation.responses['Construction Regulations'];
+        }
+        if (question.includes('environment') || question.includes('pollution')) {
+          return citbInstructorKnowledge.legislation.responses['Environmental'];
+        }
+        if (question.includes('transport') || question.includes('move')) {
+          return citbInstructorKnowledge.legislation.responses['Transportation'];
+        }
+        return citbInstructorKnowledge.legislation.responses['Health and Safety'];
+      }
+      
+      // Default response for general questions
+      return "As a CITB training instructor, I'm here to help you with excavator operation, safety procedures, and industry best practices. Could you please be more specific about your question? I can help with safety protocols, machine operation, maintenance procedures, or regulatory compliance.";
+    };
+
+    const handleSendMessage = async () => {
+      if (!localInput.trim()) return;
+      
+      const userMessage = {
+        id: Date.now(),
+        type: 'user',
+        content: localInput,
+        timestamp: new Date().toLocaleTimeString()
+      };
+      
+      setLocalMessages(prev => [...prev, userMessage]);
+      setLocalInput('');
+      setLocalLoading(true);
+      
+      try {
+        let aiResponse;
+        
+        if (useAPI && apiKey) {
+          // Use real LLM API
+          aiResponse = await callLLMAPI(localInput);
+        } else {
+          // Use local knowledge base
+          setTimeout(() => {
+            aiResponse = generateAIResponse(localInput);
+          }, 1000);
+        }
+        
+        const aiMessage = {
+          id: Date.now() + 1,
+          type: 'ai',
+          content: aiResponse,
+          timestamp: new Date().toLocaleTimeString()
+        };
+        
+        setLocalMessages(prev => [...prev, aiMessage]);
+      } catch (error) {
+        // Fallback to local knowledge base if API fails
+        const fallbackResponse = generateAIResponse(localInput);
+        const aiMessage = {
+          id: Date.now() + 1,
+          type: 'ai',
+          content: fallbackResponse,
+          timestamp: new Date().toLocaleTimeString()
+        };
+        
+        setLocalMessages(prev => [...prev, aiMessage]);
+        setApiStatus('error');
+      } finally {
+        setLocalLoading(false);
+      }
+    };
+
+    const handleKeyPress = (e) => {
+      if (e.key === 'Enter' && !e.shiftKey) {
+        e.preventDefault();
+        handleSendMessage();
+      }
+    };
+
+    const testAPIConnection = async () => {
+      if (!apiKey) return;
+      
+      setApiStatus('connecting');
+      try {
+        await callLLMAPI('Test connection');
+        setApiStatus('connected');
+        setUseAPI(true);
+      } catch (error) {
+        setApiStatus('error');
+        setUseAPI(false);
+      }
+    };
+
+    return (
+      <div className="space-y-4">
+        <div className="bg-gradient-to-r from-blue-600 to-purple-600 text-white p-6 rounded-lg">
+          <div className="flex items-center space-x-3 mb-4">
+            <Bot className="h-8 w-8" />
+            <div>
+              <h1 className="text-xl font-bold">AI Research Assistant</h1>
+              <p className="text-blue-100">Powered by CITB Training Instructor AI</p>
+            </div>
+          </div>
+          <div className="bg-white bg-opacity-10 p-4 rounded-lg">
+            <p className="text-sm text-black">
+              <strong>How it works:</strong> Ask me anything about 360° excavator operation, safety procedures, 
+              industry regulations, or training best practices. I'm trained to think and respond like an experienced 
+              CITB training instructor.
+            </p>
+          </div>
+        </div>
+
+
+
+
+        {/* Chat Interface */}
+        <div className="bg-white rounded-lg shadow-lg overflow-hidden">
+          <div className="bg-gray-50 px-4 py-3 border-b">
+            <div className="flex items-center justify-between">
+              <div>
+                <h3 className="font-semibold text-gray-800">Training Q&A</h3>
+                <p className="text-sm text-gray-600">Ask your questions about excavator training and safety</p>
+              </div>
+              {process.env.REACT_APP_OPENAI_API_KEY && (
+                <div className="flex items-center space-x-2">
+                  <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+                  <span className="text-xs text-green-600 font-medium">Enhanced AI</span>
+                </div>
+              )}
+            </div>
+          </div>
+          
+          {/* Messages Area */}
+          <div className="h-96 overflow-y-auto p-4 space-y-4">
+            {localMessages.length === 0 && (
+              <div className="text-center text-gray-500 py-8">
+                <Bot className="h-12 w-12 mx-auto mb-3 text-gray-400" />
+                <p className="text-sm">Start a conversation by asking a question below</p>
+                <div className="mt-4 space-y-2 text-xs text-gray-400">
+                  <p>Try asking about:</p>
+                  <p>• "What is OperateSAFE?"</p>
+                  <p>• "How do I check excavator components?"</p>
+                  <p>• "What are the safety regulations?"</p>
+                  <p>• "What are proper digging techniques?"</p>
+                </div>
+              </div>
+            )}
+            
+            {localMessages.map((message) => (
+              <div
+                key={message.id}
+                className={`flex ${message.type === 'user' ? 'justify-end' : 'justify-start'}`}
+              >
+                <div
+                  className={`max-w-xs md:max-w-md lg:max-w-lg px-4 py-2 rounded-lg ${
+                    message.type === 'user'
+                      ? 'bg-blue-600 text-white'
+                      : 'bg-gray-100 text-gray-800'
+                  }`}
+                >
+                  <p className="text-sm">{message.content}</p>
+                  <p className="text-xs opacity-70 mt-1">{message.timestamp}</p>
+                </div>
+              </div>
+            ))}
+            
+            {localLoading && (
+              <div className="flex justify-start">
+                <div className="bg-gray-100 text-gray-800 max-w-xs md:max-w-md lg:max-w-lg px-4 py-2 rounded-lg">
+                  <div className="flex items-center space-x-2">
+                    <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-blue-600"></div>
+                    <span className="text-sm">
+                      {useAPI && apiStatus === 'connected' 
+                        ? 'AI is thinking...' 
+                        : 'CITB Instructor is thinking...'
+                      }
+                    </span>
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
+          
+          {/* Input Area */}
+          <div className="border-t p-4">
+            <div className="flex space-x-2">
+              <input
+                type="text"
+                value={localInput}
+                onChange={(e) => setLocalInput(e.target.value)}
+                onKeyPress={handleKeyPress}
+                placeholder="Ask about excavator training, safety, or regulations..."
+                className="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-black"
+                disabled={localLoading}
+              />
+              <button
+                onClick={handleSendMessage}
+                disabled={!localInput.trim() || localLoading}
+                className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed flex items-center space-x-2"
+              >
+                <Send className="h-4 w-4" />
+                <span className="hidden sm:inline">Send</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        {/* Quick Questions */}
+        <div className="bg-white p-6 rounded-lg shadow border">
+          <h3 className="text-lg font-semibold mb-4 text-black">Quick Questions</h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+            {[
+              "What is OperateSAFE?",
+              "How do I check excavator components?",
+              "What are the safety regulations?",
+              "What are proper digging techniques?",
+              "How do I perform pre-operational checks?",
+              "What PPE is required for excavator operation?"
+            ].map((question, index) => (
+              <button
+                key={index}
+                onClick={() => setLocalInput(question)}
+                className="text-left p-3 bg-gray-50 hover:bg-gray-100 rounded-lg text-sm text-gray-700 transition-colors"
+              >
+                {question}
+              </button>
+            ))}
+          </div>
+        </div>
+      </div>
+    );
+  };
+
   const SketchfabExcavatorViewer = () => {
     const [selectedComponent, setSelectedComponent] = useState(null);
     const [iframeLoaded, setIframeLoaded] = useState(false);
@@ -4213,7 +4584,7 @@ const FlanneryTrainingApp = () => {
   return (
     <div className="flex flex-col h-screen bg-black max-w-full overflow-x-hidden">
       {/* Header */}
-      <header className="bg-black shadow-sm border-b border-flannery-500 p-4 md:p-6 max-w-full relative z-40">
+      <header className="bg-black shadow-sm border-b border-flannery-500 p-6 md:p-8 lg:p-10 max-w-full relative z-40">
         <div className="flex items-center justify-between max-w-full">
           <div className="flex items-center space-x-3">
             <div className="flex flex-col">
@@ -4234,7 +4605,7 @@ const FlanneryTrainingApp = () => {
 
       {/* Main Content */}
       <main className="flex-1 overflow-y-auto overflow-x-hidden pb-8 max-w-full bg-black">
-        <div className="px-4 md:px-8 lg:px-12 max-w-full">
+        <div className="px-4 md:px-8 lg:px-12 max-w-full pt-8 md:pt-12 lg:pt-16">
           <div className="max-w-7xl mx-auto">
             {renderContent()}
           </div>

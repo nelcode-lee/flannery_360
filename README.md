@@ -128,9 +128,21 @@ The project uses a custom Tailwind configuration with:
 Create a `.env` file in the root directory for environment-specific configuration:
 
 ```env
-REACT_APP_API_URL=your-api-url
+# OpenAI API Configuration (Optional - for enhanced AI responses)
+REACT_APP_OPENAI_API_KEY=your_openai_api_key_here
+
+# Environment Configuration
 REACT_APP_ENVIRONMENT=development
+REACT_APP_API_URL=https://api.openai.com/v1
 ```
+
+**To enable enhanced AI responses:**
+1. Get an OpenAI API key from [OpenAI Platform](https://platform.openai.com/)
+2. Add your API key to the `.env` file
+3. Restart the development server
+4. The AI Research feature will automatically use the API key
+
+**Security Note:** The `.env` file is excluded from version control to keep your API key secure.
 
 ## 🚀 Deployment
 
